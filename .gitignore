@@ -1,0 +1,20 @@
+# Generated datasets, binaries, and profiling artifacts.
+/data/
+/bin/
+/coverage.out
+*.test
+*.exe
+*.prof
+
+# Local environment and credentials must never be committed.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editor and operating-system files.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
