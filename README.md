@@ -3,15 +3,16 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: matching scan query engines.** A deterministic generator,
-validated JSONL reader, row-scan engine, columnar-scan engine, and query CLI are
-implemented. Indexing, the HTTP API, and the visual explorer are not implemented
-yet. [Measured scan baselines](docs/query-engine.md#measured-baseline) describe a
-100,000-event workload, not the future ten-million-event target.
+**Current milestone: indexed time-range queries.** A deterministic generator,
+validated JSONL reader, row-scan, columnar-scan, indexed-columnar engine, and query
+CLI are implemented. The HTTP API and visual explorer are not implemented yet.
+[One-million-event selectivity measurements](docs/indexed-queries.md#measured-results)
+show where indexing helps and where it does not. The ten-million-event target
+remains unverified.
 
 ## Why this exists
 
-ChronoLens compares a straightforward event scan with column-oriented execution
+ChronoLens compares a straightforward event scan with column-oriented and indexed execution
 over the **same data and query semantics**. Reproducible datasets, known-answer
 tests, and explicit rows-examined statistics distinguish a real improvement
 from a different answer or a misleading benchmark.
@@ -106,7 +107,7 @@ its own exit code.
 ```sh
 go run ./cmd/query -input data/events.jsonl -engine row
 go run ./cmd/query -input data/events.jsonl -engine columnar
-go run ./cmd/query -input data/events.jsonl -engine columnar -from-us 1767225620000000 -to-us 1767225630000000 -service service-001 -status 500
+go run ./cmd/query -input data/events.jsonl -engine indexed -from-us 1767225620000000 -to-us 1767225630000000 -service service-001 -status 500
 go run ./cmd/query -help
 ```
 
@@ -117,7 +118,10 @@ Service and status filters are exact matches. An unknown service returns zero
 matches, not an input error.
 
 Each invocation loads **only the selected layout** into memory, then executes
-one query. Both engines scan every row, even for narrow ranges. `load_ms` includes
+one query. Row and columnar scans visit every row. The indexed engine binary-searches
+the sorted timestamps and visits only the selected interval, then applies the
+same remaining predicates. Statistics distinguish candidate rows examined,
+rows skipped, and index comparisons. `load_ms` includes
 file reading, validation, and layout construction; `query_ms` measures only
 in-memory execution. Neither number is a repeated-run latency percentile.
 If the clock does not advance during an operation, its timing is `null` with
@@ -132,7 +136,8 @@ Malformed input is reported with a line number and no success-shaped partial
 result. Missing, duplicate, unknown, null, and incorrectly typed fields are
 rejected. Empty files produce a zero-count result with null mean/min/max.
 
-Read the [query design and benchmark methodology](docs/query-engine.md) for
+Read the [query design and benchmark methodology](docs/query-engine.md) and
+[indexed query design](docs/indexed-queries.md) for
 the complete CLI contract, architecture, measured results, and limitations.
 
 ## Architecture and structure
@@ -148,9 +153,11 @@ Seeded generator -> ordered JSONL file
                     /                 \
                    v                   v
                Event rows         Typed columns
+                                      |
+                               Optional time bounds
                     \                 /
                      v               v
-                      Full-scan query
+                    Scan / indexed query
                             |
                             v
                   Aggregates + scan statistics
@@ -161,7 +168,7 @@ cmd/generator/          CLI, output handling, and CLI tests
 cmd/query/              Query CLI and JSON reporting
 internal/generator/    Deterministic generation and validation tests
 internal/telemetry/    Shared schema, strict JSONL reader, and fuzz tests
-internal/query/        Memory layouts, aggregation, equivalence tests, benchmarks
+internal/query/        Memory layouts, time index, aggregation, tests, benchmarks
 docs/                  Query semantics and measured benchmark methodology
 .github/workflows/     Go checks on Windows and Linux
 go.mod                 Module and minimum Go version
@@ -173,12 +180,13 @@ go.mod                 Module and minimum Go version
 go test -count=1 ./...
 go test -cover ./...
 go test ./internal/query -run '^$' -bench '^BenchmarkQuery$' -benchmem -count=3
+go test ./internal/query -run '^$' -bench '^BenchmarkSelectivity$' -benchmem -benchtime=200ms -count=3
 go vet ./...
 go build ./...
 gofmt -w cmd internal
 ```
 
-To build a standalone generator, first create a `bin` directory, then run:
+To build standalone CLIs, first create a `bin` directory, then run:
 
 ```sh
 go build -o bin/chronolens-generator ./cmd/generator
@@ -206,8 +214,8 @@ plus the query race detector on Linux.
 
 ## Next milestones
 
-1. Indexed time-range queries and selectivity experiments against these scan baselines.
-2. Local API and interactive timeline explorer.
+1. Local API and interactive timeline explorer.
+2. Larger-scale experiments and deployment hardening.
 
 Ten million events and sub-100 ms selective queries are **future experimental
 targets**, not demonstrated capabilities of the current repository.

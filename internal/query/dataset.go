@@ -1,5 +1,5 @@
-// Package query compares immutable row and columnar datasets under identical
-// full-scan query semantics. Neither engine uses a time-range index yet.
+// Package query compares immutable row, columnar, and indexed columnar datasets
+// under identical aggregate query semantics.
 package query
 
 import (
@@ -15,16 +15,17 @@ type Engine string
 const (
 	Row      Engine = "row"
 	Columnar Engine = "columnar"
+	Indexed  Engine = "indexed"
 
 	MaxServices = 1 << 16
 )
 
 func ParseEngine(value string) (Engine, error) {
 	switch Engine(value) {
-	case Row, Columnar:
+	case Row, Columnar, Indexed:
 		return Engine(value), nil
 	default:
-		return "", fmt.Errorf("engine must be row or columnar")
+		return "", fmt.Errorf("engine must be row, columnar, or indexed")
 	}
 }
 

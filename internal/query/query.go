@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"math"
+	"sort"
 
 	"github.com/PoojaAgarwal2003/ChronoLens/internal/telemetry"
 )
@@ -42,9 +43,11 @@ type Aggregate struct {
 }
 
 type Stats struct {
-	Engine       Engine `json:"engine"`
-	TotalRows    int    `json:"total_rows"`
-	RowsExamined int    `json:"rows_examined"`
+	Engine           Engine `json:"engine"`
+	TotalRows        int    `json:"total_rows"`
+	RowsExamined     int    `json:"rows_examined"`
+	RowsSkipped      int    `json:"rows_skipped"`
+	IndexComparisons int    `json:"index_comparisons"`
 }
 
 type Result struct {
@@ -91,9 +94,9 @@ func matchesNumeric(timestamp int64, status uint16, f Filter) bool {
 		(f.Status == 0 || status == f.Status)
 }
 
-// Query scans every row, including nonmatching rows. Integer aggregates are
-// exact; the mean is a floating-point quotient. Cancellation returns an error,
-// never a success-shaped partial aggregate.
+// Query applies identical predicates to either the full dataset or an indexed
+// time slice. RowsExamined counts candidate row visits; timestamp probes used
+// to find the slice are counted separately as IndexComparisons.
 func (d *Dataset) Query(ctx context.Context, filter Filter) (Result, error) {
 	if err := filter.Validate(); err != nil {
 		return Result{}, err
@@ -120,16 +123,20 @@ func (d *Dataset) Query(ctx context.Context, filter Filter) (Result, error) {
 				return Result{}, err
 			}
 		}
-	case Columnar:
+	case Columnar, Indexed:
 		id, known := d.dictionary[filter.Service]
-		for i, timestamp := range d.timestamps {
+		first, end := 0, len(d.timestamps)
+		if d.engine == Indexed {
+			first, end, stats.IndexComparisons = d.timeRange(filter)
+		}
+		for i := first; i < end; i++ {
 			if i%1024 == 0 {
 				if err := ctx.Err(); err != nil {
 					return Result{}, err
 				}
 			}
 			stats.RowsExamined++
-			if !matchesNumeric(timestamp, d.statuses[i], filter) ||
+			if !matchesNumeric(d.timestamps[i], d.statuses[i], filter) ||
 				(filter.Service != "" && (!known || d.serviceIDs[i] != id)) {
 				continue
 			}
@@ -143,5 +150,23 @@ func (d *Dataset) Query(ctx context.Context, filter Filter) (Result, error) {
 	if err := ctx.Err(); err != nil {
 		return Result{}, err
 	}
+	stats.RowsSkipped = stats.TotalRows - stats.RowsExamined
 	return Result{Aggregate: totals.aggregate(), Stats: stats}, nil
+}
+
+// The validated, sorted timestamp column is itself the index. Lower bounds
+// include every tie at FromUS and exclude every tie at ToUS without +1 overflow.
+func (d *Dataset) timeRange(filter Filter) (first, end, comparisons int) {
+	first = sort.Search(len(d.timestamps), func(i int) bool {
+		comparisons++
+		return d.timestamps[i] >= filter.FromUS
+	})
+	end = len(d.timestamps)
+	if filter.ToUS != nil {
+		end = first + sort.Search(len(d.timestamps)-first, func(i int) bool {
+			comparisons++
+			return d.timestamps[first+i] >= *filter.ToUS
+		})
+	}
+	return
 }

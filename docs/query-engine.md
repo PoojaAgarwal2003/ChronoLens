@@ -1,7 +1,8 @@
 # Scan query engines
 
-Milestone 2 establishes correctness and measurement baselines before indexing.
-The system runs locally and uses only the Go standard library.
+This page documents the scan baselines introduced in milestone 2. The current
+CLI also supports [indexed time-range execution](indexed-queries.md), introduced
+in milestone 3. The system runs locally and uses only the Go standard library.
 
 ## Architecture
 
@@ -84,7 +85,7 @@ go run ./cmd/query -input data/events.jsonl -engine columnar -service service-00
 | Flag | Default | Meaning |
 |---|---|---|
 | `-input` | `data/events.jsonl` | Read-only local JSONL file |
-| `-engine` | `row` | `row` or `columnar` |
+| `-engine` | `row` | `row`, `columnar`, or `indexed` |
 | `-max-events` | `1000000` | Positive maximum accepted event count |
 | `-from-us` | `0` | Inclusive lower timestamp in Unix microseconds |
 | `-to-us` | Unbounded | Exclusive upper timestamp; must not be below `from-us` |
@@ -108,10 +109,12 @@ The mean is floating point, not an exact rational or percentile. Consumers
 such as JavaScript must handle 64-bit JSON integers carefully if values exceed
 their exact numeric range. This milestone has no browser consumer.
 
-Each result includes its engine, total row count, and actual rows examined.
-Both implementations examine every row: a selective predicate reduces
-aggregation work, **not scan length**. There is no binary-search index,
-block pruning, result cache, approximate aggregation, or hidden sampling.
+Each result includes its engine, total row count, candidate rows examined,
+rows skipped, and index comparisons. The row and columnar scan implementations
+examine every row: a selective predicate reduces aggregation work, **not scan
+length**. The indexed implementation narrows the time interval first; timestamp
+probes are counted separately from candidate row visits. There is no block
+pruning, result cache, approximate aggregation, or hidden sampling.
 
 Cancellation is checked before execution, periodically during the scan, and
 before returning. An error returns no partial aggregate. The CLI emits errors
@@ -161,6 +164,10 @@ Use equivalent predicates and compare results before comparing speed.
 
 ## Measured baseline
 
+Historical milestone-2 measurements for commit `c59d4c9`; later engine changes
+can change these timings. See [milestone-3 results](indexed-queries.md#measured-results)
+for the one-million-event comparison including indexing.
+
 Measured on 2026-09-12 in this Windows x64 development environment:
 Go 1.27.1, Intel Xeon Platinum 8370C at 2.80 GHz, 8 reported cores / 16 logical
 processors. This is **not a measurement on a personal laptop** or isolated
@@ -185,8 +192,8 @@ for full aggregation and the service/error predicate. These results do not
 support a universal columnar speedup. Hardware noise, cache residency,
 predicate order, and the cost of aggregate updates all matter.
 
-Indexing is deliberately deferred: the next experiment can compare these full
-scans against a time-range index using identical data and result semantics.
+These scan baselines motivated the subsequently implemented time-range index,
+which uses identical data and aggregate semantics.
 There are no ten-million-event, sub-100 ms end-to-end, memory-limit, or
 production-throughput claims in this milestone.
 

@@ -29,7 +29,7 @@ func datasetFile(t *testing.T, content string) string {
 func TestRunMatchingEngines(t *testing.T) {
 	path := datasetFile(t, fixture)
 	var reports []report
-	for _, engine := range []string{"row", "columnar"} {
+	for _, engine := range []string{"row", "columnar", "indexed"} {
 		var stdout, stderr bytes.Buffer
 		args := []string{"-input", path, "-engine", engine, "-from-us", "1", "-to-us", "3", "-service", "api", "-status", "500"}
 		if code := run(context.Background(), args, &stdout, &stderr); code != 0 {
@@ -50,8 +50,10 @@ func TestRunMatchingEngines(t *testing.T) {
 		}
 		reports = append(reports, result)
 	}
-	if !reflect.DeepEqual(reports[0].Result.Aggregate, reports[1].Result.Aggregate) {
-		t.Fatal("CLI engines disagree")
+	for _, result := range reports[1:] {
+		if !reflect.DeepEqual(reports[0].Result.Aggregate, result.Result.Aggregate) {
+			t.Fatal("CLI engines disagree")
+		}
 	}
 	after, err := os.ReadFile(path)
 	if err != nil || string(after) != fixture {

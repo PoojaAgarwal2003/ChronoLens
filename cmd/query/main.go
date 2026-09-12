@@ -36,7 +36,7 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 	flags := flag.NewFlagSet("query", flag.ContinueOnError)
 	flags.SetOutput(stderr)
 	input := flags.String("input", "data/events.jsonl", "JSONL input file")
-	engineName := flags.String("engine", "row", "query layout: row or columnar")
+	engineName := flags.String("engine", "row", "query engine: row, columnar, or indexed")
 	maxEvents := flags.Int("max-events", 1000000, "maximum accepted event count (not a byte limit)")
 	var filter query.Filter
 	flags.Int64Var(&filter.FromUS, "from-us", 0, "inclusive lower Unix timestamp in microseconds")
@@ -56,7 +56,7 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 		return err
 	})
 	flags.Usage = func() {
-		fmt.Fprintln(stderr, "Usage: query [flags]\n\nLoad ordered JSONL and run one full-scan aggregate query.")
+		fmt.Fprintln(stderr, "Usage: query [flags]\n\nLoad ordered JSONL and run one aggregate query.")
 		flags.PrintDefaults()
 	}
 	if err := flags.Parse(args); err != nil {
