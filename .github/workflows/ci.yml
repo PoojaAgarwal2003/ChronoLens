@@ -21,10 +21,39 @@ jobs:
           cache: false
       - run: go vet ./...
       - run: go test -count=1 ./...
-      - name: Check concurrent query execution
+      - name: Check concurrent query and server execution
         if: runner.os == 'Linux'
-        run: go test -race -count=1 ./internal/query
+        run: go test -race -count=1 ./internal/query ./internal/api ./cmd/server
       - run: go build ./...
       - name: Check formatting
         shell: bash
         run: test -z "$(gofmt -l cmd internal)"
+
+  explorer:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: explorer-browser-failures
+          path: |
+            web/playwright-report
+            web/test-results
+          retention-days: 7

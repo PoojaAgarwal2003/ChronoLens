@@ -3,9 +3,9 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: indexed time-range queries.** A deterministic generator,
-validated JSONL reader, row-scan, columnar-scan, indexed-columnar engine, and query
-CLI are implemented. The HTTP API and visual explorer are not implemented yet.
+**Current milestone: local API and interactive explorer.** A deterministic generator,
+validated JSONL reader, three query engines, diagnostic CLI, loopback-only Go API,
+and React explorer are implemented.
 [One-million-event selectivity measurements](docs/indexed-queries.md#measured-results)
 show where indexing helps and where it does not. The ten-million-event target
 remains unverified.
@@ -17,22 +17,54 @@ over the **same data and query semantics**. Reproducible datasets, known-answer
 tests, and explicit rows-examined statistics distinguish a real improvement
 from a different answer or a misleading benchmark.
 
+The explorer makes those differences visible: select a time window, filter by
+service or status, inspect exact charts, then compare the three engines against
+the same data. Candidate scans, index probes, and separate chart-construction
+work are reported explicitly.
+
+## Stack
+
+Go implements ingestion, query execution, profiling, and HTTP serving with the
+standard library. React, TypeScript, and Vite implement the browser interface;
+Playwright exercises it against a real Go server. No broker, database, hosted
+API, or container platform is required.
+
 ## Run locally
 
-Install [Go 1.27 or later](https://go.dev/dl/) and Git. No external services,
-API keys, environment variables, or third-party Go dependencies are required.
+Install [Go 1.27 or later](https://go.dev/dl/), Node.js 22.17+ within the Node 22
+release line, npm, and Git. No API keys or environment variables are required.
+The Go CLI tools can be used without Node or a frontend build.
 
 ```sh
 git clone https://github.com/PoojaAgarwal2003/ChronoLens.git
 cd ChronoLens
 go version
 go run ./cmd/generator -events 100000 -seed 42 -output data/events.jsonl
+cd web
+npm ci
+npm run build
+cd ..
+go run ./cmd/server -input data/events.jsonl -web web/dist -listen 127.0.0.1:8080
 ```
+
+Open **http://127.0.0.1:8080**. Ctrl+C stops the server. It loads one source
+snapshot at startup; row and columnar representations remain in memory and
+indexed execution shares the columns.
 
 These commands work in PowerShell and POSIX shells. The generator creates
 parent directories and **refuses to overwrite an existing output file**.
 Choose a new filename for each run, or deliberately remove an old dataset.
 Generated files in `data/` are ignored by Git.
+
+The server is **local-only, unauthenticated, and read-only**. Do not expose it
+through a public proxy or tunnel. See the [developer and API guide](docs/local-explorer.md)
+for endpoint examples, request limits, timing semantics, tests, and troubleshooting.
+
+![ChronoLens explorer using real generated data](docs/images/explorer.png)
+
+Shown: one million seeded events with a 1% time window, 10,000 matches, and
+990,000 candidate rows skipped. [View the real comparison panel](docs/images/explorer-comparison.png).
+Interactive timings in screenshots are observations, not portable performance guarantees.
 
 For JSONL on standard output:
 
@@ -142,34 +174,23 @@ the complete CLI contract, architecture, measured results, and limitations.
 
 ## Architecture and structure
 
-```text
-Seeded generator -> ordered JSONL file
-                            |
-                            v
-                  Validated streaming reader
-                            |
-                            v
-                  One selected memory layout
-                    /                 \
-                   v                   v
-               Event rows         Typed columns
-                                      |
-                               Optional time bounds
-                    \                 /
-                     v               v
-                    Scan / indexed query
-                            |
-                            v
-                  Aggregates + scan statistics
-```
+![ChronoLens architecture](docs/images/architecture.svg)
+
+The CLI loads one selected layout. The server loads a shared comparison catalog
+and serves the static frontend from `web/dist`. Chart profiles are a separate,
+bounded indexed pass; they are not hidden in aggregate-only timings.
 
 ```text
 cmd/generator/          CLI, output handling, and CLI tests
 cmd/query/              Query CLI and JSON reporting
+cmd/server/             Local server lifecycle and startup validation
 internal/generator/    Deterministic generation and validation tests
 internal/telemetry/    Shared schema, strict JSONL reader, and fuzz tests
-internal/query/        Memory layouts, time index, aggregation, tests, benchmarks
-docs/                  Query semantics and measured benchmark methodology
+internal/query/        Layouts, time index, shared catalog, exact chart profiles
+internal/api/          Local HTTP routes, limits, origin guards, comparison batches
+internal/measure/      Explicit handling of unresolved clock timings
+web/                   React UI, build configuration, real-server browser tests
+docs/                  Architecture, API/setup guides, measurements, original images
 .github/workflows/     Go checks on Windows and Linux
 go.mod                 Module and minimum Go version
 ```
@@ -191,17 +212,30 @@ To build standalone CLIs, first create a `bin` directory, then run:
 ```sh
 go build -o bin/chronolens-generator ./cmd/generator
 go build -o bin/chronolens-query ./cmd/query
+go build -o bin/chronolens-server ./cmd/server
 ```
 
 On Windows, add `.exe` to each output filename.
-There is no server or deployment configuration in this milestone.
+The server also needs the built `web/dist` directory; it is not embedded.
 
 Tests cover reproducibility, timestamp order, schema bounds, invalid arguments,
 overflow, writer failures, cancellation, and preservation of existing files.
 Query tests additionally cover known aggregates, engine equivalence, half-open
 time ranges, dictionary limits, concurrent reads, and malformed input. The CI
 workflow runs tests, vet, build, and formatting checks on Windows and Linux,
-plus the query race detector on Linux.
+plus query/API/server race detection on Linux. A separate CI job builds the
+frontend and runs Chromium browser tests against a real generated dataset.
+
+```sh
+cd web
+npm ci
+npm run build
+npm run test:e2e
+```
+
+If Chromium is missing, run `npx playwright install chromium`. See the
+[developer guide](docs/local-explorer.md#development-and-tests) for Linux browser
+dependencies and local frontend iteration.
 
 ### Troubleshooting
 
@@ -214,8 +248,8 @@ plus the query race detector on Linux.
 
 ## Next milestones
 
-1. Local API and interactive timeline explorer.
-2. Larger-scale experiments and deployment hardening.
+1. Larger-scale experiments, ingestion profiles, and persistent storage formats.
+2. Authentication and deployment hardening before considering nonlocal access.
 
 Ten million events and sub-100 ms selective queries are **future experimental
 targets**, not demonstrated capabilities of the current repository.

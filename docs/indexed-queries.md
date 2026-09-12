@@ -95,6 +95,8 @@ timestamps, empty ranges, empty datasets, absent services, the maximum integer
 timestamp, cancellation, invalid ordering, and concurrent read-only queries.
 Comparison counts are checked against a logarithmic upper bound.
 
-There is no persistent index, mutation protocol, sharding, browser interface,
-or ten-million-event result in this milestone. Single CLI timings can be below
-clock resolution; unresolved readings remain null with an explanatory note.
+These measurements belong to indexed-query milestone `d1453df`. The subsequently
+added [local explorer](local-explorer.md) uses this engine, but browser/API work
+is not included in these measurements. There is still no persistent index,
+mutation protocol, sharding, or ten-million-event result. Single CLI timings can
+be below clock resolution; unresolved readings remain null with an explanatory note.

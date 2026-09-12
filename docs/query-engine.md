@@ -2,7 +2,7 @@
 
 This page documents the scan baselines introduced in milestone 2. The current
 CLI also supports [indexed time-range execution](indexed-queries.md), introduced
-in milestone 3. The system runs locally and uses only the Go standard library.
+in milestone 3. The Go engine runs locally and uses only the standard library.
 
 ## Architecture
 
@@ -107,7 +107,9 @@ The aggregate reports:
 Counts, sums, and extrema are exact within their declared integer types.
 The mean is floating point, not an exact rational or percentile. Consumers
 such as JavaScript must handle 64-bit JSON integers carefully if values exceed
-their exact numeric range. This milestone has no browser consumer.
+their exact numeric range. The later [local explorer API](local-explorer.md)
+uses decimal strings for 64-bit timestamp and duration-sum fields; the CLI
+retains its numeric format.
 
 Each result includes its engine, total row count, candidate rows examined,
 rows skipped, and index comparisons. The row and columnar scan implementations

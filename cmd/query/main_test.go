@@ -11,6 +11,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/PoojaAgarwal2003/ChronoLens/internal/measure"
 )
 
 const fixture = `{"timestamp_us":1,"service":"api","duration_us":100,"status":200}
@@ -154,10 +156,10 @@ func TestRunEmptyDataset(t *testing.T) {
 }
 
 func TestDurationMillisecondsDoesNotClaimZeroLatency(t *testing.T) {
-	if durationMilliseconds(0) != nil {
+	if measure.Milliseconds(0) != nil {
 		t.Fatal("an unresolved clock reading must not be reported as zero latency")
 	}
-	if got := durationMilliseconds(1250 * time.Microsecond); got == nil || *got != 1.25 {
+	if got := measure.Milliseconds(1250 * time.Microsecond); got == nil || *got != 1.25 {
 		t.Fatalf("expected exactly 1.25 milliseconds, got %v", got)
 	}
 }

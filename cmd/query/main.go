@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/PoojaAgarwal2003/ChronoLens/internal/measure"
 	"github.com/PoojaAgarwal2003/ChronoLens/internal/query"
 )
 
@@ -89,10 +90,10 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 		fmt.Fprintf(stderr, "query: load input: %v\n", err)
 		return 1
 	}
-	loadMS := durationMilliseconds(time.Since(loadStart))
+	loadMS := measure.Milliseconds(time.Since(loadStart))
 	queryStart := time.Now()
 	result, err := data.Query(ctx, filter)
-	queryMS := durationMilliseconds(time.Since(queryStart))
+	queryMS := measure.Milliseconds(time.Since(queryStart))
 	if err != nil {
 		fmt.Fprintf(stderr, "query: execute: %v\n", err)
 		return 1
@@ -111,12 +112,4 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 		return 1
 	}
 	return 0
-}
-
-func durationMilliseconds(elapsed time.Duration) *float64 {
-	if elapsed == 0 {
-		return nil
-	}
-	ms := float64(elapsed) / float64(time.Millisecond)
-	return &ms
 }
