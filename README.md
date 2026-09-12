@@ -3,16 +3,18 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: reproducible dataset generation.** The Go generator and
-its tests are implemented. The query engine, HTTP API, and visual explorer are
-not implemented yet. No query-performance results are claimed.
+**Current milestone: matching scan query engines.** A deterministic generator,
+validated JSONL reader, row-scan engine, columnar-scan engine, and query CLI are
+implemented. Indexing, the HTTP API, and the visual explorer are not implemented
+yet. [Measured scan baselines](docs/query-engine.md#measured-baseline) describe a
+100,000-event workload, not the future ten-million-event target.
 
 ## Why this exists
 
-ChronoLens will compare a straightforward event scan with more efficient query
-execution over the **same data and query semantics**. Before comparing query
-engines, we need datasets that are reproducible, timestamp-ordered, and easy to
-inspect. This first milestone provides that foundation.
+ChronoLens compares a straightforward event scan with column-oriented execution
+over the **same data and query semantics**. Reproducible datasets, known-answer
+tests, and explicit rows-examined statistics distinguish a real improvement
+from a different answer or a misleading benchmark.
 
 ## Run locally
 
@@ -61,6 +63,12 @@ Services and durations are sampled uniformly. Error events are independent
 Bernoulli samples: a 5% probability does not guarantee exactly 5% errors in a
 finite dataset. This is a baseline workload, not a model of production traffic.
 
+The reader accepts a broader input contract: nonnegative signed 64-bit
+timestamps, unsigned 32-bit durations (including zero), HTTP status codes
+100-599, and nonempty service names up to 128 UTF-8 bytes. Input timestamps must
+be nondecreasing; equal timestamps are allowed even though the generator emits
+strictly increasing timestamps. See the [reader contract](docs/query-engine.md#input-contract).
+
 ## Generator options
 
 ```sh
@@ -93,25 +101,68 @@ The built executable uses exit code 0 for success/help, 2 for argument errors,
 and 1 for generation or I/O errors. `go run` may translate a child failure to
 its own exit code.
 
+## Query a dataset
+
+```sh
+go run ./cmd/query -input data/events.jsonl -engine row
+go run ./cmd/query -input data/events.jsonl -engine columnar
+go run ./cmd/query -input data/events.jsonl -engine columnar -from-us 1767225620000000 -to-us 1767225630000000 -service service-001 -status 500
+go run ./cmd/query -help
+```
+
+Queries return JSON containing count, server-error count, duration sum, mean,
+minimum, maximum, and scan statistics. The time range is **inclusive at
+`-from-us`, exclusive at `-to-us`**; an omitted upper bound is unbounded.
+Service and status filters are exact matches. An unknown service returns zero
+matches, not an input error.
+
+Each invocation loads **only the selected layout** into memory, then executes
+one query. Both engines scan every row, even for narrow ranges. `load_ms` includes
+file reading, validation, and layout construction; `query_ms` measures only
+in-memory execution. Neither number is a repeated-run latency percentile.
+If the clock does not advance during an operation, its timing is `null` with
+an explanatory note, not a claim of zero-millisecond execution.
+
+The default `-max-events 1000000` prevents accidentally loading more than one
+million events; exceeding the limit is an error, never silent truncation.
+Raise this explicitly for larger inputs if sufficient memory is available.
+It is a row-count guard, not an exact memory limit.
+
+Malformed input is reported with a line number and no success-shaped partial
+result. Missing, duplicate, unknown, null, and incorrectly typed fields are
+rejected. Empty files produce a zero-count result with null mean/min/max.
+
+Read the [query design and benchmark methodology](docs/query-engine.md) for
+the complete CLI contract, architecture, measured results, and limitations.
+
 ## Architecture and structure
 
 ```text
-CLI flags
-    |
-    v
-Validated configuration
-    |
-    v
-Seeded generator -> typed telemetry events -> JSON encoder
-                                                  |
-                                                  v
-                                      Buffered JSONL file / stdout
+Seeded generator -> ordered JSONL file
+                            |
+                            v
+                  Validated streaming reader
+                            |
+                            v
+                  One selected memory layout
+                    /                 \
+                   v                   v
+               Event rows         Typed columns
+                    \                 /
+                     v               v
+                      Full-scan query
+                            |
+                            v
+                  Aggregates + scan statistics
 ```
 
 ```text
 cmd/generator/          CLI, output handling, and CLI tests
+cmd/query/              Query CLI and JSON reporting
 internal/generator/    Deterministic generation and validation tests
-internal/telemetry/    Shared event schema
+internal/telemetry/    Shared schema, strict JSONL reader, and fuzz tests
+internal/query/        Memory layouts, aggregation, equivalence tests, benchmarks
+docs/                  Query semantics and measured benchmark methodology
 .github/workflows/     Go checks on Windows and Linux
 go.mod                 Module and minimum Go version
 ```
@@ -121,6 +172,7 @@ go.mod                 Module and minimum Go version
 ```sh
 go test -count=1 ./...
 go test -cover ./...
+go test ./internal/query -run '^$' -bench '^BenchmarkQuery$' -benchmem -count=3
 go vet ./...
 go build ./...
 gofmt -w cmd internal
@@ -130,14 +182,18 @@ To build a standalone generator, first create a `bin` directory, then run:
 
 ```sh
 go build -o bin/chronolens-generator ./cmd/generator
+go build -o bin/chronolens-query ./cmd/query
 ```
 
-On Windows, use `bin/chronolens-generator.exe` as the output path.
+On Windows, add `.exe` to each output filename.
 There is no server or deployment configuration in this milestone.
 
 Tests cover reproducibility, timestamp order, schema bounds, invalid arguments,
 overflow, writer failures, cancellation, and preservation of existing files.
-The CI workflow runs tests, vet, build, and formatting checks on Windows and Linux.
+Query tests additionally cover known aggregates, engine equivalence, half-open
+time ranges, dictionary limits, concurrent reads, and malformed input. The CI
+workflow runs tests, vet, build, and formatting checks on Windows and Linux,
+plus the query race detector on Linux.
 
 ### Troubleshooting
 
@@ -145,12 +201,13 @@ The CI workflow runs tests, vet, build, and formatting checks on Windows and Lin
 - **Output already exists:** choose a new `-output` path; overwrites are intentionally forbidden.
 - **Permission denied or disk full:** choose a writable directory with sufficient free space.
 - **Unexpected sub-microsecond precision error:** use a start time and interval aligned to microseconds.
+- **Dataset exceeds max-events:** explicitly increase the query limit or choose a smaller dataset.
+- **Reader error on line N:** check the exact field names, types, and timestamp order; the reader does not repair or silently skip records.
 
 ## Next milestones
 
-1. Reference and columnar query engines with matching-result tests.
-2. Indexed time-range queries and reproducible performance experiments.
-3. Local API and interactive timeline explorer.
+1. Indexed time-range queries and selectivity experiments against these scan baselines.
+2. Local API and interactive timeline explorer.
 
 Ten million events and sub-100 ms selective queries are **future experimental
 targets**, not demonstrated capabilities of the current repository.

@@ -21,6 +21,9 @@ jobs:
           cache: false
       - run: go vet ./...
       - run: go test -count=1 ./...
+      - name: Check concurrent query execution
+        if: runner.os == 'Linux'
+        run: go test -race -count=1 ./internal/query
       - run: go build ./...
       - name: Check formatting
         shell: bash
