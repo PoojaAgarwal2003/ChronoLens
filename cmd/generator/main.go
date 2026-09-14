@@ -30,8 +30,9 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 	flags.Int64Var(&config.Events, "events", 100000, "number of events (greater than zero)")
 	flags.IntVar(&config.Services, "services", 16, "number of distinct service names (1-1024)")
 	flags.Int64Var(&config.Seed, "seed", 42, "deterministic random seed")
+	flags.StringVar(&config.Profile, "profile", generator.Uniform, "synthetic workload: uniform or incident")
 	flags.DurationVar(&config.Interval, "interval", time.Millisecond, "spacing between timestamps (whole microseconds)")
-	flags.IntVar(&config.ErrorPercent, "error-percent", 5, "probability of status 500, as a percentage (0-100)")
+	flags.IntVar(&config.ErrorPercent, "error-percent", 5, "baseline status 500 probability (0-100); congested incident requests use at least 80")
 	start := flags.String("start", "2026-01-01T00:00:00Z", "first event time in RFC3339 format (microsecond precision)")
 	output := flags.String("output", "data/events.jsonl", "new output file, or - for stdout; existing files are never overwritten")
 	flags.Usage = func() {

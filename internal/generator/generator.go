@@ -13,7 +13,11 @@ import (
 	"github.com/PoojaAgarwal2003/ChronoLens/internal/telemetry"
 )
 
-const MaxServices = 1024
+const (
+	MaxServices = 1024
+	Uniform     = "uniform"
+	Incident    = "incident"
+)
 
 // Config completely specifies a dataset; generation never reads the wall clock.
 type Config struct {
@@ -23,12 +27,19 @@ type Config struct {
 	Start        time.Time
 	Interval     time.Duration
 	ErrorPercent int
+	Profile      string
 }
 
 // Validate checks bounds before a caller creates an output file.
 func (c Config) Validate() error {
 	if c.Events <= 0 {
 		return fmt.Errorf("events must be greater than zero")
+	}
+	if c.Profile != "" && c.Profile != Uniform && c.Profile != Incident {
+		return fmt.Errorf("profile must be uniform or incident")
+	}
+	if c.Profile == Incident && (c.Events < 5 || c.Interval < 4*time.Microsecond || c.Interval%(4*time.Microsecond) != 0) {
+		return fmt.Errorf("incident profile requires at least 5 events and an interval divisible by 4 microseconds")
 	}
 	if c.Services < 1 || c.Services > MaxServices {
 		return fmt.Errorf("services must be between 1 and %d", MaxServices)
@@ -61,6 +72,11 @@ func Generate(ctx context.Context, dst io.Writer, c Config) error {
 		services[i] = fmt.Sprintf("service-%03d", i+1)
 	}
 	rng := rand.New(rand.NewSource(c.Seed))
+	var incidentRNG *rand.Rand
+	if c.Profile == Incident {
+		incidentRNG = rand.New(rand.NewSource(c.Seed ^ 0x4348524f4e4f))
+	}
+	incidentStart, incidentEnd := incidentBounds(c.Events)
 	encoder := json.NewEncoder(dst)
 	timestamp, step := c.Start.UnixMicro(), c.Interval.Microseconds()
 	for i := int64(0); i < c.Events; i++ {
@@ -76,12 +92,30 @@ func Generate(ctx context.Context, dst io.Writer, c Config) error {
 		if rng.Intn(100) < c.ErrorPercent {
 			event.Status = 500
 		}
+		inIncident := c.Profile == Incident && i >= incidentStart && i < incidentEnd
+		if inIncident && incidentRNG.Intn(100) < 80 {
+			event.Service = services[0]
+			event.DurationUS = uint32(1000000 + incidentRNG.Intn(2000001))
+			event.Status = 200
+			if incidentRNG.Intn(100) < max(80, c.ErrorPercent) {
+				event.Status = 500
+			}
+		}
 		if err := encoder.Encode(event); err != nil {
 			return fmt.Errorf("write event %d: %w", i+1, err)
 		}
 		if i < c.Events-1 {
-			timestamp += step
+			gap := step
+			if inIncident {
+				gap /= 4
+			}
+			timestamp += gap
 		}
 	}
 	return nil
+}
+
+func incidentBounds(events int64) (int64, int64) {
+	// Divide first so even a large, invalid-to-run request cannot overflow here.
+	return events/5*2 + events%5*2/5, events/5*3 + events%5*3/5
 }

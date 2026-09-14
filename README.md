@@ -3,9 +3,10 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: local API and interactive explorer.** A deterministic generator,
+**Current milestone: deterministic incident workloads.** A deterministic generator,
 validated JSONL reader, three query engines, diagnostic CLI, loopback-only Go API,
-and React explorer are implemented.
+and React explorer are implemented. The opt-in incident profile creates correlated
+traffic, service, failure, and latency spikes without changing the uniform baseline.
 [One-million-event selectivity measurements](docs/indexed-queries.md#measured-results)
 show where indexing helps and where it does not. The ten-million-event target
 remains unverified.
@@ -89,12 +90,17 @@ This is a schema illustration, not a promised first record for seed 42.
 |---|---|
 | `timestamp_us` | Unix timestamp in microseconds; strictly increasing |
 | `service` | Synthetic service name, such as `service-001` |
-| `duration_us` | Integer request duration from 100 to 500,000 microseconds |
+| `duration_us` | Uniform baseline: 100-500,000 microseconds; congested incident requests: 1,000,000-3,000,000 |
 | `status` | 200 for success or 500 for a synthetic server error |
 
-Services and durations are sampled uniformly. Error events are independent
+With the default `uniform` profile, services and durations are sampled uniformly. Error events are independent
 Bernoulli samples: a 5% probability does not guarantee exactly 5% errors in a
 finite dataset. This is a baseline workload, not a model of production traffic.
+
+The `incident` profile compresses a middle event segment into a traffic burst
+and routes most of those requests to `service-001` with higher durations and
+failure probability. It is a deliberately constructed experiment, not a
+simulation claiming to reproduce real production incidents.
 
 The reader accepts a broader input contract: nonnegative signed 64-bit
 timestamps, unsigned 32-bit durations (including zero), HTTP status codes
@@ -114,15 +120,27 @@ go run ./cmd/generator -events 1000000 -services 32 -seed 7 -interval 1ms -error
 | `-events` | `100000` | Positive integer; resulting timestamps must fit signed 64-bit microseconds |
 | `-services` | `16` | 1 through 1,024 |
 | `-seed` | `42` | Signed 64-bit integer |
+| `-profile` | `uniform` | `uniform` or `incident`; incident requires at least 5 events and an interval divisible by 4 microseconds |
 | `-start` | `2026-01-01T00:00:00Z` | RFC3339 time, at or after the Unix epoch, through year 9999; no sub-microsecond precision |
 | `-interval` | `1ms` | Positive whole microseconds, expressed as a Go duration |
-| `-error-percent` | `5` | Integer probability from 0 through 100 |
+| `-error-percent` | `5` | Baseline probability, 0-100; congested incident requests use `max(80, value)` |
 | `-output` | `data/events.jsonl` | New file path, or `-` for standard output |
 
 The same configuration and generator version produce byte-identical output.
 The generator does not read the wall clock or buffer the whole dataset.
 Additional working memory is proportional to the configured service count,
 plus a fixed output buffer.
+
+For a visible, reproducible incident:
+
+```sh
+go run ./cmd/generator -events 100000 -profile incident -seed 42 -output data/incident.jsonl
+go run ./cmd/server -input data/incident.jsonl -web web/dist -listen 127.0.0.1:8080
+```
+
+Start with the full timeline, locate the burst near the middle, and filter
+`service-001` and status `500`. See [workload definitions and expected results](docs/workloads.md).
+Existing uniform data is byte-compatible with earlier milestones.
 
 Invalid arguments fail before creating a dataset. Handled write failures and
 Ctrl+C cancellation remove an incomplete file created by that invocation.
