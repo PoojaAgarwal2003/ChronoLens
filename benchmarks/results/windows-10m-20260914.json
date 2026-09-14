@@ -1,0 +1,1029 @@
+{
+  "schema_version": 1,
+  "input": "scale-10m-20260914-3185.jsonl",
+  "settings": {
+    "max_events": 10000000,
+    "samples": 5,
+    "window_ms": 200,
+    "min_iterations": 3,
+    "max_iterations": 1000000,
+    "timeout": "10m0s",
+    "warmup_queries_per_case": 1
+  },
+  "runtime": {
+    "go_version": "go1.27.1",
+    "os": "windows",
+    "arch": "amd64",
+    "gomaxprocs": 16,
+    "memory_limit_bytes": 1073741824,
+    "main_version": "v0.0.0-20260914100231-52fb888a2e26+dirty",
+    "build_settings": {
+      "-buildmode": "exe",
+      "-compiler": "gc",
+      "CGO_ENABLED": "0",
+      "vcs": "git",
+      "vcs.modified": "true",
+      "vcs.revision": "52fb888a2e2634cd5381999592e7e2d744fedff6",
+      "vcs.time": "2026-09-14T10:02:31Z"
+    }
+  },
+  "source": {
+    "sha256": "afce58436b7e769ddce7daef80c4a827d4b3f2f73bbeaf456cd203e24d290498",
+    "bytes": 826673337,
+    "events": 10000000,
+    "services": 16,
+    "min_us": 0,
+    "max_us": 9999999,
+    "time_span_us": 10000000
+  },
+  "cases": [
+    {
+      "name": "time_0.1pct",
+      "span_divisor": 1000,
+      "actual_width_us": 10000,
+      "filter": {
+        "from_us": 4995000,
+        "to_us": 5005000,
+        "service": "",
+        "status": 0
+      },
+      "time_matched_rows": 10000
+    },
+    {
+      "name": "time_1pct",
+      "span_divisor": 100,
+      "actual_width_us": 100000,
+      "filter": {
+        "from_us": 4950000,
+        "to_us": 5050000,
+        "service": "",
+        "status": 0
+      },
+      "time_matched_rows": 100000
+    },
+    {
+      "name": "time_10pct",
+      "span_divisor": 10,
+      "actual_width_us": 1000000,
+      "filter": {
+        "from_us": 4500000,
+        "to_us": 5500000,
+        "service": "",
+        "status": 0
+      },
+      "time_matched_rows": 1000000
+    },
+    {
+      "name": "time_100pct",
+      "span_divisor": 1,
+      "actual_width_us": 10000000,
+      "filter": {
+        "from_us": 0,
+        "to_us": 10000000,
+        "service": "",
+        "status": 0
+      },
+      "time_matched_rows": 10000000
+    },
+    {
+      "name": "service_only",
+      "span_divisor": 0,
+      "actual_width_us": 10000000,
+      "filter": {
+        "from_us": 0,
+        "to_us": null,
+        "service": "service-001",
+        "status": 0
+      },
+      "time_matched_rows": 10000000
+    }
+  ],
+  "engines": [
+    {
+      "engine": "row",
+      "load": {
+        "ms": 46693.1329,
+        "sha256": "afce58436b7e769ddce7daef80c4a827d4b3f2f73bbeaf456cd203e24d290498",
+        "bytes": 826673337
+      },
+      "heap": {
+        "before_heap_alloc_bytes": 367416,
+        "after_heap_alloc_bytes": 323885912,
+        "delta_heap_alloc_bytes": 323518496
+      },
+      "cases": [
+        {
+          "name": "time_0.1pct",
+          "result": {
+            "aggregate": {
+              "count": 10000,
+              "error_count": 485,
+              "duration_sum_us": 2498817565,
+              "mean_duration_us": 249881.7565,
+              "min_duration_us": 100,
+              "max_duration_us": 499967
+            },
+            "stats": {
+              "engine": "row",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 0
+            }
+          },
+          "samples": [
+            {
+              "iterations": 5,
+              "elapsed_ms": 214.842,
+              "batch_mean_ms": 42.9684,
+              "stable_window": true
+            },
+            {
+              "iterations": 5,
+              "elapsed_ms": 213.0016,
+              "batch_mean_ms": 42.600319999999996,
+              "stable_window": true
+            },
+            {
+              "iterations": 5,
+              "elapsed_ms": 215.8471,
+              "batch_mean_ms": 43.16942,
+              "stable_window": true
+            },
+            {
+              "iterations": 6,
+              "elapsed_ms": 230.8998,
+              "batch_mean_ms": 38.4833,
+              "stable_window": true
+            },
+            {
+              "iterations": 5,
+              "elapsed_ms": 202.7571,
+              "batch_mean_ms": 40.55142,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 38.4833,
+            "median": 42.600319999999996,
+            "max": 43.16942,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "time_1pct",
+          "result": {
+            "aggregate": {
+              "count": 100000,
+              "error_count": 5133,
+              "duration_sum_us": 25025812364,
+              "mean_duration_us": 250258.12364,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "row",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 0
+            }
+          },
+          "samples": [
+            {
+              "iterations": 6,
+              "elapsed_ms": 238.92,
+              "batch_mean_ms": 39.82,
+              "stable_window": true
+            },
+            {
+              "iterations": 6,
+              "elapsed_ms": 234.3051,
+              "batch_mean_ms": 39.050850000000004,
+              "stable_window": true
+            },
+            {
+              "iterations": 6,
+              "elapsed_ms": 234.2944,
+              "batch_mean_ms": 39.04906666666667,
+              "stable_window": true
+            },
+            {
+              "iterations": 6,
+              "elapsed_ms": 231.1579,
+              "batch_mean_ms": 38.526316666666666,
+              "stable_window": true
+            },
+            {
+              "iterations": 6,
+              "elapsed_ms": 234.3219,
+              "batch_mean_ms": 39.05365,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 38.526316666666666,
+            "median": 39.050850000000004,
+            "max": 39.82,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "time_10pct",
+          "result": {
+            "aggregate": {
+              "count": 1000000,
+              "error_count": 49995,
+              "duration_sum_us": 250082580976,
+              "mean_duration_us": 250082.580976,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "row",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 0
+            }
+          },
+          "samples": [
+            {
+              "iterations": 5,
+              "elapsed_ms": 203.9936,
+              "batch_mean_ms": 40.798719999999996,
+              "stable_window": true
+            },
+            {
+              "iterations": 5,
+              "elapsed_ms": 206.6505,
+              "batch_mean_ms": 41.3301,
+              "stable_window": true
+            },
+            {
+              "iterations": 5,
+              "elapsed_ms": 208.8181,
+              "batch_mean_ms": 41.763619999999996,
+              "stable_window": true
+            },
+            {
+              "iterations": 5,
+              "elapsed_ms": 232.774,
+              "batch_mean_ms": 46.5548,
+              "stable_window": true
+            },
+            {
+              "iterations": 4,
+              "elapsed_ms": 204.2835,
+              "batch_mean_ms": 51.070875,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 40.798719999999996,
+            "median": 41.763619999999996,
+            "max": 51.070875,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "time_100pct",
+          "result": {
+            "aggregate": {
+              "count": 10000000,
+              "error_count": 500760,
+              "duration_sum_us": 2500545320493,
+              "mean_duration_us": 250054.5320493,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "row",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 0
+            }
+          },
+          "samples": [
+            {
+              "iterations": 3,
+              "elapsed_ms": 212.3256,
+              "batch_mean_ms": 70.7752,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 218.6674,
+              "batch_mean_ms": 72.88913333333333,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 243.4972,
+              "batch_mean_ms": 81.16573333333334,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 228.7092,
+              "batch_mean_ms": 76.2364,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 218.5833,
+              "batch_mean_ms": 72.86110000000001,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 70.7752,
+            "median": 72.88913333333333,
+            "max": 81.16573333333334,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "service_only",
+          "result": {
+            "aggregate": {
+              "count": 625192,
+              "error_count": 31527,
+              "duration_sum_us": 156492887153,
+              "mean_duration_us": 250311.7236832845,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "row",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 0
+            }
+          },
+          "samples": [
+            {
+              "iterations": 3,
+              "elapsed_ms": 215.1254,
+              "batch_mean_ms": 71.70846666666667,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 217.5404,
+              "batch_mean_ms": 72.51346666666667,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 212.8512,
+              "batch_mean_ms": 70.9504,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 228.8082,
+              "batch_mean_ms": 76.2694,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 246.5871,
+              "batch_mean_ms": 82.1957,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 70.9504,
+            "median": 72.51346666666667,
+            "max": 82.1957,
+            "stable_window": true
+          }
+        }
+      ]
+    },
+    {
+      "engine": "columnar",
+      "load": {
+        "ms": 44385.6141,
+        "sha256": "afce58436b7e769ddce7daef80c4a827d4b3f2f73bbeaf456cd203e24d290498",
+        "bytes": 826673337
+      },
+      "heap": {
+        "before_heap_alloc_bytes": 430144,
+        "after_heap_alloc_bytes": 183800760,
+        "delta_heap_alloc_bytes": 183370616
+      },
+      "cases": [
+        {
+          "name": "time_0.1pct",
+          "result": {
+            "aggregate": {
+              "count": 10000,
+              "error_count": 485,
+              "duration_sum_us": 2498817565,
+              "mean_duration_us": 249881.7565,
+              "min_duration_us": 100,
+              "max_duration_us": 499967
+            },
+            "stats": {
+              "engine": "columnar",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 0
+            }
+          },
+          "samples": [
+            {
+              "iterations": 10,
+              "elapsed_ms": 214.1605,
+              "batch_mean_ms": 21.416050000000002,
+              "stable_window": true
+            },
+            {
+              "iterations": 10,
+              "elapsed_ms": 211.6351,
+              "batch_mean_ms": 21.16351,
+              "stable_window": true
+            },
+            {
+              "iterations": 10,
+              "elapsed_ms": 215.1117,
+              "batch_mean_ms": 21.51117,
+              "stable_window": true
+            },
+            {
+              "iterations": 10,
+              "elapsed_ms": 212.1002,
+              "batch_mean_ms": 21.21002,
+              "stable_window": true
+            },
+            {
+              "iterations": 10,
+              "elapsed_ms": 221.349,
+              "batch_mean_ms": 22.1349,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 21.16351,
+            "median": 21.416050000000002,
+            "max": 22.1349,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "time_1pct",
+          "result": {
+            "aggregate": {
+              "count": 100000,
+              "error_count": 5133,
+              "duration_sum_us": 25025812364,
+              "mean_duration_us": 250258.12364,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "columnar",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 0
+            }
+          },
+          "samples": [
+            {
+              "iterations": 9,
+              "elapsed_ms": 205.6804,
+              "batch_mean_ms": 22.853377777777776,
+              "stable_window": true
+            },
+            {
+              "iterations": 10,
+              "elapsed_ms": 219.5825,
+              "batch_mean_ms": 21.95825,
+              "stable_window": true
+            },
+            {
+              "iterations": 9,
+              "elapsed_ms": 213.6395,
+              "batch_mean_ms": 23.73772222222222,
+              "stable_window": true
+            },
+            {
+              "iterations": 9,
+              "elapsed_ms": 214.4726,
+              "batch_mean_ms": 23.830288888888887,
+              "stable_window": true
+            },
+            {
+              "iterations": 9,
+              "elapsed_ms": 208.317,
+              "batch_mean_ms": 23.146333333333335,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 21.95825,
+            "median": 23.146333333333335,
+            "max": 23.830288888888887,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "time_10pct",
+          "result": {
+            "aggregate": {
+              "count": 1000000,
+              "error_count": 49995,
+              "duration_sum_us": 250082580976,
+              "mean_duration_us": 250082.580976,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "columnar",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 0
+            }
+          },
+          "samples": [
+            {
+              "iterations": 8,
+              "elapsed_ms": 217.9218,
+              "batch_mean_ms": 27.240225,
+              "stable_window": true
+            },
+            {
+              "iterations": 8,
+              "elapsed_ms": 221.9746,
+              "batch_mean_ms": 27.746825,
+              "stable_window": true
+            },
+            {
+              "iterations": 8,
+              "elapsed_ms": 217.2521,
+              "batch_mean_ms": 27.1565125,
+              "stable_window": true
+            },
+            {
+              "iterations": 8,
+              "elapsed_ms": 210.5426,
+              "batch_mean_ms": 26.317825,
+              "stable_window": true
+            },
+            {
+              "iterations": 8,
+              "elapsed_ms": 200.1213,
+              "batch_mean_ms": 25.0151625,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 25.0151625,
+            "median": 27.1565125,
+            "max": 27.746825,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "time_100pct",
+          "result": {
+            "aggregate": {
+              "count": 10000000,
+              "error_count": 500760,
+              "duration_sum_us": 2500545320493,
+              "mean_duration_us": 250054.5320493,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "columnar",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 0
+            }
+          },
+          "samples": [
+            {
+              "iterations": 3,
+              "elapsed_ms": 201.669,
+              "batch_mean_ms": 67.223,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 200.5924,
+              "batch_mean_ms": 66.86413333333333,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 216.3276,
+              "batch_mean_ms": 72.1092,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 273.2681,
+              "batch_mean_ms": 91.08936666666666,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 230.8911,
+              "batch_mean_ms": 76.9637,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 66.86413333333333,
+            "median": 72.1092,
+            "max": 91.08936666666666,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "service_only",
+          "result": {
+            "aggregate": {
+              "count": 625192,
+              "error_count": 31527,
+              "duration_sum_us": 156492887153,
+              "mean_duration_us": 250311.7236832845,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "columnar",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 0
+            }
+          },
+          "samples": [
+            {
+              "iterations": 5,
+              "elapsed_ms": 206.7309,
+              "batch_mean_ms": 41.34618,
+              "stable_window": true
+            },
+            {
+              "iterations": 5,
+              "elapsed_ms": 211.4785,
+              "batch_mean_ms": 42.2957,
+              "stable_window": true
+            },
+            {
+              "iterations": 5,
+              "elapsed_ms": 209.4251,
+              "batch_mean_ms": 41.88502,
+              "stable_window": true
+            },
+            {
+              "iterations": 6,
+              "elapsed_ms": 234.0458,
+              "batch_mean_ms": 39.00763333333334,
+              "stable_window": true
+            },
+            {
+              "iterations": 5,
+              "elapsed_ms": 207.7875,
+              "batch_mean_ms": 41.5575,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 39.00763333333334,
+            "median": 41.5575,
+            "max": 42.2957,
+            "stable_window": true
+          }
+        }
+      ]
+    },
+    {
+      "engine": "indexed",
+      "load": {
+        "ms": 42483.4225,
+        "sha256": "afce58436b7e769ddce7daef80c4a827d4b3f2f73bbeaf456cd203e24d290498",
+        "bytes": 826673337
+      },
+      "heap": {
+        "before_heap_alloc_bytes": 441280,
+        "after_heap_alloc_bytes": 183809496,
+        "delta_heap_alloc_bytes": 183368216
+      },
+      "cases": [
+        {
+          "name": "time_0.1pct",
+          "result": {
+            "aggregate": {
+              "count": 10000,
+              "error_count": 485,
+              "duration_sum_us": 2498817565,
+              "mean_duration_us": 249881.7565,
+              "min_duration_us": 100,
+              "max_duration_us": 499967
+            },
+            "stats": {
+              "engine": "indexed",
+              "total_rows": 10000000,
+              "rows_examined": 10000,
+              "rows_skipped": 9990000,
+              "index_comparisons": 45
+            }
+          },
+          "samples": [
+            {
+              "iterations": 3094,
+              "elapsed_ms": 200.577,
+              "batch_mean_ms": 0.06482773109243697,
+              "stable_window": true
+            },
+            {
+              "iterations": 3115,
+              "elapsed_ms": 200.6802,
+              "batch_mean_ms": 0.06442382022471911,
+              "stable_window": true
+            },
+            {
+              "iterations": 3154,
+              "elapsed_ms": 201.2712,
+              "batch_mean_ms": 0.0638145846544071,
+              "stable_window": true
+            },
+            {
+              "iterations": 3206,
+              "elapsed_ms": 200.52,
+              "batch_mean_ms": 0.06254522769806613,
+              "stable_window": true
+            },
+            {
+              "iterations": 3053,
+              "elapsed_ms": 201.4986,
+              "batch_mean_ms": 0.06600019652800525,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 0.06254522769806613,
+            "median": 0.06442382022471911,
+            "max": 0.06600019652800525,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "time_1pct",
+          "result": {
+            "aggregate": {
+              "count": 100000,
+              "error_count": 5133,
+              "duration_sum_us": 25025812364,
+              "mean_duration_us": 250258.12364,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "indexed",
+              "total_rows": 10000000,
+              "rows_examined": 100000,
+              "rows_skipped": 9900000,
+              "index_comparisons": 45
+            }
+          },
+          "samples": [
+            {
+              "iterations": 305,
+              "elapsed_ms": 200.9646,
+              "batch_mean_ms": 0.6589003278688524,
+              "stable_window": true
+            },
+            {
+              "iterations": 309,
+              "elapsed_ms": 201.3145,
+              "batch_mean_ms": 0.6515032362459547,
+              "stable_window": true
+            },
+            {
+              "iterations": 312,
+              "elapsed_ms": 204.7885,
+              "batch_mean_ms": 0.6563733974358974,
+              "stable_window": true
+            },
+            {
+              "iterations": 293,
+              "elapsed_ms": 201.7443,
+              "batch_mean_ms": 0.6885470989761092,
+              "stable_window": true
+            },
+            {
+              "iterations": 291,
+              "elapsed_ms": 201.3871,
+              "batch_mean_ms": 0.6920518900343643,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 0.6515032362459547,
+            "median": 0.6589003278688524,
+            "max": 0.6920518900343643,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "time_10pct",
+          "result": {
+            "aggregate": {
+              "count": 1000000,
+              "error_count": 49995,
+              "duration_sum_us": 250082580976,
+              "mean_duration_us": 250082.580976,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "indexed",
+              "total_rows": 10000000,
+              "rows_examined": 1000000,
+              "rows_skipped": 9000000,
+              "index_comparisons": 45
+            }
+          },
+          "samples": [
+            {
+              "iterations": 30,
+              "elapsed_ms": 201.7615,
+              "batch_mean_ms": 6.725383333333334,
+              "stable_window": true
+            },
+            {
+              "iterations": 32,
+              "elapsed_ms": 202.9762,
+              "batch_mean_ms": 6.34300625,
+              "stable_window": true
+            },
+            {
+              "iterations": 33,
+              "elapsed_ms": 206.4356,
+              "batch_mean_ms": 6.2556242424242425,
+              "stable_window": true
+            },
+            {
+              "iterations": 33,
+              "elapsed_ms": 201.215,
+              "batch_mean_ms": 6.097424242424243,
+              "stable_window": true
+            },
+            {
+              "iterations": 33,
+              "elapsed_ms": 203.6709,
+              "batch_mean_ms": 6.171845454545454,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 6.097424242424243,
+            "median": 6.2556242424242425,
+            "max": 6.725383333333334,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "time_100pct",
+          "result": {
+            "aggregate": {
+              "count": 10000000,
+              "error_count": 500760,
+              "duration_sum_us": 2500545320493,
+              "mean_duration_us": 250054.5320493,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "indexed",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 47
+            }
+          },
+          "samples": [
+            {
+              "iterations": 4,
+              "elapsed_ms": 268.0518,
+              "batch_mean_ms": 67.01295,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 205.7919,
+              "batch_mean_ms": 68.5973,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 203.1703,
+              "batch_mean_ms": 67.72343333333333,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 215.603,
+              "batch_mean_ms": 71.86766666666666,
+              "stable_window": true
+            },
+            {
+              "iterations": 3,
+              "elapsed_ms": 211.4875,
+              "batch_mean_ms": 70.49583333333334,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 67.01295,
+            "median": 68.5973,
+            "max": 71.86766666666666,
+            "stable_window": true
+          }
+        },
+        {
+          "name": "service_only",
+          "result": {
+            "aggregate": {
+              "count": 625192,
+              "error_count": 31527,
+              "duration_sum_us": 156492887153,
+              "mean_duration_us": 250311.7236832845,
+              "min_duration_us": 100,
+              "max_duration_us": 500000
+            },
+            "stats": {
+              "engine": "indexed",
+              "total_rows": 10000000,
+              "rows_examined": 10000000,
+              "rows_skipped": 0,
+              "index_comparisons": 24
+            }
+          },
+          "samples": [
+            {
+              "iterations": 5,
+              "elapsed_ms": 200.0573,
+              "batch_mean_ms": 40.01146,
+              "stable_window": true
+            },
+            {
+              "iterations": 6,
+              "elapsed_ms": 240.5863,
+              "batch_mean_ms": 40.09771666666666,
+              "stable_window": true
+            },
+            {
+              "iterations": 6,
+              "elapsed_ms": 231.5746,
+              "batch_mean_ms": 38.59576666666667,
+              "stable_window": true
+            },
+            {
+              "iterations": 6,
+              "elapsed_ms": 227.6972,
+              "batch_mean_ms": 37.949533333333335,
+              "stable_window": true
+            },
+            {
+              "iterations": 6,
+              "elapsed_ms": 237.1714,
+              "batch_mean_ms": 39.52856666666667,
+              "stable_window": true
+            }
+          ],
+          "batch_mean_ms": {
+            "min": 37.949533333333335,
+            "median": 39.52856666666667,
+            "max": 40.09771666666666,
+            "stable_window": true
+          }
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Query samples are warm batch means, not request percentiles; min/median/max summarize batch means only.",
+    "Each stable batch performs at least 3 queries and runs at least window_ms. A capped or unresolved batch has null batch_mean_ms and stable_window=false; any such sample makes its summary null.",
+    "Query timing includes time.Now, loop, context, error, and full aggregate stability checks. Loading/hashing, explicit GC, warmup, metadata, profiles, charts, HTTP/UI, and report construction are excluded.",
+    "Load timing includes file open/stat/read/validation, SHA256 of actual bytes, layout construction, and close; it excludes explicit GC and metadata collection.",
+    "Heap snapshots are process-wide runtime.MemStats.HeapAlloc after forced GC, before/after loading one layout, with the dataset kept alive. Signed delta is not OS RSS, total allocations, or peak memory. Runtime noise and retained report values affect snapshots.",
+    "Time fractions use [min_us,max_us+1), ceiling integer widths and lower-biased centering. A null to_us is unbounded (including conceptual MaxInt64+1). Ties and rounding change event selectivity; inspect endpoints, time_matched_rows, aggregate.count, and stats.rows_examined.",
+    "Service-only selects the lexicographically first service with no time predicate. Engines run row, columnar, indexed in fixed order; filesystem cache, runtime GC, and process noise are not controlled.",
+    "Timeout/cancellation is cooperative, checked before and after regular-file reads and in query loops; a blocked OS read or forced GC may delay cancellation.",
+    "Build VCS settings are included when available; missing settings are not evidence of a clean checkout. Runtime memory limit is observed, never changed."
+  ]
+}

@@ -98,5 +98,7 @@ Comparison counts are checked against a logarithmic upper bound.
 These measurements belong to indexed-query milestone `d1453df`. The subsequently
 added [local explorer](local-explorer.md) uses this engine, but browser/API work
 is not included in these measurements. There is still no persistent index,
-mutation protocol, sharding, or ten-million-event result. Single CLI timings can
+mutation protocol or sharding. A later [ten-million-event experiment](../benchmarks/README.md)
+publishes separate raw samples and methodology; it does not replace the historical
+one-million-event measurements above. Single CLI timings can
 be below clock resolution; unresolved readings remain null with an explanatory note.

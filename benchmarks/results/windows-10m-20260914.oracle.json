@@ -1,0 +1,96 @@
+{
+  "input": "scale-10m-20260914-3185.jsonl",
+  "events": 10000000,
+  "services": [
+    "service-001",
+    "service-002",
+    "service-003",
+    "service-004",
+    "service-005",
+    "service-006",
+    "service-007",
+    "service-008",
+    "service-009",
+    "service-010",
+    "service-011",
+    "service-012",
+    "service-013",
+    "service-014",
+    "service-015",
+    "service-016"
+  ],
+  "input_bytes": 826673337,
+  "sha256": "afce58436b7e769ddce7daef80c4a827d4b3f2f73bbeaf456cd203e24d290498",
+  "cases": [
+    {
+      "filter": {
+        "name": "0.1% time",
+        "from_us": 4995000,
+        "to_us": 5005000,
+        "service": ""
+      },
+      "count": 10000,
+      "error_count": 485,
+      "duration_sum_us": "2498817565",
+      "min_duration_us": 100,
+      "max_duration_us": 499967,
+      "mean_duration_us": 249881.7565
+    },
+    {
+      "filter": {
+        "name": "1% time",
+        "from_us": 4950000,
+        "to_us": 5050000,
+        "service": ""
+      },
+      "count": 100000,
+      "error_count": 5133,
+      "duration_sum_us": "25025812364",
+      "min_duration_us": 100,
+      "max_duration_us": 500000,
+      "mean_duration_us": 250258.12364
+    },
+    {
+      "filter": {
+        "name": "10% time",
+        "from_us": 4500000,
+        "to_us": 5500000,
+        "service": ""
+      },
+      "count": 1000000,
+      "error_count": 49995,
+      "duration_sum_us": "250082580976",
+      "min_duration_us": 100,
+      "max_duration_us": 500000,
+      "mean_duration_us": 250082.580976
+    },
+    {
+      "filter": {
+        "name": "100% time",
+        "from_us": 0,
+        "to_us": 10000000,
+        "service": ""
+      },
+      "count": 10000000,
+      "error_count": 500760,
+      "duration_sum_us": "2500545320493",
+      "min_duration_us": 100,
+      "max_duration_us": 500000,
+      "mean_duration_us": 250054.5320493
+    },
+    {
+      "filter": {
+        "name": "service-only",
+        "from_us": 0,
+        "to_us": 10000000,
+        "service": "service-001"
+      },
+      "count": 625192,
+      "error_count": 31527,
+      "duration_sum_us": "156492887153",
+      "min_duration_us": 100,
+      "max_duration_us": 500000,
+      "mean_duration_us": 250311.7236832845
+    }
+  ]
+}

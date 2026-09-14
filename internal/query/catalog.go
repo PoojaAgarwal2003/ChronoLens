@@ -59,19 +59,35 @@ type Metadata struct {
 }
 
 func (c *Catalog) Metadata() Metadata {
-	data := c.engines[Columnar]
+	return c.engines[Columnar].Metadata()
+}
+
+// Metadata describes one layout without constructing a multi-layout Catalog.
+// Returned slices and timestamp pointers do not alias the dataset.
+func (data *Dataset) Metadata() Metadata {
 	result := Metadata{Rows: data.Len(), Services: append([]string{}, data.names...), Statuses: []uint16{}}
 	sort.Strings(result.Services)
 	statuses := make(map[uint16]bool)
-	for _, status := range data.statuses {
-		statuses[status] = true
+	if data.engine == Row {
+		for _, event := range data.rows {
+			statuses[event.Status] = true
+		}
+	} else {
+		for _, status := range data.statuses {
+			statuses[status] = true
+		}
 	}
 	for status := range statuses {
 		result.Statuses = append(result.Statuses, status)
 	}
 	sort.Slice(result.Statuses, func(i, j int) bool { return result.Statuses[i] < result.Statuses[j] })
 	if data.Len() > 0 {
-		first, last := data.timestamps[0], data.timestamps[data.Len()-1]
+		var first, last int64
+		if data.engine == Row {
+			first, last = data.rows[0].TimestampUS, data.rows[data.Len()-1].TimestampUS
+		} else {
+			first, last = data.timestamps[0], data.timestamps[data.Len()-1]
+		}
 		result.MinUS, result.MaxUS = &first, &last
 	}
 	return result

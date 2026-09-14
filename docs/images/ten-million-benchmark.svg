@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="920" viewBox="0 0 1280 920" role="img" aria-labelledby="title desc">
+<title id="title">ChronoLens: measured time selectivity across three query engines</title>
+<desc id="desc">Warm batch means on a logarithmic millisecond axis. Error bars show min and max batch means, not request percentiles. Loading and browser rendering are excluded.</desc>
+<rect width="1280" height="920" rx="18" fill="#0a1418"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<text x="40" y="45" font-size="13" fill="#65e0c9" letter-spacing="2">CHRONOLENS / MEASURED, NOT PROMISED</text>
+<text x="40" y="85" font-size="30" fill="#edf6f7" >10,000,000 events. Same answers. Less work.</text>
+<rect x="40" y="112" width="389" height="99" rx="9" fill="#102227" stroke="#284046"/>
+<text x="58" y="155" font-size="31" fill="#65e0c9" >0.0644 ms</text>
+<text x="58" y="185" font-size="12" fill="#a8bec4" >0.1% time range: median warm batch mean</text>
+<rect x="443" y="112" width="389" height="99" rx="9" fill="#102227" stroke="#284046"/>
+<text x="461" y="155" font-size="31" fill="#65e0c9" >661x</text>
+<text x="461" y="185" font-size="12" fill="#a8bec4" >vs row scan for this selective case only</text>
+<rect x="846" y="112" width="389" height="99" rx="9" fill="#102227" stroke="#284046"/>
+<text x="864" y="155" font-size="31" fill="#65e0c9" >99.9%</text>
+<text x="864" y="185" font-size="12" fill="#a8bec4" >candidate visits skipped; probes counted separately</text>
+<text x="70" y="245" font-size="14" fill="#edf6f7" >Query time (ms, logarithmic)</text>
+<line x1="130" x2="1150" y1="600" y2="600" stroke="#294048" stroke-dasharray="3 6"/>
+<text x="112" y="605" font-size="13" fill="#a8bec4" text-anchor="end">0.01</text>
+<line x1="130" x2="1150" y1="517.5" y2="517.5" stroke="#294048" stroke-dasharray="3 6"/>
+<text x="112" y="522.5" font-size="13" fill="#a8bec4" text-anchor="end">0.1</text>
+<line x1="130" x2="1150" y1="435" y2="435" stroke="#294048" stroke-dasharray="3 6"/>
+<text x="112" y="440" font-size="13" fill="#a8bec4" text-anchor="end">1</text>
+<line x1="130" x2="1150" y1="352.5" y2="352.5" stroke="#294048" stroke-dasharray="3 6"/>
+<text x="112" y="357.5" font-size="13" fill="#a8bec4" text-anchor="end">10</text>
+<line x1="130" x2="1150" y1="270" y2="270" stroke="#294048" stroke-dasharray="3 6"/>
+<text x="112" y="275" font-size="13" fill="#a8bec4" text-anchor="end">100</text>
+<polyline points="151,300.57343893479424 461,303.6904844608687 771,301.2841538181581 1081,281.33032012123357" fill="none" stroke="#f5b777" stroke-width="3"/>
+<path d="M151 300.09796236483777V304.21503472546624M146 300.09796236483777H156M146 304.21503472546624H156" stroke="#f5b777" stroke-width="2"/>
+<circle cx="151" cy="300.57343893479424" r="5" fill="#f5b777"/>
+<path d="M461 302.99164640546024V304.1750070755057M456 302.99164640546024H466M456 304.1750070755057H466" stroke="#f5b777" stroke-width="2"/>
+<circle cx="461" cy="303.6904844608687" r="5" fill="#f5b777"/>
+<path d="M771 294.07570285645886V302.12166061902366M766 294.07570285645886H776M766 302.12166061902366H776" stroke="#f5b777" stroke-width="2"/>
+<circle cx="771" cy="301.2841538181581" r="5" fill="#f5b777"/>
+<path d="M1081 277.47675085891603V282.38480881363034M1076 277.47675085891603H1086M1076 282.38480881363034H1086" stroke="#f5b777" stroke-width="2"/>
+<circle cx="1081" cy="281.33032012123357" r="5" fill="#f5b777"/>
+<circle cx="400" cy="677" r="5" fill="#f5b777"/>
+<text x="415" y="682" font-size="15" fill="#f5b777" >row</text>
+<polyline points="160,325.2140017995775 470,322.4302182390584 780,316.7053953199453 1090,281.71576911441826" fill="none" stroke="#91adff" stroke-width="3"/>
+<path d="M160 324.03110094654414V325.6390149372279M155 324.03110094654414H165M155 325.6390149372279H165" stroke="#91adff" stroke-width="2"/>
+<circle cx="160" cy="325.2140017995775" r="5" fill="#91adff"/>
+<path d="M470 321.3868321538193V324.3181876609836M465 321.3868321538193H475M465 324.3181876609836H475" stroke="#91adff" stroke-width="2"/>
+<circle cx="470" cy="322.4302182390584" r="5" fill="#91adff"/>
+<path d="M780 315.9349031569686V319.6482254043877M775 315.9349031569686H785M775 319.6482254043877H785" stroke="#91adff" stroke-width="2"/>
+<circle cx="780" cy="316.7053953199453" r="5" fill="#91adff"/>
+<path d="M1090 273.34391619468425V284.42155936450223M1085 273.34391619468425H1095M1085 284.42155936450223H1095" stroke="#91adff" stroke-width="2"/>
+<circle cx="1090" cy="281.71576911441826" r="5" fill="#91adff"/>
+<circle cx="570" cy="677" r="5" fill="#91adff"/>
+<text x="585" y="682" font-size="15" fill="#91adff" >columnar</text>
+<polyline points="169,533.2536658798865 479,449.94737279866405 789,369.30767104503616 1099,283.5046706728468" fill="none" stroke="#65e0c9" stroke-width="3"/>
+<path d="M169 532.3875186291694V534.3139803213616M164 532.3875186291694H174M164 534.3139803213616H174" stroke="#65e0c9" stroke-width="2"/>
+<circle cx="169" cy="533.2536658798865" r="5" fill="#65e0c9"/>
+<path d="M479 448.188560626922V450.3518823688264M474 448.188560626922H484M474 450.3518823688264H484" stroke="#65e0c9" stroke-width="2"/>
+<circle cx="479" cy="449.94737279866405" r="5" fill="#65e0c9"/>
+<path d="M789 366.71334392836394V370.22542091773505M784 366.71334392836394H794M784 370.22542091773505H794" stroke="#65e0c9" stroke-width="2"/>
+<circle cx="789" cy="369.30767104503616" r="5" fill="#65e0c9"/>
+<path d="M1099 281.83598255303895V284.3419042319264M1094 281.83598255303895H1104M1094 284.3419042319264H1104" stroke="#65e0c9" stroke-width="2"/>
+<circle cx="1099" cy="283.5046706728468" r="5" fill="#65e0c9"/>
+<circle cx="740" cy="677" r="5" fill="#65e0c9"/>
+<text x="755" y="682" font-size="15" fill="#65e0c9" >indexed</text>
+<text x="160" y="625" font-size="14" fill="#edf6f7" text-anchor="middle">0.1%</text>
+<text x="470" y="625" font-size="14" fill="#edf6f7" text-anchor="middle">1%</text>
+<text x="780" y="625" font-size="14" fill="#edf6f7" text-anchor="middle">10%</text>
+<text x="1090" y="625" font-size="14" fill="#edf6f7" text-anchor="middle">100%</text>
+<text x="640" y="654" font-size="14" fill="#a8bec4" text-anchor="middle">Centered fraction of the timestamp span</text>
+<text x="640" y="713" font-size="13" fill="#a8bec4" text-anchor="middle">Median of 5 batch means; whiskers = min/max batch means, NOT request percentiles.</text>
+<rect x="40" y="737" width="1200" height="76" rx="9" fill="#102227" stroke="#284046"/>
+<text x="60" y="764" font-size="12" fill="#edf6f7" >NEGATIVE CONTROL / SERVICE-ONLY FILTER</text>
+<text x="60" y="793" font-size="14" fill="#a8bec4" >All engines still visit 10,000,000 candidates.</text>
+<text x="590" y="784" font-size="16" fill="#f5b777" >row: 72.51 ms</text>
+<text x="800" y="784" font-size="16" fill="#91adff" >columnar: 41.56 ms</text>
+<text x="1010" y="784" font-size="16" fill="#65e0c9" >indexed: 39.53 ms</text>
+<text x="40" y="847" font-size="14" fill="#a8bec4" >Loading: 42.5-46.7 seconds per layout, including strict JSONL parsing and SHA-256.</text>
+<text x="40" y="873" font-size="13" fill="#a8bec4" >Warm queries only; no loading, charts, HTTP, or browser rendering. go1.27.1, windows/amd64.</text>
+<text x="40" y="897" font-size="12" fill="#a8bec4" >One shared-host run. Raw samples, exact aggregates, independent oracle, and reproduction commands are published alongside this chart.</text>
+</g></svg>

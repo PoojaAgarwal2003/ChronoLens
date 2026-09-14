@@ -3,13 +3,14 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: deterministic incident workloads.** A deterministic generator,
+**Current milestone: reproducible ten-million-event benchmarks.** A deterministic generator,
 validated JSONL reader, three query engines, diagnostic CLI, loopback-only Go API,
 and React explorer are implemented. The opt-in incident profile creates correlated
 traffic, service, failure, and latency spikes without changing the uniform baseline.
-[One-million-event selectivity measurements](docs/indexed-queries.md#measured-results)
-show where indexing helps and where it does not. The ten-million-event target
-remains unverified.
+[A measured ten-million-event experiment](benchmarks/README.md) reports a
+**0.0644 ms median warm batch mean** for a 0.1% time range, versus **42.60 ms**
+for the row scan with identical results. Loading each layout took 42.5-46.7 seconds.
+These are workload-specific query measurements, not browser latency or request p95.
 
 ## Why this exists
 
@@ -66,6 +67,8 @@ for endpoint examples, request limits, timing semantics, tests, and troubleshoot
 Shown: one million seeded events with a 1% time window, 10,000 matches, and
 990,000 candidate rows skipped. [View the real comparison panel](docs/images/explorer-comparison.png).
 Interactive timings in screenshots are observations, not portable performance guarantees.
+The [ten-million-event demonstration](benchmarks/README.md#explorer-demonstration)
+shows the larger dataset with exact charts and matching engine results.
 
 For JSONL on standard output:
 
@@ -197,16 +200,21 @@ the complete CLI contract, architecture, measured results, and limitations.
 The CLI loads one selected layout. The server loads a shared comparison catalog
 and serves the static frontend from `web/dist`. Chart profiles are a separate,
 bounded indexed pass; they are not hidden in aggregate-only timings.
+The benchmark runner loads one layout at a time, verifies source hashes and
+full aggregate equivalence, and reports raw warm batches separately from loading.
 
 ```text
 cmd/generator/          CLI, output handling, and CLI tests
 cmd/query/              Query CLI and JSON reporting
+cmd/bench/              Bounded benchmark CLI and report output
 cmd/server/             Local server lifecycle and startup validation
 internal/generator/    Deterministic generation and validation tests
 internal/telemetry/    Shared schema, strict JSONL reader, and fuzz tests
 internal/query/        Layouts, time index, shared catalog, exact chart profiles
 internal/api/          Local HTTP routes, limits, origin guards, comparison batches
 internal/measure/      Explicit handling of unresolved clock timings
+internal/benchmark/    Single-layout experiments, provenance, batch timing, heap snapshots
+benchmarks/            Raw results, independent oracle, chart renderer, reproduction guide
 web/                   React UI, build configuration, real-server browser tests
 docs/                  Architecture, API/setup guides, measurements, original images
 .github/workflows/     Go checks on Windows and Linux
@@ -230,6 +238,7 @@ To build standalone CLIs, first create a `bin` directory, then run:
 ```sh
 go build -o bin/chronolens-generator ./cmd/generator
 go build -o bin/chronolens-query ./cmd/query
+go build -o bin/chronolens-bench ./cmd/bench
 go build -o bin/chronolens-server ./cmd/server
 ```
 
@@ -243,6 +252,10 @@ time ranges, dictionary limits, concurrent reads, and malformed input. The CI
 workflow runs tests, vet, build, and formatting checks on Windows and Linux,
 plus query/API/server race detection on Linux. A separate CI job builds the
 frontend and runs Chromium browser tests against a real generated dataset.
+The benchmark runner is also exercised under the race detector. Its tests cover
+source mutation, complete aggregate agreement, overflow-safe range construction,
+deadline handling, and unresolved clocks. The existing Playwright suite also
+checks the independent oracle and reproducibility of the published benchmark chart.
 
 ```sh
 cd web
@@ -266,11 +279,12 @@ dependencies and local frontend iteration.
 
 ## Next milestones
 
-1. Larger-scale experiments, ingestion profiles, and persistent storage formats.
+1. Persistent storage formats and faster startup, evaluated against the published JSONL baseline.
 2. Authentication and deployment hardening before considering nonlocal access.
 
-Ten million events and sub-100 ms selective queries are **future experimental
-targets**, not demonstrated capabilities of the current repository.
+Ten-million-event warm selective queries are now measured, with
+[raw samples and reproduction commands](benchmarks/README.md). Cold-start,
+concurrent-load, and end-to-end UI latency targets remain separate, unverified goals.
 
 ## Contributing and licensing
 
