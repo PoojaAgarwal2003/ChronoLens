@@ -3,7 +3,7 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: reproducible ten-million-event benchmarks.** A deterministic generator,
+**Current milestone: immutable snapshot codec and converter.** A deterministic generator,
 validated JSONL reader, three query engines, diagnostic CLI, loopback-only Go API,
 and React explorer are implemented. The opt-in incident profile creates correlated
 traffic, service, failure, and latency spikes without changing the uniform baseline.
@@ -11,6 +11,8 @@ traffic, service, failure, and latency spikes without changing the uniform basel
 **0.0644 ms median warm batch mean** for a 0.1% time range, versus **42.60 ms**
 for the row scan with identical results. Loading each layout took 42.5-46.7 seconds.
 These are workload-specific query measurements, not browser latency or request p95.
+The new [snapshot converter](docs/snapshots.md) adds a versioned, checksummed
+binary export; query/explorer snapshot input follows in the next milestone.
 
 ## Why this exists
 
@@ -205,11 +207,13 @@ full aggregate equivalence, and reports raw warm batches separately from loading
 
 ```text
 cmd/generator/          CLI, output handling, and CLI tests
+cmd/pack/               Validated JSONL-to-snapshot conversion and safe publication
 cmd/query/              Query CLI and JSON reporting
 cmd/bench/              Bounded benchmark CLI and report output
 cmd/server/             Local server lifecycle and startup validation
 internal/generator/    Deterministic generation and validation tests
 internal/telemetry/    Shared schema, strict JSONL reader, and fuzz tests
+internal/snapshot/     Bounded block-columnar codec, integrity checks, corruption tests
 internal/query/        Layouts, time index, shared catalog, exact chart profiles
 internal/api/          Local HTTP routes, limits, origin guards, comparison batches
 internal/measure/      Explicit handling of unresolved clock timings
@@ -237,6 +241,7 @@ To build standalone CLIs, first create a `bin` directory, then run:
 
 ```sh
 go build -o bin/chronolens-generator ./cmd/generator
+go build -o bin/chronolens-pack ./cmd/pack
 go build -o bin/chronolens-query ./cmd/query
 go build -o bin/chronolens-bench ./cmd/bench
 go build -o bin/chronolens-server ./cmd/server
@@ -279,8 +284,9 @@ dependencies and local frontend iteration.
 
 ## Next milestones
 
-1. Persistent storage formats and faster startup, evaluated against the published JSONL baseline.
-2. Authentication and deployment hardening before considering nonlocal access.
+The [scoped remaining-work roadmap](docs/roadmap.md) separates the current
+storage/startup work from the intentionally deferred half: concurrent-load
+experiments, release packaging, and licensing/deployment decisions.
 
 Ten-million-event warm selective queries are now measured, with
 [raw samples and reproduction commands](benchmarks/README.md). Cold-start,
