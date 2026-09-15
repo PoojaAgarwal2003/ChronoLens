@@ -2,6 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 import { randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
+process.env.CHRONOLENS_E2E_FORMAT = 'jsonl';
 process.env.CHRONOLENS_E2E_DIR ??= fileURLToPath(new URL(`./node_modules/.cache/chronolens-e2e-${randomUUID()}`, import.meta.url));
 process.env.CHRONOLENS_E2E_TOKEN ??= randomUUID();
 

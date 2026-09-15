@@ -2,6 +2,7 @@ export type Engine = 'row' | 'columnar' | 'indexed';
 
 export interface Meta {
   dataset: string;
+  input_format: 'jsonl' | 'snapshot';
   rows: number;
   service_count: number;
   services: string[];

@@ -17,13 +17,14 @@ import (
 )
 
 type report struct {
-	Input      string       `json:"input"`
-	Filter     query.Filter `json:"filter"`
-	Services   int          `json:"services"`
-	LoadMS     *float64     `json:"load_ms"`
-	QueryMS    *float64     `json:"query_ms"`
-	TimingNote string       `json:"timing_note,omitempty"`
-	Result     query.Result `json:"result"`
+	Input       string            `json:"input"`
+	InputFormat query.InputFormat `json:"input_format"`
+	Filter      query.Filter      `json:"filter"`
+	Services    int               `json:"services"`
+	LoadMS      *float64          `json:"load_ms"`
+	QueryMS     *float64          `json:"query_ms"`
+	TimingNote  string            `json:"timing_note,omitempty"`
+	Result      query.Result      `json:"result"`
 }
 
 func main() {
@@ -36,7 +37,8 @@ func main() {
 func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 	flags := flag.NewFlagSet("query", flag.ContinueOnError)
 	flags.SetOutput(stderr)
-	input := flags.String("input", "data/events.jsonl", "JSONL input file")
+	input := flags.String("input", "data/events.jsonl", "ordered JSONL or snapshot input file (selected by -format)")
+	formatName := flags.String("format", string(query.JSONLFormat), "input format: jsonl or snapshot")
 	engineName := flags.String("engine", "row", "query engine: row, columnar, or indexed")
 	maxEvents := flags.Int("max-events", 1000000, "maximum accepted event count (not a byte limit)")
 	var filter query.Filter
@@ -57,7 +59,7 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 		return err
 	})
 	flags.Usage = func() {
-		fmt.Fprintln(stderr, "Usage: query [flags]\n\nLoad ordered JSONL and run one aggregate query.")
+		fmt.Fprintln(stderr, "Usage: query [flags]\n\nLoad ordered JSONL or a snapshot and run one aggregate query.")
 		flags.PrintDefaults()
 	}
 	if err := flags.Parse(args); err != nil {
@@ -79,13 +81,18 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 		fmt.Fprintf(stderr, "query: %v\n", err)
 		return 2
 	}
+	format, err := query.ParseInputFormat(*formatName)
+	if err != nil {
+		fmt.Fprintf(stderr, "query: %v\n", err)
+		return 2
+	}
 	loadStart := time.Now()
 	file, err := os.Open(*input)
 	if err != nil {
 		fmt.Fprintf(stderr, "query: open input: %v\n", err)
 		return 1
 	}
-	data, loadErr := query.Load(ctx, file, engine, *maxEvents)
+	data, loadErr := query.LoadFormat(ctx, file, engine, *maxEvents, format)
 	if err := errors.Join(loadErr, file.Close()); err != nil {
 		fmt.Fprintf(stderr, "query: load input: %v\n", err)
 		return 1
@@ -101,7 +108,7 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 	encoder := json.NewEncoder(stdout)
 	encoder.SetIndent("", "  ")
 	output := report{
-		Input: *input, Filter: filter, Services: data.ServiceCount(),
+		Input: *input, InputFormat: format, Filter: filter, Services: data.ServiceCount(),
 		LoadMS: loadMS, QueryMS: queryMS, Result: result,
 	}
 	if loadMS == nil || queryMS == nil {

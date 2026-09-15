@@ -31,6 +31,11 @@ To explore one million events instead, generate a new file with `-events 1000000
 and point `-input` at it. Parsing large JSONL inputs happens at startup, not on
 every interaction. Do not modify the file during loading.
 
+For an immutable binary input, first convert JSONL with `cmd/pack`, then pass
+`-format snapshot` and the `.clens` file to the server. The default remains
+`-format jsonl`; no extension-based detection or fallback is used.
+The [snapshot guide](snapshots.md) explains conversion, integrity checks, and limits.
+
 Use Ctrl+C for graceful shutdown. A standalone server can be built with:
 
 ```sh
@@ -70,7 +75,7 @@ All API paths are same-origin. Errors have the shape:
 | Route | Method | Purpose |
 |---|---|---|
 | `/api/health` | GET | Readiness: `{"status":"ok"}` |
-| `/api/meta` | GET | Dataset name, counts, timestamp bounds, service/status options, engine names and limits |
+| `/api/meta` | GET | Dataset name, `input_format`, counts, timestamp bounds, service/status options, engine names and limits |
 | `/api/query` | POST | Aggregate result, exact chart profile, and separate timings |
 | `/api/compare` | POST | Sequential warm batches for all engines and aggregate-equivalence confirmation |
 

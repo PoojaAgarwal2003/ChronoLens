@@ -97,8 +97,9 @@ Comparison counts are checked against a logarithmic upper bound.
 
 These measurements belong to indexed-query milestone `d1453df`. The subsequently
 added [local explorer](local-explorer.md) uses this engine, but browser/API work
-is not included in these measurements. There is still no persistent index,
-mutation protocol or sharding. A later [ten-million-event experiment](../benchmarks/README.md)
+is not included in these measurements. There is still no on-disk query execution,
+mutation protocol or sharding. The [snapshot format](snapshots.md) persists columns
+but still decodes them into memory before querying. A later [ten-million-event experiment](../benchmarks/README.md)
 publishes separate raw samples and methodology; it does not replace the historical
 one-million-event measurements above. Single CLI timings can
 be below clock resolution; unresolved readings remain null with an explanatory note.

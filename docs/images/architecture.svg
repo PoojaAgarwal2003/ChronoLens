@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img" aria-labelledby="title description">
   <title id="title">ChronoLens local explorer architecture</title>
-  <desc id="description">Ordered JSONL loads once into a catalog with row storage and shared columnar and indexed storage. A loopback Go API serves aggregate queries, exact chart profiles and bounded comparison batches to a React explorer.</desc>
+  <desc id="description">Explicitly selected JSONL or a checksummed snapshot validates completely before loading a catalog with row storage and shared columnar and indexed storage. A loopback Go API serves aggregate queries, exact chart profiles and bounded comparison batches to a React explorer.</desc>
   <defs>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#446578"/></marker>
   </defs>
@@ -9,7 +9,7 @@
     <text x="32" y="38" font-size="22" font-weight="700">ChronoLens / local execution model</text>
     <text x="32" y="62" font-size="13" fill="#486373">One source snapshot. Three query paths. Separate, exact chart work.</text>
     <rect x="30" y="150" width="145" height="88" rx="10" fill="#fff" stroke="#9cb4c2"/>
-    <text x="102" y="185" text-anchor="middle" font-size="17" font-weight="600">Ordered JSONL</text>
+    <text x="102" y="185" text-anchor="middle" font-size="15" font-weight="600">JSONL / snapshot</text>
     <text x="102" y="208" text-anchor="middle" font-size="12">validated once</text>
     <rect x="222" y="100" width="285" height="230" rx="12" fill="#e4f5f1" stroke="#3b9a87"/>
     <text x="242" y="132" font-size="18" font-weight="600">Immutable engine catalog</text>

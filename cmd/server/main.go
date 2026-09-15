@@ -29,7 +29,8 @@ func main() {
 func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 	flags := flag.NewFlagSet("server", flag.ContinueOnError)
 	flags.SetOutput(stderr)
-	input := flags.String("input", "data/events.jsonl", "ordered JSONL dataset")
+	input := flags.String("input", "data/events.jsonl", "ordered JSONL or snapshot dataset (selected by -format)")
+	formatName := flags.String("format", string(query.JSONLFormat), "input format: jsonl or snapshot")
 	web := flags.String("web", "web/dist", "built frontend directory")
 	listen := flags.String("listen", "127.0.0.1:8080", "numeric loopback address and port")
 	maxEvents := flags.Int("max-events", 1000000, "accepted event limit (1-10000000); all layouts remain in memory")
@@ -47,13 +48,18 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 		fmt.Fprintln(stderr, "server: use a numeric loopback host:port, nonempty input/web paths, and max-events between 1 and 10000000")
 		return 2
 	}
+	format, err := query.ParseInputFormat(*formatName)
+	if err != nil {
+		fmt.Fprintf(stderr, "server: %v\n", err)
+		return 2
+	}
 	start := time.Now()
 	file, err := os.Open(*input)
 	if err != nil {
 		fmt.Fprintf(stderr, "server: open dataset: %v\n", err)
 		return 1
 	}
-	catalog, loadErr := query.LoadCatalog(ctx, file, *maxEvents)
+	catalog, loadErr := query.LoadCatalogFormat(ctx, file, *maxEvents, format)
 	if err := errors.Join(loadErr, file.Close()); err != nil {
 		fmt.Fprintf(stderr, "server: load dataset: %v\n", err)
 		return 1

@@ -38,18 +38,19 @@ type Server struct {
 }
 
 type metadataResponse struct {
-	Dataset           string         `json:"dataset"`
-	Rows              int            `json:"rows"`
-	ServiceCount      int            `json:"service_count"`
-	Services          []string       `json:"services"`
-	ServicesTruncated bool           `json:"services_truncated"`
-	Statuses          []uint16       `json:"statuses"`
-	MinUS             *string        `json:"min_timestamp_us"`
-	MaxUS             *string        `json:"max_timestamp_us"`
-	Engines           []query.Engine `json:"engines"`
-	DefaultBuckets    int            `json:"default_buckets"`
-	MaxBuckets        int            `json:"max_buckets"`
-	LoadMS            *float64       `json:"load_ms"`
+	Dataset           string            `json:"dataset"`
+	InputFormat       query.InputFormat `json:"input_format"`
+	Rows              int               `json:"rows"`
+	ServiceCount      int               `json:"service_count"`
+	Services          []string          `json:"services"`
+	ServicesTruncated bool              `json:"services_truncated"`
+	Statuses          []uint16          `json:"statuses"`
+	MinUS             *string           `json:"min_timestamp_us"`
+	MaxUS             *string           `json:"max_timestamp_us"`
+	Engines           []query.Engine    `json:"engines"`
+	DefaultBuckets    int               `json:"default_buckets"`
+	MaxBuckets        int               `json:"max_buckets"`
+	LoadMS            *float64          `json:"load_ms"`
 }
 
 type request struct {
@@ -114,7 +115,7 @@ func New(catalog *query.Catalog, assets fs.FS, dataset string, loadTime time.Dur
 	}
 	meta := catalog.Metadata()
 	response := metadataResponse{
-		Dataset: dataset, Rows: meta.Rows, ServiceCount: len(meta.Services),
+		Dataset: dataset, InputFormat: catalog.InputFormat(), Rows: meta.Rows, ServiceCount: len(meta.Services),
 		Services: meta.Services, Statuses: meta.Statuses,
 		Engines:        []query.Engine{query.Row, query.Columnar, query.Indexed},
 		DefaultBuckets: 100, MaxBuckets: query.MaxBuckets, LoadMS: measure.Milliseconds(loadTime),

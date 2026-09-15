@@ -98,9 +98,50 @@ all prefixes/truncation, forged lengths, invalid semantic data with repaired
 checksums, corruption, limits, I/O failures, cancellation, and callback failure.
 A bounded reader fuzz target is included.
 
-## Scope of this milestone
+## Query and explore
 
-Milestone 7 supplies the codec and converter. Existing query/server commands
-still default to JSONL; snapshot loading is the next separately committed
-milestone. Faster startup is a hypothesis until the later measured comparison.
-The [roadmap](roadmap.md) explicitly leaves the remaining half of the work deferred.
+```sh
+go run ./cmd/query -input data/incident.clens -format snapshot -engine indexed
+go run ./cmd/server -input data/incident.clens -format snapshot -web web/dist -listen 127.0.0.1:8080
+```
+
+Both commands accept `-format jsonl|snapshot`, with **JSONL as the default**.
+Selection is explicit, not inferred from the extension. A bad snapshot header,
+checksum, or trailer fails loading; it never triggers a JSONL fallback.
+The query report and `/api/meta` include `input_format`. The explorer labels
+the loaded format without changing query controls or chart semantics.
+
+```text
+JSONL ----------------> strict JSONL reader ---+
+  |                                           |
+  +-- pack --> snapshot --> CRC/SHA reader ----+--> shared layout builder
+                                                        |
+                                      row / columnar / indexed queries
+                                                        |
+                                            loopback API --> explorer
+```
+
+The entire source must validate before a dataset becomes queryable or the
+server listens. A snapshot is decoded into the same immutable in-memory layouts
+as JSONL. The server still retains rows and shared columnar/indexed arrays;
+snapshots do not introduce lazy disk access or reduce the logical event count.
+
+![Real incident explorer loaded from a validated snapshot](images/snapshot-explorer.png)
+
+Shown: 100,000 actual incident-profile events loaded from the converter's
+snapshot, with 17,016 server errors and the same traffic spike as the JSONL
+source. The displayed startup time is one observation, not a repeated benchmark.
+
+`query.Load` and `query.LoadCatalog` remain JSONL-compatible library entry
+points. Their explicit-format counterparts share the same event accumulation
+logic, limits, and interning. Cross-format tests compare complete aggregates,
+exact profiles, and metadata, including ties, boundary values, and empty data.
+
+`npm run test:e2e` in `web` builds once and runs the existing suite sequentially
+against JSONL and freshly packed snapshot fixtures. Each run starts and owns its
+own server/workspace. To inspect just the snapshot suite interactively, use
+`npx playwright test --config playwright.snapshot.config.ts --ui`.
+
+Milestone 8 integrates query/explorer input. The benchmark CLI still reads
+JSONL until milestone 9 adds an explicitly measured format comparison.
+The [roadmap](roadmap.md) leaves the remaining half of the work deferred.

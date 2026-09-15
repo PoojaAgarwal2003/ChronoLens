@@ -13,6 +13,8 @@ import (
 	"time"
 
 	"github.com/PoojaAgarwal2003/ChronoLens/internal/measure"
+	"github.com/PoojaAgarwal2003/ChronoLens/internal/query"
+	"github.com/PoojaAgarwal2003/ChronoLens/internal/snapshot"
 )
 
 const fixture = `{"timestamp_us":1,"service":"api","duration_us":100,"status":200}
@@ -42,7 +44,7 @@ func TestRunMatchingEngines(t *testing.T) {
 			t.Fatal(err)
 		}
 		if result.Result.Aggregate.Count != 1 || result.Result.Aggregate.DurationSumUS != 200 ||
-			result.Result.Stats.RowsExamined != 2 || result.Services != 1 ||
+			result.Result.Stats.RowsExamined != 2 || result.Services != 1 || result.InputFormat != query.JSONLFormat ||
 			(result.LoadMS != nil && *result.LoadMS < 0) ||
 			(result.QueryMS != nil && *result.QueryMS < 0) || stderr.Len() != 0 {
 			t.Fatalf("invalid query report: %+v, stderr=%s", result, &stderr)
@@ -70,6 +72,7 @@ func TestRunInvalidArguments(t *testing.T) {
 		{"-to-us", "9223372036854775808"}, {"-status", "-1"}, {"-status", "99"},
 		{"-status", "600"}, {"-status", "65536"}, {"-input", ""}, {"-service", " api"},
 		{"-unknown"}, {"positional"},
+		{"-format", "auto"}, {"-format", ""}, {"-format", "Snapshot"}, {"-format", " snapshot"},
 	}
 	for _, args := range tests {
 		t.Run(strings.Join(args, " "), func(t *testing.T) {
@@ -126,8 +129,73 @@ func TestRunMissingFileAndCancellation(t *testing.T) {
 func TestRunHelp(t *testing.T) {
 	var stdout, stderr bytes.Buffer
 	if code := run(context.Background(), []string{"-help"}, &stdout, &stderr); code != 0 ||
-		!strings.Contains(stderr.String(), "Usage: query") || stdout.Len() != 0 {
+		!strings.Contains(stderr.String(), "Usage: query") || !strings.Contains(stderr.String(), "snapshot") ||
+		!strings.Contains(stderr.String(), "-format") || !strings.Contains(stderr.String(), `default "jsonl"`) || stdout.Len() != 0 {
 		t.Fatalf("invalid help response: %d, %s", code, &stderr)
+	}
+}
+
+func TestRunSnapshotFormat(t *testing.T) {
+	for _, input := range []string{fixture, ""} {
+		var encoded bytes.Buffer
+		if _, err := snapshot.WriteJSONL(context.Background(), &encoded, strings.NewReader(input), 10); err != nil {
+			t.Fatal(err)
+		}
+		// Deliberately retain a .jsonl extension: only -format chooses the reader.
+		path := datasetFile(t, encoded.String())
+		for _, engine := range []string{"row", "columnar", "indexed"} {
+			var stdout, stderr bytes.Buffer
+			if code := run(context.Background(), []string{"-input", path, "-format", "snapshot", "-engine", engine},
+				&stdout, &stderr); code != 0 {
+				t.Fatalf("%s snapshot exit %d: %s", engine, code, &stderr)
+			}
+			var got report
+			if err := json.Unmarshal(stdout.Bytes(), &got); err != nil {
+				t.Fatal(err)
+			}
+			wantCount := uint64(2)
+			if input == "" {
+				wantCount = 0
+			}
+			if got.InputFormat != query.SnapshotFormat || got.Input != path || got.Result.Aggregate.Count != wantCount ||
+				got.Result.Stats.Engine != query.Engine(engine) || !bytes.Contains(stdout.Bytes(), []byte(`"input_format": "snapshot"`)) {
+				t.Fatalf("invalid snapshot report: %s", &stdout)
+			}
+		}
+	}
+}
+
+func TestRunFormatInputFailures(t *testing.T) {
+	var encoded bytes.Buffer
+	if _, err := snapshot.WriteJSONL(context.Background(), &encoded, strings.NewReader(fixture), 10); err != nil {
+		t.Fatal(err)
+	}
+	corrupt := bytes.Clone(encoded.Bytes())
+	corrupt[len(corrupt)-1] ^= 1
+	for _, test := range []struct {
+		name, input string
+		args        []string
+	}{
+		{"default does not detect snapshot", encoded.String(), nil},
+		{"jsonl does not detect snapshot", encoded.String(), []string{"-format", "jsonl"}},
+		{"snapshot rejects JSONL", fixture, []string{"-format", "snapshot"}},
+		{"corrupt trailer", string(corrupt), []string{"-format", "snapshot"}},
+		{"truncated trailer", encoded.String()[:encoded.Len()-1], []string{"-format", "snapshot"}},
+		{"snapshot event limit", encoded.String(), []string{"-format", "snapshot", "-max-events", "1"}},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			var stdout, stderr bytes.Buffer
+			args := append([]string{"-input", datasetFile(t, test.input)}, test.args...)
+			if code := run(context.Background(), args, &stdout, &stderr); code != 1 || stdout.Len() != 0 || stderr.Len() == 0 {
+				t.Fatalf("expected input failure without partial report: exit=%d, stdout=%s, stderr=%s", code, &stdout, &stderr)
+			}
+		})
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	var stdout, stderr bytes.Buffer
+	if code := run(ctx, []string{"-input", datasetFile(t, encoded.String()), "-format", "snapshot"}, &stdout, &stderr); code != 1 || stdout.Len() != 0 || !strings.Contains(stderr.String(), "canceled") {
+		t.Fatalf("snapshot cancellation exit=%d, stdout=%s, stderr=%s", code, &stdout, &stderr)
 	}
 }
 

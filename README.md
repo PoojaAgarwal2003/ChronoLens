@@ -3,7 +3,7 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: immutable snapshot codec and converter.** A deterministic generator,
+**Current milestone: snapshot-backed queries and explorer.** A deterministic generator,
 validated JSONL reader, three query engines, diagnostic CLI, loopback-only Go API,
 and React explorer are implemented. The opt-in incident profile creates correlated
 traffic, service, failure, and latency spikes without changing the uniform baseline.
@@ -11,8 +11,8 @@ traffic, service, failure, and latency spikes without changing the uniform basel
 **0.0644 ms median warm batch mean** for a 0.1% time range, versus **42.60 ms**
 for the row scan with identical results. Loading each layout took 42.5-46.7 seconds.
 These are workload-specific query measurements, not browser latency or request p95.
-The new [snapshot converter](docs/snapshots.md) adds a versioned, checksummed
-binary export; query/explorer snapshot input follows in the next milestone.
+The [snapshot converter and loader](docs/snapshots.md) add versioned, checksummed
+binary input. Query/server commands accept `-format snapshot`; JSONL remains the default.
 
 ## Why this exists
 

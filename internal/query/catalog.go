@@ -12,11 +12,18 @@ import (
 // Catalog loads one source snapshot and exposes all three engines. Indexed
 // execution shares the immutable columnar arrays; only rows require another layout.
 type Catalog struct {
-	engines map[Engine]*Dataset
+	engines     map[Engine]*Dataset
+	inputFormat InputFormat
 }
 
+// LoadCatalog is the JSONL compatibility wrapper for LoadCatalogFormat.
 func LoadCatalog(ctx context.Context, input io.Reader, maxEvents int) (*Catalog, error) {
-	columnar, err := Load(ctx, input, Columnar, maxEvents)
+	return LoadCatalogFormat(ctx, input, maxEvents, JSONLFormat)
+}
+
+// LoadCatalogFormat publishes all layouts only after the whole input is validated.
+func LoadCatalogFormat(ctx context.Context, input io.Reader, maxEvents int, format InputFormat) (*Catalog, error) {
+	columnar, err := LoadFormat(ctx, input, Columnar, maxEvents, format)
 	if err != nil {
 		return nil, err
 	}
@@ -40,8 +47,13 @@ func LoadCatalog(ctx context.Context, input io.Reader, maxEvents int) (*Catalog,
 	}
 	indexed := *columnar
 	indexed.engine = Indexed
-	return &Catalog{engines: map[Engine]*Dataset{Row: row, Columnar: columnar, Indexed: &indexed}}, nil
+	return &Catalog{
+		engines:     map[Engine]*Dataset{Row: row, Columnar: columnar, Indexed: &indexed},
+		inputFormat: format,
+	}, nil
 }
+
+func (c *Catalog) InputFormat() InputFormat { return c.inputFormat }
 
 func (c *Catalog) Engine(engine Engine) (*Dataset, error) {
 	if c == nil || c.engines[engine] == nil {

@@ -4,6 +4,7 @@ import { timeBounds, type Meta, type QueryResponse } from '../src/api';
 async function ready(page: Page) {
   await page.goto('/');
   await expect(page.getByTestId('match-count')).toHaveText('10,000');
+  await expect(page.getByTestId('input-format')).toHaveText(process.env.CHRONOLENS_E2E_FORMAT === 'snapshot' ? 'SNAPSHOT' : 'JSONL');
 }
 async function selectWindow(page: Page, name: string) {
   const response = page.waitForResponse(response => response.url().endsWith('/api/query') && response.status() === 200);

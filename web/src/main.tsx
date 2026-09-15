@@ -5,6 +5,7 @@ import { Histogram, Timeline } from './Charts';
 import './style.css';
 
 const engineNames: Record<Engine, string> = { row: 'Row scan', columnar: 'Columnar scan', indexed: 'Indexed search' };
+const formatNames: Record<Meta['input_format'], string> = { jsonl: 'JSONL', snapshot: 'SNAPSHOT' };
 const engineDescriptions: Record<Engine, string> = {
   row: 'Scan every row in the immutable dataset.',
   columnar: 'Scan contiguous timestamp columns, then read matching fields.',
@@ -38,7 +39,7 @@ function App() {
         !meta ? <div className="notice" role="status">Connecting to the local dataset…</div> :
           meta.rows === 0 ? <section className="notice empty" role="status">
             <h2>No events loaded</h2>
-            <p>{meta.dataset} is empty. Generate a nonempty JSONL dataset and restart the local server with its path.</p>
+            <p>{meta.dataset} is empty. Generate or convert a nonempty dataset and restart the local server with its path and matching format.</p>
             <p>There are no timestamp bounds or measurements to display.</p>
           </section> : <Workbench meta={meta} />}
       <footer><span>CHRONOLENS / LOCAL TELEMETRY EXPLORER</span><span>No sampling. No remote services. Same data, three execution paths.</span></footer>
@@ -108,7 +109,7 @@ function Workbench({ meta }: { meta: Meta }) {
   const stats = data?.result.stats;
   const avoided = stats?.total_rows ? stats.rows_skipped / stats.total_rows * 100 : 0;
   return <>
-    <section className="dataset-strip" aria-label="Loaded dataset"><div className="dataset-name"><span className="file-icon" aria-hidden="true">▤</span><div><span className="micro-label">ACTIVE DATASET</span><strong title={meta.dataset}>{meta.dataset}</strong></div></div><div><strong>{number(meta.rows)}</strong><span>events loaded</span></div><div><strong>{number(meta.service_count)}</strong><span>services</span></div><div><strong>{milliseconds(meta.load_ms)}</strong><span>initial load · not query time</span></div></section>
+    <section className="dataset-strip" aria-label="Loaded dataset"><div className="dataset-name"><span className="file-icon" aria-hidden="true">▤</span><div><span className="micro-label">ACTIVE DATASET / <span data-testid="input-format">{formatNames[meta.input_format] ?? 'UNKNOWN FORMAT'}</span></span><strong title={meta.dataset}>{meta.dataset}</strong></div></div><div><strong>{number(meta.rows)}</strong><span>events loaded</span></div><div><strong>{number(meta.service_count)}</strong><span>services</span></div><div><strong>{milliseconds(meta.load_ms)}</strong><span>initial load · not query time</span></div></section>
 
     <section className="panel controls" aria-labelledby="query-title">
       <div className="section-heading"><h2 id="query-title"><span className="section-number">01</span>Shape your query</h2><span className="muted">Half-open time range [start, end)</span></div>
