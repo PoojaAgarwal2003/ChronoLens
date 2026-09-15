@@ -1,5 +1,9 @@
 # Ten million events: measurements and reproduction
 
+This is the historical 2026-09-14 JSONL query experiment. The newer
+[snapshot startup comparison](snapshot-startup.md) measures loading costs
+separately and retains these original results.
+
 ChronoLens processed **10,000,000 generated events** in a measured experiment on
 2026-09-14. A centered 0.1% time-range query examined 10,000 candidate rows and
 reported a **0.0644 ms median warm batch mean**, compared with **42.60 ms** for
@@ -157,7 +161,8 @@ uses a logarithmic axis, and refuses to overwrite an existing SVG.
 
 | Flag | Default | Bounds |
 |---|---|---|
-| `-input` | `data/events.jsonl` | Regular ordered JSONL file; empty datasets rejected |
+| `-input` | `data/events.jsonl` | Regular dataset file selected by `-format`; empty datasets rejected |
+| `-format` | `jsonl` | Explicit `jsonl` or `snapshot`; never inferred or silently substituted |
 | `-max-events` | `1000000` | 1-100,000,000; a row guard, not a memory cap |
 | `-samples` | `5` | 1-100 batches per engine/case |
 | `-window` | `100ms` | Greater than zero, at most one minute |
@@ -172,7 +177,13 @@ represented by an unbounded `to_us`. Event selectivity need not equal the
 selected fraction of time; every report includes actual endpoints and counts.
 The service-only control chooses the first lexicographically sorted service.
 
-`source` records input provenance. `cases` records predicates and actual time
+`source` records input provenance, including `input_format` in reports produced
+after snapshot support. Earlier schema-v1 reports without that field are JSONL.
+Snapshot load timings include block CRC32C and embedded SHA-256 validation in
+addition to the same complete-source SHA-256 fingerprint used for JSONL.
+Conversion is not included in load or warm query time.
+
+`cases` records predicates and actual time
 matches. `engines[].cases[].samples` contains iterations, elapsed time, batch
 mean, and stability; `batch_mean_ms` summarizes those means with min/median/max.
 `engines[].heap` records explicit before/after snapshots and a signed delta.
@@ -227,6 +238,6 @@ loaded events, including a selective result well below the original 100 ms
 target. It does not establish a UI p95 SLO, cold-start responsiveness, concurrent
 load capacity, persistent storage performance, or production deployment safety.
 
-The next storage experiment should attack the visible bottleneck: startup still
-spends tens of seconds parsing JSONL. A versioned binary layout could reduce
-that cost, but no such format or result is claimed here.
+This historical experiment identified JSONL startup as a bottleneck. The later
+[versioned snapshot comparison](snapshot-startup.md) measures that problem
+without replacing the query measurements or claiming a new query algorithm.

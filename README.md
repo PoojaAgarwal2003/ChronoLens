@@ -3,16 +3,21 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: snapshot-backed queries and explorer.** A deterministic generator,
+**Current milestone: measured snapshot startup.** A deterministic generator,
 validated JSONL reader, three query engines, diagnostic CLI, loopback-only Go API,
 and React explorer are implemented. The opt-in incident profile creates correlated
 traffic, service, failure, and latency spikes without changing the uniform baseline.
-[A measured ten-million-event experiment](benchmarks/README.md) reports a
+[The snapshot startup experiment](benchmarks/snapshot-startup.md) loaded
+**10 million events into the indexed layout in 0.841 seconds**, versus
+**35.109 seconds from JSONL** in the same run. Snapshot files were **80.6% smaller**;
+one-time conversion took 34.4 seconds.
+
+[The earlier warm-query experiment](benchmarks/README.md) reports a
 **0.0644 ms median warm batch mean** for a 0.1% time range, versus **42.60 ms**
-for the row scan with identical results. Loading each layout took 42.5-46.7 seconds.
-These are workload-specific query measurements, not browser latency or request p95.
+for the row scan with identical results. These are workload-specific observations,
+not browser latency, request p95, or cold-disk guarantees.
 The [snapshot converter and loader](docs/snapshots.md) add versioned, checksummed
-binary input. Query/server commands accept `-format snapshot`; JSONL remains the default.
+binary input. Query/server/benchmark commands accept `-format snapshot`; JSONL remains the default.
 
 ## Why this exists
 

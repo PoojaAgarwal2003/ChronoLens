@@ -69,3 +69,16 @@ test('chart rejects unstable query summaries and never converts null loading tim
   expect(invoke('render-chart.mjs', input, output).status).toBe(0);
   expect(readFileSync(output, 'utf8')).toContain('Loading timings unresolved');
 });
+
+test('warm-query chart labels snapshot validation rather than JSONL parsing', async ({}, info) => {
+  mkdirSync(info.outputDir, { recursive: true });
+  const report = JSON.parse(readFileSync(evidence, 'utf8'));
+  report.source.input_format = 'snapshot';
+  const input = info.outputPath('snapshot-report.json');
+  const output = info.outputPath('snapshot-chart.svg');
+  writeFileSync(input, JSON.stringify(report));
+  expect(invoke('render-chart.mjs', input, output).status).toBe(0);
+  const svg = readFileSync(output, 'utf8');
+  expect(svg).toContain('snapshot integrity checks and source SHA-256');
+  expect(svg).not.toContain('strict JSONL parsing');
+});

@@ -1,0 +1,10 @@
+{
+  "input": "storage-10m-20260915.jsonl",
+  "output": "storage-10m-20260915.clens",
+  "events": 10000000,
+  "blocks": 2442,
+  "source_sha256": "afce58436b7e769ddce7daef80c4a827d4b3f2f73bbeaf456cd203e24d290498",
+  "source_bytes": 826673337,
+  "snapshot_bytes": 160556844,
+  "pack_ms": 34402.499
+}

@@ -11,6 +11,7 @@ import (
 	"os/signal"
 
 	"github.com/PoojaAgarwal2003/ChronoLens/internal/benchmark"
+	"github.com/PoojaAgarwal2003/ChronoLens/internal/query"
 )
 
 func main() {
@@ -24,7 +25,8 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 	config := benchmark.DefaultConfig()
 	flags := flag.NewFlagSet("bench", flag.ContinueOnError)
 	flags.SetOutput(stderr)
-	flags.StringVar(&config.Input, "input", config.Input, "ordered JSONL input file")
+	flags.StringVar(&config.Input, "input", config.Input, "ordered JSONL or snapshot input file")
+	formatName := flags.String("format", string(config.InputFormat), "input format: jsonl or snapshot")
 	flags.IntVar(&config.MaxEvents, "max-events", config.MaxEvents, "maximum accepted events, 1..100000000 (not a byte limit)")
 	flags.IntVar(&config.Samples, "samples", config.Samples, "warm batch samples per engine/case, 1..100")
 	flags.DurationVar(&config.Window, "window", config.Window, "minimum duration per batch, >0 and <=1m")
@@ -44,6 +46,12 @@ func run(ctx context.Context, args []string, stdout, stderr io.Writer) int {
 		fmt.Fprintln(stderr, "bench: no positional arguments accepted")
 		return 2
 	}
+	format, err := query.ParseInputFormat(*formatName)
+	if err != nil {
+		fmt.Fprintf(stderr, "bench: %v\n", err)
+		return 2
+	}
+	config.InputFormat = format
 	if err := config.Validate(); err != nil {
 		fmt.Fprintf(stderr, "bench: %v\n", err)
 		return 2

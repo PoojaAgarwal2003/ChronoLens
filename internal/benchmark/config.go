@@ -1,14 +1,17 @@
 // Package benchmark measures single-layout aggregate queries against a verified
-// JSONL source. It does not measure the server, profiles, or browser rendering.
+// JSONL or snapshot source. It does not measure the server, profiles, or browser rendering.
 package benchmark
 
 import (
 	"fmt"
 	"time"
+
+	"github.com/PoojaAgarwal2003/ChronoLens/internal/query"
 )
 
 type Config struct {
 	Input         string
+	InputFormat   query.InputFormat
 	MaxEvents     int
 	Samples       int
 	Window        time.Duration
@@ -18,13 +21,16 @@ type Config struct {
 
 func DefaultConfig() Config {
 	return Config{
-		Input: "data/events.jsonl", MaxEvents: 1_000_000, Samples: 5,
+		Input: "data/events.jsonl", InputFormat: query.JSONLFormat, MaxEvents: 1_000_000, Samples: 5,
 		Window: 100 * time.Millisecond, MaxIterations: 1_000_000,
 		Timeout: 10 * time.Minute,
 	}
 }
 
 func (c Config) Validate() error {
+	if _, err := query.ParseInputFormat(string(c.InputFormat)); err != nil {
+		return err
+	}
 	switch {
 	case c.Input == "":
 		return fmt.Errorf("input must be nonempty")

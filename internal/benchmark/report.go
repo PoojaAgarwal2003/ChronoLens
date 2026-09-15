@@ -39,13 +39,14 @@ type Runtime struct {
 }
 
 type Source struct {
-	SHA256     string `json:"sha256"`
-	Bytes      int64  `json:"bytes"`
-	Events     int    `json:"events"`
-	Services   int    `json:"services"`
-	MinUS      int64  `json:"min_us"`
-	MaxUS      int64  `json:"max_us"`
-	TimeSpanUS uint64 `json:"time_span_us"`
+	InputFormat query.InputFormat `json:"input_format"`
+	SHA256      string            `json:"sha256"`
+	Bytes       int64             `json:"bytes"`
+	Events      int               `json:"events"`
+	Services    int               `json:"services"`
+	MinUS       int64             `json:"min_us"`
+	MaxUS       int64             `json:"max_us"`
+	TimeSpanUS  uint64            `json:"time_span_us"`
 }
 
 type Case struct {

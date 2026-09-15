@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-15",
+  "environment": "Shared Windows 11 Enterprise development environment, not a personal laptop or isolated lab",
+  "cpu": "Intel Xeon Platinum 8370C at 2.80 GHz",
+  "reported_cores": 8,
+  "logical_processors": 16,
+  "total_memory_gib": 63.95,
+  "available_memory_gib_at_measurement_start": 20.38,
+  "process_environment": {
+    "GOMEMLIMIT": "1GiB",
+    "GOGC": "100",
+    "GOMAXPROCS": "16"
+  },
+  "jsonl_run_started_at_utc": "2026-09-15T09:16:33.3339205Z",
+  "snapshot_run_started_at_utc": "2026-09-15T09:18:44.5985199Z",
+  "snapshot_run_finished_at_utc": "2026-09-15T09:19:06.8828637Z",
+  "conversion_started_at_utc": "2026-09-15T09:00:36.2609883Z",
+  "conversion_finished_at_utc": "2026-09-15T09:01:12.1434715Z",
+  "generator_arguments": [
+    "-events",
+    "10000000",
+    "-services",
+    "16",
+    "-seed",
+    "42",
+    "-start",
+    "1970-01-01T00:00:00Z",
+    "-interval",
+    "1us",
+    "-error-percent",
+    "5",
+    "-profile",
+    "uniform"
+  ],
+  "benchmark_common_arguments": [
+    "-max-events",
+    "10000000",
+    "-samples",
+    "5",
+    "-window",
+    "200ms",
+    "-max-iterations",
+    "1000000",
+    "-timeout",
+    "10m"
+  ],
+  "benchmark_inputs": [
+    {
+      "input": "data/storage-10m-20260915.jsonl",
+      "format": "jsonl"
+    },
+    {
+      "input": "data/storage-10m-20260915.clens",
+      "format": "snapshot"
+    }
+  ],
+  "method": "Separate fresh benchmark processes, JSONL then snapshot; each loads row, columnar, indexed in fixed order. One observed load per engine/format, not load-time replicates. Five warm batches per query case. Prior independent verification read both inputs; filesystem caches not flushed. No parent tests or demo servers ran during benchmark measurement. Host otherwise shared.",
+  "provenance": "Binary build records base2135237 and dirty=true. Source hashes normalize CRLF to LF and match the executable source published with this evidence. Historical reports remain untouched.",
+  "source_file_sha256": {
+    "cmd/bench/main.go": "ad116902009d81b981c47840bea166fc649178935c39f971c3f47bb3663e998b",
+    "cmd/generator/main.go": "145a77d63f5d9e36ed579205affdcece547e5c8ab64108ffc0afaa4e804805d9",
+    "cmd/pack/main.go": "577f9cc82d4ebe0b39d721965a9db3b2c09b8c9d1152c93909b51f86a9feb66c",
+    "cmd/pack/publish.go": "190dd0585ba8ee75e982074150a40aa61a9788c86aebcba0c46c4252caeaacfa",
+    "internal/benchmark/cases.go": "e6d6c46cdd24b77b67f8812fcb5ac631037c27b8795b962d9fb10b1421880508",
+    "internal/benchmark/config.go": "088b05f4757446bd53ba572e723795003bc8926191af2d8908f79adfa2c00ff9",
+    "internal/benchmark/load.go": "9deb5db63fd9eb1f5cfe0e1ba2c48d0afb4aa8f9dbbad72f05efc12ce36e39c9",
+    "internal/benchmark/report.go": "aa50de2465c34450b17128ddf97954d36ca04e70087c2a7732cd04880432721d",
+    "internal/benchmark/run.go": "ece6031940e48df38d8219ff7b02652f375c122d9e653898e8668beebd332d9d",
+    "internal/benchmark/timing.go": "b70da3e1c99c25e4481c87b9c822f347f9eb0007e255f725e5bde081066d7656",
+    "internal/generator/generator.go": "b9743a84aee940c3b9f284cd5b6a8e14b96494298dc0841a5da83b276e67aa83",
+    "internal/measure/timing.go": "5815a09876132b7ec4bfb80aa319614f0e1d40b7fd6e3d43360ef64940ae135e",
+    "internal/query/catalog.go": "3afd34542e309f9455b5e90bd05ab847aefa1cc56dc3a865d17487e5442f1717",
+    "internal/query/dataset.go": "187bfa84e96274d45d4cd1ed0d653191f57a0ce2e01c4b3ab52767a73c9a2454",
+    "internal/query/profile.go": "424d5c3355fe5af1db1028d56a747e6a9840eae2e5044bc4b8849f44faa9e785",
+    "internal/query/query.go": "0b122adf952c0c53cb65fa86e06e1952a59cf7f852d8250716ed0413c5bd2a4c",
+    "internal/snapshot/reader.go": "0c44d688ed15d919e3343cdd604241e8053b220b99b2593b18c1e3eab642220d",
+    "internal/snapshot/snapshot.go": "0f0bcfeb8b0f450465a9c55e1b626060a7a7de189d8afdeb519539c3b0e04cee",
+    "internal/snapshot/writer.go": "7b89ce9c6b3aa7ef96669f22b892d70edeaef862e859c4d6f3ca454495f4bc78",
+    "internal/telemetry/event.go": "b9d32b10b7a42aa8e69574ee07277a8351b5cd0e462ba72b3cfbddc4900f5f37",
+    "internal/telemetry/reader.go": "7dbfb9a419e4ca7ecb4193a4ce9483ae683d7f6f054f615a3d7e81711bbe5b90",
+    "go.mod": "5419c83b56625181b36aec9e5b91a9a05fd5ba15ba4085e23004137a554dcb72"
+  }
+}

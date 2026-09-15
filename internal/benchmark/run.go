@@ -10,7 +10,7 @@ import (
 	"github.com/PoojaAgarwal2003/ChronoLens/internal/query"
 )
 
-type loader func(context.Context, string, query.Engine, int) (*query.Dataset, Load, error)
+type loader func(context.Context, string, query.Engine, int, query.InputFormat) (*query.Dataset, Load, error)
 
 // Run loads and releases each layout in turn. A failure returns no partial
 // report; matching hashes and full aggregates are prerequisites for success.
@@ -37,6 +37,7 @@ func run(ctx context.Context, config Config, load loader) (Report, error) {
 			"Each stable batch performs at least 3 queries and runs at least window_ms. A capped or unresolved batch has null batch_mean_ms and stable_window=false; any such sample makes its summary null.",
 			"Query timing includes time.Now, loop, context, error, and full aggregate stability checks. Loading/hashing, explicit GC, warmup, metadata, profiles, charts, HTTP/UI, and report construction are excluded.",
 			"Load timing includes file open/stat/read/validation, SHA256 of actual bytes, layout construction, and close; it excludes explicit GC and metadata collection.",
+			"source.input_format is explicit: jsonl performs strict JSON validation; snapshot also validates block CRC32C and its embedded SHA256 trailer. Both formats hash the complete source file for provenance; conversion is separate.",
 			"Heap snapshots are process-wide runtime.MemStats.HeapAlloc after forced GC, before/after loading one layout, with the dataset kept alive. Signed delta is not OS RSS, total allocations, or peak memory. Runtime noise and retained report values affect snapshots.",
 			"Time fractions use [min_us,max_us+1), ceiling integer widths and lower-biased centering. A null to_us is unbounded (including conceptual MaxInt64+1). Ties and rounding change event selectivity; inspect endpoints, time_matched_rows, aggregate.count, and stats.rows_examined.",
 			"Service-only selects the lexicographically first service with no time predicate. Engines run row, columnar, indexed in fixed order; filesystem cache, runtime GC, and process noise are not controlled.",
@@ -71,7 +72,7 @@ func runEngine(ctx context.Context, config Config, engine query.Engine, report *
 		return EngineReport{}, err
 	}
 	before := heapAlloc()
-	data, loading, err := load(ctx, config.Input, engine, config.MaxEvents)
+	data, loading, err := load(ctx, config.Input, engine, config.MaxEvents, config.InputFormat)
 	if err != nil {
 		return EngineReport{}, err
 	}
@@ -92,7 +93,8 @@ func runEngine(ctx context.Context, config Config, engine query.Engine, report *
 			return EngineReport{}, err
 		}
 		report.Source = Source{
-			SHA256: loading.SHA256, Bytes: loading.Bytes, Events: metadata.Rows,
+			InputFormat: config.InputFormat,
+			SHA256:      loading.SHA256, Bytes: loading.Bytes, Events: metadata.Rows,
 			Services: len(metadata.Services), MinUS: *metadata.MinUS, MaxUS: *metadata.MaxUS,
 			TimeSpanUS: uint64(*metadata.MaxUS) - uint64(*metadata.MinUS) + 1,
 		}

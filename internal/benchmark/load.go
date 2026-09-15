@@ -31,7 +31,7 @@ func (r *contextReader) Read(buffer []byte) (int, error) {
 	return n, err
 }
 
-func loadFile(ctx context.Context, path string, engine query.Engine, maxEvents int) (*query.Dataset, Load, error) {
+func loadFile(ctx context.Context, path string, engine query.Engine, maxEvents int, format query.InputFormat) (*query.Dataset, Load, error) {
 	if err := ctx.Err(); err != nil {
 		return nil, Load{}, err
 	}
@@ -41,7 +41,7 @@ func loadFile(ctx context.Context, path string, engine query.Engine, maxEvents i
 		return nil, Load{}, fmt.Errorf("stat input: %w", err)
 	}
 	if !before.Mode().IsRegular() {
-		return nil, Load{}, fmt.Errorf("input must be a regular JSONL file")
+		return nil, Load{}, fmt.Errorf("input must be a regular dataset file")
 	}
 	file, err := os.Open(path)
 	if err != nil {
@@ -49,7 +49,7 @@ func loadFile(ctx context.Context, path string, engine query.Engine, maxEvents i
 	}
 	hash := sha256.New()
 	reader := &contextReader{ctx: ctx, input: io.TeeReader(file, hash)}
-	data, loadErr := query.Load(ctx, reader, engine, maxEvents)
+	data, loadErr := query.LoadFormat(ctx, reader, engine, maxEvents, format)
 	after, statErr := file.Stat()
 	closeErr := file.Close()
 	if err := errors.Join(loadErr, statErr, closeErr, ctx.Err()); err != nil {

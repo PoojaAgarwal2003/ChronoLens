@@ -6,9 +6,9 @@ Only milestones 7-9 belong to that work session. Milestones 10-12 stay deferred.
 
 | Milestone | Scope | Boundary |
 |---|---|---|
-| 7 | Versioned, bounded, checksummed immutable snapshot codec and safe JSONL conversion | Today |
-| 8 | Snapshot input in query/catalog/server while keeping existing JSONL behavior | Today, after milestone 7 |
-| 9 | Benchmark input-format support and measured JSONL-versus-snapshot startup evidence | Today, after milestone 8 |
+| 7 | Versioned, bounded, checksummed immutable snapshot codec and safe JSONL conversion | Completed 2026-09-15; `a83d4e9` |
+| 8 | Snapshot input in query/catalog/server while keeping existing JSONL behavior | Completed 2026-09-15; `2135237` |
+| 9 | Benchmark input-format support and measured JSONL-versus-snapshot startup evidence | Completed 2026-09-15; [results](../benchmarks/snapshot-startup.md) |
 | 10 | Concurrent-load, backpressure/cancellation, and end-to-end UI latency experiments | Deferred |
 | 11 | Reproducible release packages and fresh-machine installation/release automation | Deferred |
 | 12 | License owner decision, authentication design, and public-deployment readiness review | Deferred; no public exposure or automatic license selection |

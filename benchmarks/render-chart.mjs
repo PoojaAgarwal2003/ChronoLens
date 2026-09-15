@@ -5,6 +5,9 @@ const escape = text => String(text).replace(/[&<>"']/g, c => ({
 }[c]));
 
 function render(report) {
+  // Schema-v1 reports published before snapshot support are explicitly JSONL.
+  const inputFormat = report.source.input_format ?? 'jsonl';
+  if (!['jsonl', 'snapshot'].includes(inputFormat)) throw new Error('Unsupported report input format');
   const names = ['row', 'columnar', 'indexed'];
   const colors = ['#f5b777', '#91adff', '#65e0c9'];
   const labels = ['0.1%', '1%', '10%', '100%'];
@@ -76,8 +79,9 @@ function render(report) {
   engines.forEach((engine, i) => parts.push(text(590 + i * 210, 784,
     `${engine.engine}: ${engine.cases[4].batch_mean_ms.median.toFixed(2)} ms`, 16, colors[i])));
   const loads = engines.map(engine => engine.load.ms);
+  const validation = inputFormat === 'snapshot' ? 'snapshot integrity checks and source SHA-256' : 'strict JSONL parsing and SHA-256';
   const loading = loads.every(value => Number.isFinite(value) && value > 0)
-    ? `Loading: ${(Math.min(...loads) / 1000).toFixed(1)}-${(Math.max(...loads) / 1000).toFixed(1)} seconds per layout, including strict JSONL parsing and SHA-256.`
+    ? `Loading: ${(Math.min(...loads) / 1000).toFixed(1)}-${(Math.max(...loads) / 1000).toFixed(1)} seconds per layout, including ${validation}.`
     : 'Loading timings unresolved for at least one layout; see raw report (never inferred as zero).';
   parts.push(text(40, 847, loading, 14));
   parts.push(text(40, 873, `Warm queries only; no loading, charts, HTTP, or browser rendering. ${report.runtime.go_version}, ${report.runtime.os}/${report.runtime.arch}.`, 13));

@@ -142,6 +142,18 @@ against JSONL and freshly packed snapshot fixtures. Each run starts and owns its
 own server/workspace. To inspect just the snapshot suite interactively, use
 `npx playwright test --config playwright.snapshot.config.ts --ui`.
 
-Milestone 8 integrates query/explorer input. The benchmark CLI still reads
-JSONL until milestone 9 adds an explicitly measured format comparison.
+The benchmark CLI also accepts `-format snapshot`, retaining JSONL by default.
+It records the selected format and hashes the complete source separately for
+each engine load. A format comparison requires separate runs over matching
+inputs; source-byte hashes differ by representation, while logical events and
+query results must agree.
+
+```sh
+go run ./cmd/bench -input data/incident.clens -format snapshot -max-events 100000
+```
+
 The [roadmap](roadmap.md) leaves the remaining half of the work deferred.
+
+The [ten-million-event startup comparison](../benchmarks/snapshot-startup.md)
+publishes actual conversion cost, file sizes, validated loading times, source
+provenance, and independent full-record verification.

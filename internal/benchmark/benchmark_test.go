@@ -76,7 +76,7 @@ func TestRunKnownAnswersAndReport(t *testing.T) {
 	}
 	wantHash := fmt.Sprintf("%x", sha256.Sum256([]byte(fixture)))
 	if report.Input != filepath.Base(path) || report.Source != (Source{
-		SHA256: wantHash, Bytes: int64(len(fixture)), Events: 5, Services: 2,
+		InputFormat: query.JSONLFormat, SHA256: wantHash, Bytes: int64(len(fixture)), Events: 5, Services: 2,
 		MinUS: 0, MaxUS: 999, TimeSpanUS: 1000,
 	}) || report.SchemaVersion != 1 {
 		t.Fatalf("incorrect source: %+v", report)
@@ -235,8 +235,8 @@ func TestMutationRejected(t *testing.T) {
 	path := fixtureFile(t, fixture)
 	loads := 0
 	changed := strings.Replace(fixture, `"duration_us":10`, `"duration_us":11`, 1)
-	load := func(ctx context.Context, path string, engine query.Engine, maxEvents int) (*query.Dataset, Load, error) {
-		data, result, err := loadFile(ctx, path, engine, maxEvents)
+	load := func(ctx context.Context, path string, engine query.Engine, maxEvents int, format query.InputFormat) (*query.Dataset, Load, error) {
+		data, result, err := loadFile(ctx, path, engine, maxEvents, format)
 		loads++
 		if loads == 1 {
 			if err := os.WriteFile(path, []byte(changed), 0o600); err != nil {
@@ -255,7 +255,7 @@ func TestHashActualBytes(t *testing.T) {
 	for _, content := range []string{fixture, strings.TrimSuffix(fixture, "\n"), strings.ReplaceAll(fixture, "\n", "\r\n")} {
 		path := fixtureFile(t, content)
 		for _, engine := range []query.Engine{query.Row, query.Columnar, query.Indexed} {
-			data, result, err := loadFile(context.Background(), path, engine, 5)
+			data, result, err := loadFile(context.Background(), path, engine, 5, query.JSONLFormat)
 			if err != nil || result.SHA256 != fmt.Sprintf("%x", sha256.Sum256([]byte(content))) ||
 				result.Bytes != int64(len(content)) || data.Len() != 5 {
 				t.Fatalf("incorrect actual-byte hash: %+v, %v", result, err)
@@ -307,7 +307,7 @@ func TestCancellationAndDeadline(t *testing.T) {
 	}
 	config := quickConfig("does-not-exist")
 	config.Timeout = time.Nanosecond
-	_, err := run(context.Background(), config, func(ctx context.Context, _ string, _ query.Engine, _ int) (*query.Dataset, Load, error) {
+	_, err := run(context.Background(), config, func(ctx context.Context, _ string, _ query.Engine, _ int, _ query.InputFormat) (*query.Dataset, Load, error) {
 		<-ctx.Done()
 		return nil, Load{}, ctx.Err()
 	})
@@ -318,7 +318,7 @@ func TestCancellationAndDeadline(t *testing.T) {
 
 func TestRunRejectsCrossEngineAggregateMismatch(t *testing.T) {
 	loads := 0
-	load := func(ctx context.Context, _ string, engine query.Engine, maxEvents int) (*query.Dataset, Load, error) {
+	load := func(ctx context.Context, _ string, engine query.Engine, maxEvents int, _ query.InputFormat) (*query.Dataset, Load, error) {
 		content := fixture
 		loads++
 		if loads == 2 {
