@@ -1,0 +1,71 @@
+name: Local preview packages (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Local preview version: N.N.N-preview[.N]'
+        required: true
+        default: '0.11.0-preview.1'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            target: windows-amd64
+          - os: ubuntu-latest
+            target: linux-amd64
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    env:
+      PREVIEW_VERSION: ${{ inputs.version }}
+      PREVIEW_TARGET: ${{ matrix.target }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.17.0'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci --prefix web
+      - run: go vet ./...
+      - run: go test -count=1 ./...
+      - run: go build ./...
+      - name: Install existing Playwright Chromium dependency
+        working-directory: web
+        run: npx playwright install --with-deps chromium
+      - name: Build twice and compare exact archive SHA256
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory releases | Out-Null
+          go run ./cmd/release -version $env:PREVIEW_VERSION -target $env:PREVIEW_TARGET -output releases/preview.zip
+          if ($LASTEXITCODE -ne 0) { throw 'First preview build failed' }
+          go run ./cmd/release -version $env:PREVIEW_VERSION -target $env:PREVIEW_TARGET -output releases/repeat.zip
+          if ($LASTEXITCODE -ne 0) { throw 'Second preview build failed' }
+          if ((Get-FileHash releases/preview.zip).Hash -ne (Get-FileHash releases/repeat.zip).Hash) {
+            throw 'Same-host archive reproducibility failed'
+          }
+      - name: Isolated package-only execution plus real browser
+        shell: pwsh
+        run: |
+          go run ./cmd/release-smoke -archive releases/preview.zip -work-root $env:RUNNER_TEMP -browser-script "$PWD/web/release-browser-smoke.mjs"
+          if ($LASTEXITCODE -ne 0) { throw 'Isolated package smoke failed' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chronolens-${{ inputs.version }}-${{ matrix.target }}-unsigned-local-preview
+          path: |
+            releases/preview.zip
+            releases/preview.zip.sha256
+          if-no-files-found: error
+          retention-days: 14

@@ -28,6 +28,20 @@ jobs:
       - name: Check formatting
         shell: bash
         run: test -z "$(gofmt -l cmd internal)"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.17.0'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci --prefix web
+      - name: Build and smoke native local-preview package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory releases | Out-Null
+          go run ./cmd/release -version 0.11.0-preview -output releases/ci-preview.zip
+          if ($LASTEXITCODE -ne 0) { throw 'Preview packaging failed' }
+          go run ./cmd/release-smoke -archive releases/ci-preview.zip -work-root $env:RUNNER_TEMP
+          if ($LASTEXITCODE -ne 0) { throw 'Preview smoke failed' }
 
   explorer:
     runs-on: ubuntu-latest

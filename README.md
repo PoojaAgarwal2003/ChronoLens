@@ -3,7 +3,13 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: measured concurrency and browser latency.** A deterministic generator,
+**Current milestone: unsigned, reproducible local-preview packages.**
+[Release instructions](docs/releases.md) cover Windows/Linux amd64 bundles containing
+all six CLIs and built UI assets, without requiring Go, Node, or a source checkout
+on the consumer machine. The project license remains unselected; authentication
+and public deployment are deferred to milestone 12. This is **not production-ready**.
+
+A deterministic generator,
 validated JSONL reader, three query engines, diagnostic CLI, loopback-only Go API,
 and React explorer are implemented. The opt-in incident profile creates correlated
 traffic, service, failure, and latency spikes without changing the uniform baseline.
@@ -226,6 +232,8 @@ cmd/query/              Query CLI and JSON reporting
 cmd/bench/              Bounded benchmark CLI and report output
 cmd/load/               Bounded open-loop loopback HTTP load CLI
 cmd/server/             Local server lifecycle and startup validation
+cmd/release/            Developer-only deterministic preview bundling
+cmd/release-smoke/      Developer-only isolated packaged-application checks
 internal/generator/    Deterministic generation and validation tests
 internal/telemetry/    Shared schema, strict JSONL reader, and fuzz tests
 internal/snapshot/     Bounded block-columnar codec, integrity checks, corruption tests
@@ -234,6 +242,7 @@ internal/api/          Local HTTP routes, limits, origin guards, comparison batc
 internal/measure/      Explicit handling of unresolved clock timings
 internal/benchmark/    Single-layout experiments, provenance, batch timing, heap snapshots
 internal/load/         Fixed arrivals, explicit skips/errors, complete-request percentiles
+internal/release/      Archive safety, provenance, checksums, and publication
 benchmarks/            Raw results, independent oracle, chart renderer, reproduction guide
 web/                   React UI, build configuration, real-server browser tests
 docs/                  Architecture, API/setup guides, measurements, original images
@@ -303,7 +312,9 @@ dependencies and local frontend iteration.
 
 The [scoped remaining-work roadmap](docs/roadmap.md) tracks independently reviewed
 milestones. Storage/startup and bounded concurrency/browser experiments are
-implemented; release packaging and licensing/deployment decisions remain separate.
+implemented, as are local-preview bundles with isolated Windows execution and
+Windows/Linux CI automation. Linux execution awaits publication of these changes.
+Licensing, authentication, and public-deployment decisions remain deferred.
 
 Ten-million-event warm selective queries are now measured, with
 [raw samples and reproduction commands](benchmarks/README.md).

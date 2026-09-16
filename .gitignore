@@ -12,6 +12,8 @@
 *.prof
 *.clens
 .chronolens-pack-*.tmp
+/releases/
+.chronolens-release-*
 
 # Local environment and credentials must never be committed.
 .env
