@@ -88,6 +88,8 @@ non-native target. Native CI jobs test the respective OS. Source/input selection
 is bounded and allowlisted; symlinks, unsafe/colliding archive paths, unexpected
 assets/production dependencies, missing assets/licenses, and failed builds are
 rejected. The builder snapshots fingerprinted Go inputs before compiling.
+Installer-managed links are allowed only in the trusted Go SDK root;
+project paths and individual notice files still reject links.
 
 ## Provenance and reproducibility boundary
 

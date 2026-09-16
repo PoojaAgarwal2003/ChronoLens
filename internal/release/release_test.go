@@ -266,6 +266,44 @@ func TestPublishNoClobberAndFailureCleanup(t *testing.T) {
 	}
 }
 
+func TestToolchainNoticesAllowLinkedInstallationOnly(t *testing.T) {
+	root := t.TempDir()
+	sdk := filepath.Join(root, "sdk")
+	if err := os.Mkdir(sdk, 0755); err != nil {
+		t.Fatal(err)
+	}
+	for _, name := range []string{"LICENSE", "PATENTS"} {
+		if err := os.WriteFile(filepath.Join(sdk, name), []byte(name), 0644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	link := filepath.Join(root, "installed-go")
+	if err := os.Symlink(sdk, link); err != nil {
+		t.Skipf("host does not grant symlink creation: %v", err)
+	}
+	for _, name := range []string{"LICENSE", "PATENTS"} {
+		b, err := readToolchainNotice(link, name)
+		if err != nil || string(b) != name {
+			t.Fatalf("linked SDK %s: %q %v", name, b, err)
+		}
+	}
+	if _, err := ReadRegular(link, "LICENSE"); err == nil {
+		t.Fatal("project-root link checks were weakened")
+	}
+	if err := os.Remove(filepath.Join(sdk, "LICENSE")); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Symlink(filepath.Join(sdk, "PATENTS"), filepath.Join(sdk, "LICENSE")); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := readToolchainNotice(link, "LICENSE"); err == nil {
+		t.Fatal("followed a linked notice file")
+	}
+	if _, err := readToolchainNotice(filepath.Join(root, "missing"), "LICENSE"); err == nil {
+		t.Fatal("accepted a missing SDK")
+	}
+}
+
 func TestFailedBuildLeavesNoPublishedOutput(t *testing.T) {
 	root := t.TempDir()
 	ctx, cancel := context.WithCancel(context.Background())

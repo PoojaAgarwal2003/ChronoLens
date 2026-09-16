@@ -101,6 +101,16 @@ func SafeName(name string) bool {
 
 // ReadRegular rejects links in every path component, not only the final file.
 func ReadRegular(root, name string) ([]byte, error) {
+	return readRegular(root, name, false)
+}
+
+// SDK installers may link GOROOT, including Windows junctions. Only the trusted
+// installation root may follow links; individual notice files still may not.
+func readToolchainNotice(root, name string) ([]byte, error) {
+	return readRegular(root, name, true)
+}
+
+func readRegular(root, name string, trustedRoot bool) ([]byte, error) {
 	if !SafeName(name) {
 		return nil, fmt.Errorf("unsafe path %q", name)
 	}
@@ -111,6 +121,9 @@ func ReadRegular(root, name string) ([]byte, error) {
 	// Check root ancestors too, including Windows junctions exposed as ModeSymlink.
 	for p := current; ; p = filepath.Dir(p) {
 		info, err := os.Lstat(p)
+		if trustedRoot {
+			info, err = os.Stat(p)
+		}
 		if err != nil || !info.IsDir() || info.Mode()&os.ModeSymlink != 0 {
 			return nil, fmt.Errorf("unsafe directory %s: %v", p, err)
 		}
@@ -495,12 +508,12 @@ func Build(ctx context.Context, c Config) (sum string, resultErr error) {
 	if err != nil {
 		return "", err
 	}
-	license, err := ReadRegular(strings.TrimSpace(string(goRoot)), "LICENSE")
+	license, err := readToolchainNotice(strings.TrimSpace(string(goRoot)), "LICENSE")
 	if err != nil {
 		return "", err
 	}
 	files["licenses/Go-LICENSE.txt"] = license
-	notice, err := ReadRegular(strings.TrimSpace(string(goRoot)), "PATENTS")
+	notice, err := readToolchainNotice(strings.TrimSpace(string(goRoot)), "PATENTS")
 	if err != nil {
 		return "", err
 	}
