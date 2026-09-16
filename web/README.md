@@ -48,6 +48,15 @@ intercept requests for network errors, late responses, and null timer values.
 The suite also checks int64 range arithmetic, keyboard input, empty intersections,
 engine equivalence, and mobile overflow.
 
+## Opt-in latency experiment
+
+`npm run experiment:latency` separately builds a one-million-event workload,
+owns an ephemeral loopback server, runs bounded baseline/overload/cancellation
+phases, then records forty real Chromium interactions. It is not part of the
+normal e2e suite and asserts correctness, not machine-specific latency limits.
+Reports preserve per-click DOM/paint-opportunity, HTTP and paired server timers.
+See [method, limits and actual results](../benchmarks/concurrency-latency.md).
+
 ## Measurement semantics
 
 - Timestamp bounds stay decimal strings and use `BigInt` for range arithmetic.

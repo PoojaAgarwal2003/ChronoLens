@@ -1,0 +1,1409 @@
+{
+  "schema": 1,
+  "config": {
+    "target": "http://127.0.0.1:57495/api/compare",
+    "payload": {
+      "engine": "indexed",
+      "from_us": "1767225600000000",
+      "to_us": null,
+      "service": "",
+      "status": 0,
+      "buckets": 100
+    },
+    "duration_ns": 5000000000,
+    "arrivals_per_second": 40,
+    "max_inflight": 1,
+    "max_requests": 1000,
+    "request_timeout_ns": 1000000000
+  },
+  "started_utc": "2026-09-16T03:54:40.1684737Z",
+  "elapsed_ms": 5060.2866,
+  "policy": "Open-loop fixed arrivals; no workload retries; skip arrivals \u003e= one period late or at inflight cap; drain on normal completion; cancel on parent cancellation. Metadata probe excluded from schedule and elapsed.",
+  "environment": {
+    "arch": "amd64",
+    "client_server": "same-host loopback",
+    "go": "go1.27.1",
+    "gomaxprocs": 16,
+    "logical_cpus": 16,
+    "os": "windows"
+  },
+  "dataset_metadata": {
+    "dataset": "events.clens",
+    "input_format": "snapshot",
+    "rows": 1000000,
+    "service_count": 16,
+    "services": [
+      "service-001",
+      "service-002",
+      "service-003",
+      "service-004",
+      "service-005",
+      "service-006",
+      "service-007",
+      "service-008",
+      "service-009",
+      "service-010",
+      "service-011",
+      "service-012",
+      "service-013",
+      "service-014",
+      "service-015",
+      "service-016"
+    ],
+    "services_truncated": false,
+    "statuses": [
+      200,
+      500
+    ],
+    "min_timestamp_us": "1767225600000000",
+    "max_timestamp_us": "1767226599999000",
+    "engines": [
+      "row",
+      "columnar",
+      "indexed"
+    ],
+    "default_buckets": 100,
+    "max_buckets": 240,
+    "load_ms": 91.8916
+  },
+  "scheduled": 200,
+  "sent": 29,
+  "skipped": 171,
+  "outcomes": {
+    "skipped_inflight": 171,
+    "success": 29
+  },
+  "http_statuses": {
+    "200": 29
+  },
+  "successful_complete_requests": {
+    "count": 29,
+    "p50_ms": 159.5816,
+    "p95_ms": 162.7184,
+    "p99_ms": 163.118
+  },
+  "observed_scheduler_lag": {
+    "count": 200,
+    "p50_ms": 0.3778,
+    "p95_ms": 0.5777,
+    "p99_ms": 0.6384
+  },
+  "samples": [
+    {
+      "index": 0,
+      "scheduled_ms": 0,
+      "started_ms": 0,
+      "scheduler_lag_ms": 0,
+      "complete_latency_ms": 162.7184,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1176
+    },
+    {
+      "index": 1,
+      "scheduled_ms": 25,
+      "scheduler_lag_ms": 0.8192,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 2,
+      "scheduled_ms": 50,
+      "scheduler_lag_ms": 0.5012,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 3,
+      "scheduled_ms": 75,
+      "scheduler_lag_ms": 0.3199,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 4,
+      "scheduled_ms": 100,
+      "scheduler_lag_ms": 0.2129,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 5,
+      "scheduled_ms": 125,
+      "scheduler_lag_ms": 0.5415,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 6,
+      "scheduled_ms": 150,
+      "scheduler_lag_ms": 0.2661,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 7,
+      "scheduled_ms": 175,
+      "started_ms": 175.5,
+      "scheduler_lag_ms": 0.5,
+      "complete_latency_ms": 160.4844,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1187
+    },
+    {
+      "index": 8,
+      "scheduled_ms": 200,
+      "scheduler_lag_ms": 0.5816,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 9,
+      "scheduled_ms": 225,
+      "scheduler_lag_ms": 0.224,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 10,
+      "scheduled_ms": 250,
+      "scheduler_lag_ms": 0.5546,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 11,
+      "scheduled_ms": 275,
+      "scheduler_lag_ms": 0.4864,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 12,
+      "scheduled_ms": 300,
+      "scheduler_lag_ms": 0.3732,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 13,
+      "scheduled_ms": 325,
+      "scheduler_lag_ms": 0.2472,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 14,
+      "scheduled_ms": 350,
+      "started_ms": 350.2978,
+      "scheduler_lag_ms": 0.2978,
+      "complete_latency_ms": 162.3377,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1186
+    },
+    {
+      "index": 15,
+      "scheduled_ms": 375,
+      "scheduler_lag_ms": 0.453,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 16,
+      "scheduled_ms": 400,
+      "scheduler_lag_ms": 0.3579,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 17,
+      "scheduled_ms": 425,
+      "scheduler_lag_ms": 0.3823,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 18,
+      "scheduled_ms": 450,
+      "scheduler_lag_ms": 0.3716,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 19,
+      "scheduled_ms": 475,
+      "scheduler_lag_ms": 0.2594,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 20,
+      "scheduled_ms": 500,
+      "scheduler_lag_ms": 0.5388,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 21,
+      "scheduled_ms": 525,
+      "started_ms": 525.393,
+      "scheduler_lag_ms": 0.393,
+      "complete_latency_ms": 157.7243,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1185
+    },
+    {
+      "index": 22,
+      "scheduled_ms": 550,
+      "scheduler_lag_ms": 0.4425,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 23,
+      "scheduled_ms": 575,
+      "scheduler_lag_ms": 0.1585,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 24,
+      "scheduled_ms": 600,
+      "scheduler_lag_ms": 0.4987,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 25,
+      "scheduled_ms": 625,
+      "scheduler_lag_ms": 0.3315,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 26,
+      "scheduled_ms": 650,
+      "scheduler_lag_ms": 0.4737,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 27,
+      "scheduled_ms": 675,
+      "scheduler_lag_ms": 0.5567,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 28,
+      "scheduled_ms": 700,
+      "started_ms": 700.3856,
+      "scheduler_lag_ms": 0.3856,
+      "complete_latency_ms": 160.865,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1187
+    },
+    {
+      "index": 29,
+      "scheduled_ms": 725,
+      "scheduler_lag_ms": 0.3972,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 30,
+      "scheduled_ms": 750,
+      "scheduler_lag_ms": 0.3067,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 31,
+      "scheduled_ms": 775,
+      "scheduler_lag_ms": 0.4509,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 32,
+      "scheduled_ms": 800,
+      "scheduler_lag_ms": 0.5305,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 33,
+      "scheduled_ms": 825,
+      "scheduler_lag_ms": 0.2332,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 34,
+      "scheduled_ms": 850,
+      "scheduler_lag_ms": 0.6238,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 35,
+      "scheduled_ms": 875,
+      "started_ms": 875.5124,
+      "scheduler_lag_ms": 0.5124,
+      "complete_latency_ms": 159.4149,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1176
+    },
+    {
+      "index": 36,
+      "scheduled_ms": 900,
+      "scheduler_lag_ms": 0.2903,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 37,
+      "scheduled_ms": 925,
+      "scheduler_lag_ms": 0.3787,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 38,
+      "scheduled_ms": 950,
+      "scheduler_lag_ms": 0.2681,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 39,
+      "scheduled_ms": 975,
+      "scheduler_lag_ms": 0.1485,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 40,
+      "scheduled_ms": 1000,
+      "scheduler_lag_ms": 0.287,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 41,
+      "scheduled_ms": 1025,
+      "scheduler_lag_ms": 0.1528,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 42,
+      "scheduled_ms": 1050,
+      "started_ms": 1050.4677,
+      "scheduler_lag_ms": 0.4677,
+      "complete_latency_ms": 159.4171,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1174
+    },
+    {
+      "index": 43,
+      "scheduled_ms": 1075,
+      "scheduler_lag_ms": 0.4711,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 44,
+      "scheduled_ms": 1100,
+      "scheduler_lag_ms": 0.2884,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 45,
+      "scheduled_ms": 1125,
+      "scheduler_lag_ms": 0.4015,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 46,
+      "scheduled_ms": 1150,
+      "scheduler_lag_ms": 0.1301,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 47,
+      "scheduled_ms": 1175,
+      "scheduler_lag_ms": 0.522,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 48,
+      "scheduled_ms": 1200,
+      "scheduler_lag_ms": 0.1264,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 49,
+      "scheduled_ms": 1225,
+      "started_ms": 1225.2373,
+      "scheduler_lag_ms": 0.2373,
+      "complete_latency_ms": 159.0773,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1187
+    },
+    {
+      "index": 50,
+      "scheduled_ms": 1250,
+      "scheduler_lag_ms": 0.4214,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 51,
+      "scheduled_ms": 1275,
+      "scheduler_lag_ms": 0.5042,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 52,
+      "scheduled_ms": 1300,
+      "scheduler_lag_ms": 0.3068,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 53,
+      "scheduled_ms": 1325,
+      "scheduler_lag_ms": 0.5689,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 54,
+      "scheduled_ms": 1350,
+      "scheduler_lag_ms": 0.4164,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 55,
+      "scheduled_ms": 1375,
+      "scheduler_lag_ms": 0.5389,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 56,
+      "scheduled_ms": 1400,
+      "started_ms": 1400.3474,
+      "scheduler_lag_ms": 0.3474,
+      "complete_latency_ms": 157.6484,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1176
+    },
+    {
+      "index": 57,
+      "scheduled_ms": 1425,
+      "scheduler_lag_ms": 0.4165,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 58,
+      "scheduled_ms": 1450,
+      "scheduler_lag_ms": 0.36,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 59,
+      "scheduled_ms": 1475,
+      "scheduler_lag_ms": 0.278,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 60,
+      "scheduled_ms": 1500,
+      "scheduler_lag_ms": 0.5571,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 61,
+      "scheduled_ms": 1525,
+      "scheduler_lag_ms": 0.4099,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 62,
+      "scheduled_ms": 1550,
+      "scheduler_lag_ms": 0.4551,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 63,
+      "scheduled_ms": 1575,
+      "started_ms": 1575.4758,
+      "scheduler_lag_ms": 0.4758,
+      "complete_latency_ms": 155.8567,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1195
+    },
+    {
+      "index": 64,
+      "scheduled_ms": 1600,
+      "scheduler_lag_ms": 0.3361,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 65,
+      "scheduled_ms": 1625,
+      "scheduler_lag_ms": 0.4427,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 66,
+      "scheduled_ms": 1650,
+      "scheduler_lag_ms": 0.3125,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 67,
+      "scheduled_ms": 1675,
+      "scheduler_lag_ms": 0.542,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 68,
+      "scheduled_ms": 1700,
+      "scheduler_lag_ms": 0.1851,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 69,
+      "scheduled_ms": 1725,
+      "scheduler_lag_ms": 0.5888,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 70,
+      "scheduled_ms": 1750,
+      "started_ms": 1750.3071,
+      "scheduler_lag_ms": 0.3071,
+      "complete_latency_ms": 159.7047,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1176
+    },
+    {
+      "index": 71,
+      "scheduled_ms": 1775,
+      "scheduler_lag_ms": 0.3261,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 72,
+      "scheduled_ms": 1800,
+      "scheduler_lag_ms": 0.1766,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 73,
+      "scheduled_ms": 1825,
+      "scheduler_lag_ms": 0.3572,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 74,
+      "scheduled_ms": 1850,
+      "scheduler_lag_ms": 0.4349,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 75,
+      "scheduled_ms": 1875,
+      "scheduler_lag_ms": 0.4898,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 76,
+      "scheduled_ms": 1900,
+      "scheduler_lag_ms": 0.5679,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 77,
+      "scheduled_ms": 1925,
+      "started_ms": 1925.258,
+      "scheduler_lag_ms": 0.258,
+      "complete_latency_ms": 161.138,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1195
+    },
+    {
+      "index": 78,
+      "scheduled_ms": 1950,
+      "scheduler_lag_ms": 0.1364,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 79,
+      "scheduled_ms": 1975,
+      "scheduler_lag_ms": 0.4243,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 80,
+      "scheduled_ms": 2000,
+      "scheduler_lag_ms": 0.163,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 81,
+      "scheduled_ms": 2025,
+      "scheduler_lag_ms": 0.1255,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 82,
+      "scheduled_ms": 2050,
+      "scheduler_lag_ms": 0.2605,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 83,
+      "scheduled_ms": 2075,
+      "scheduler_lag_ms": 0.2493,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 84,
+      "scheduled_ms": 2100,
+      "started_ms": 2100.5206,
+      "scheduler_lag_ms": 0.5206,
+      "complete_latency_ms": 159.5247,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1198
+    },
+    {
+      "index": 85,
+      "scheduled_ms": 2125,
+      "scheduler_lag_ms": 0.2584,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 86,
+      "scheduled_ms": 2150,
+      "scheduler_lag_ms": 0.1355,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 87,
+      "scheduled_ms": 2175,
+      "scheduler_lag_ms": 0.1144,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 88,
+      "scheduled_ms": 2200,
+      "scheduler_lag_ms": 0.1734,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 89,
+      "scheduled_ms": 2225,
+      "scheduler_lag_ms": 0.5538,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 90,
+      "scheduled_ms": 2250,
+      "scheduler_lag_ms": 0.5535,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 91,
+      "scheduled_ms": 2275,
+      "started_ms": 2275.5647,
+      "scheduler_lag_ms": 0.5647,
+      "complete_latency_ms": 162.2503,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1196
+    },
+    {
+      "index": 92,
+      "scheduled_ms": 2300,
+      "scheduler_lag_ms": 0.2206,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 93,
+      "scheduled_ms": 2325,
+      "scheduler_lag_ms": 0.4307,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 94,
+      "scheduled_ms": 2350,
+      "scheduler_lag_ms": 0.2916,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 95,
+      "scheduled_ms": 2375,
+      "scheduler_lag_ms": 0.1872,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 96,
+      "scheduled_ms": 2400,
+      "scheduler_lag_ms": 0.3428,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 97,
+      "scheduled_ms": 2425,
+      "scheduler_lag_ms": 0.1974,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 98,
+      "scheduled_ms": 2450,
+      "started_ms": 2450.0719,
+      "scheduler_lag_ms": 0.0719,
+      "complete_latency_ms": 159.5816,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1186
+    },
+    {
+      "index": 99,
+      "scheduled_ms": 2475,
+      "scheduler_lag_ms": 0.1721,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 100,
+      "scheduled_ms": 2500,
+      "scheduler_lag_ms": 0.091,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 101,
+      "scheduled_ms": 2525,
+      "scheduler_lag_ms": 0.5753,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 102,
+      "scheduled_ms": 2550,
+      "scheduler_lag_ms": 0.3786,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 103,
+      "scheduled_ms": 2575,
+      "scheduler_lag_ms": 0.6246,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 104,
+      "scheduled_ms": 2600,
+      "scheduler_lag_ms": 0.3021,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 105,
+      "scheduled_ms": 2625,
+      "started_ms": 2625.3881,
+      "scheduler_lag_ms": 0.3881,
+      "complete_latency_ms": 159.3688,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1193
+    },
+    {
+      "index": 106,
+      "scheduled_ms": 2650,
+      "scheduler_lag_ms": 0.5211,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 107,
+      "scheduled_ms": 2675,
+      "scheduler_lag_ms": 0.2129,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 108,
+      "scheduled_ms": 2700,
+      "scheduler_lag_ms": 0.3921,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 109,
+      "scheduled_ms": 2725,
+      "scheduler_lag_ms": 0.4674,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 110,
+      "scheduled_ms": 2750,
+      "scheduler_lag_ms": 0.1863,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 111,
+      "scheduled_ms": 2775,
+      "scheduler_lag_ms": 0.4846,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 112,
+      "scheduled_ms": 2800,
+      "started_ms": 2800.5207,
+      "scheduler_lag_ms": 0.5207,
+      "complete_latency_ms": 160.4613,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1174
+    },
+    {
+      "index": 113,
+      "scheduled_ms": 2825,
+      "scheduler_lag_ms": 0.4586,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 114,
+      "scheduled_ms": 2850,
+      "scheduler_lag_ms": 0.2669,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 115,
+      "scheduled_ms": 2875,
+      "scheduler_lag_ms": 0.5224,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 116,
+      "scheduled_ms": 2900,
+      "scheduler_lag_ms": 0.0905,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 117,
+      "scheduled_ms": 2925,
+      "scheduler_lag_ms": 0.4618,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 118,
+      "scheduled_ms": 2950,
+      "scheduler_lag_ms": 0.1865,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 119,
+      "scheduled_ms": 2975,
+      "started_ms": 2975.5497,
+      "scheduler_lag_ms": 0.5497,
+      "complete_latency_ms": 159.9576,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1176
+    },
+    {
+      "index": 120,
+      "scheduled_ms": 3000,
+      "scheduler_lag_ms": 0.2158,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 121,
+      "scheduled_ms": 3025,
+      "scheduler_lag_ms": 0.4984,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 122,
+      "scheduled_ms": 3050,
+      "scheduler_lag_ms": 0.4132,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 123,
+      "scheduled_ms": 3075,
+      "scheduler_lag_ms": 0.378,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 124,
+      "scheduled_ms": 3100,
+      "scheduler_lag_ms": 0.4875,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 125,
+      "scheduled_ms": 3125,
+      "scheduler_lag_ms": 0.3888,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 126,
+      "scheduled_ms": 3150,
+      "started_ms": 3150.5421,
+      "scheduler_lag_ms": 0.5421,
+      "complete_latency_ms": 157.4367,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1186
+    },
+    {
+      "index": 127,
+      "scheduled_ms": 3175,
+      "scheduler_lag_ms": 0.5494,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 128,
+      "scheduled_ms": 3200,
+      "scheduler_lag_ms": 0.1729,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 129,
+      "scheduled_ms": 3225,
+      "scheduler_lag_ms": 0.45,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 130,
+      "scheduled_ms": 3250,
+      "scheduler_lag_ms": 0.5635,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 131,
+      "scheduled_ms": 3275,
+      "scheduler_lag_ms": 0.236,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 132,
+      "scheduled_ms": 3300,
+      "scheduler_lag_ms": 0.3313,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 133,
+      "scheduled_ms": 3325,
+      "started_ms": 3325.4904,
+      "scheduler_lag_ms": 0.4904,
+      "complete_latency_ms": 159.3817,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1186
+    },
+    {
+      "index": 134,
+      "scheduled_ms": 3350,
+      "scheduler_lag_ms": 0.6728,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 135,
+      "scheduled_ms": 3375,
+      "scheduler_lag_ms": 0.3284,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 136,
+      "scheduled_ms": 3400,
+      "scheduler_lag_ms": 0.4567,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 137,
+      "scheduled_ms": 3425,
+      "scheduler_lag_ms": 0.522,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 138,
+      "scheduled_ms": 3450,
+      "scheduler_lag_ms": 0.283,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 139,
+      "scheduled_ms": 3475,
+      "scheduler_lag_ms": 0.4776,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 140,
+      "scheduled_ms": 3500,
+      "started_ms": 3500.1721,
+      "scheduler_lag_ms": 0.1721,
+      "complete_latency_ms": 154.345,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1194
+    },
+    {
+      "index": 141,
+      "scheduled_ms": 3525,
+      "scheduler_lag_ms": 0.4228,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 142,
+      "scheduled_ms": 3550,
+      "scheduler_lag_ms": 0.1417,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 143,
+      "scheduled_ms": 3575,
+      "scheduler_lag_ms": 0.3832,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 144,
+      "scheduled_ms": 3600,
+      "scheduler_lag_ms": 0.2326,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 145,
+      "scheduled_ms": 3625,
+      "scheduler_lag_ms": 0.6211,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 146,
+      "scheduled_ms": 3650,
+      "scheduler_lag_ms": 0.3454,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 147,
+      "scheduled_ms": 3675,
+      "started_ms": 3675.4715,
+      "scheduler_lag_ms": 0.4715,
+      "complete_latency_ms": 158.1367,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1176
+    },
+    {
+      "index": 148,
+      "scheduled_ms": 3700,
+      "scheduler_lag_ms": 0.2437,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 149,
+      "scheduled_ms": 3725,
+      "scheduler_lag_ms": 0.2784,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 150,
+      "scheduled_ms": 3750,
+      "scheduler_lag_ms": 0.1321,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 151,
+      "scheduled_ms": 3775,
+      "scheduler_lag_ms": 0.5777,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 152,
+      "scheduled_ms": 3800,
+      "scheduler_lag_ms": 0.1454,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 153,
+      "scheduled_ms": 3825,
+      "scheduler_lag_ms": 0.3083,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 154,
+      "scheduled_ms": 3850,
+      "started_ms": 3850.3778,
+      "scheduler_lag_ms": 0.3778,
+      "complete_latency_ms": 163.118,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1208
+    },
+    {
+      "index": 155,
+      "scheduled_ms": 3875,
+      "scheduler_lag_ms": 0.4836,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 156,
+      "scheduled_ms": 3900,
+      "scheduler_lag_ms": 0.2455,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 157,
+      "scheduled_ms": 3925,
+      "scheduler_lag_ms": 0.4946,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 158,
+      "scheduled_ms": 3950,
+      "scheduler_lag_ms": 0.1094,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 159,
+      "scheduled_ms": 3975,
+      "scheduler_lag_ms": 0.4801,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 160,
+      "scheduled_ms": 4000,
+      "scheduler_lag_ms": 0.4166,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 161,
+      "scheduled_ms": 4025,
+      "started_ms": 4025.5145,
+      "scheduler_lag_ms": 0.5145,
+      "complete_latency_ms": 158.0472,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1192
+    },
+    {
+      "index": 162,
+      "scheduled_ms": 4050,
+      "scheduler_lag_ms": 0.1876,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 163,
+      "scheduled_ms": 4075,
+      "scheduler_lag_ms": 0.5282,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 164,
+      "scheduled_ms": 4100,
+      "scheduler_lag_ms": 0.4156,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 165,
+      "scheduled_ms": 4125,
+      "scheduler_lag_ms": 0.4651,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 166,
+      "scheduled_ms": 4150,
+      "scheduler_lag_ms": 0.637,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 167,
+      "scheduled_ms": 4175,
+      "scheduler_lag_ms": 0.4572,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 168,
+      "scheduled_ms": 4200,
+      "started_ms": 4200.3353,
+      "scheduler_lag_ms": 0.3353,
+      "complete_latency_ms": 162.3396,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1184
+    },
+    {
+      "index": 169,
+      "scheduled_ms": 4225,
+      "scheduler_lag_ms": 0.1591,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 170,
+      "scheduled_ms": 4250,
+      "scheduler_lag_ms": 0.4411,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 171,
+      "scheduled_ms": 4275,
+      "scheduler_lag_ms": 0.1914,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 172,
+      "scheduled_ms": 4300,
+      "scheduler_lag_ms": 0.348,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 173,
+      "scheduled_ms": 4325,
+      "scheduler_lag_ms": 0.2608,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 174,
+      "scheduled_ms": 4350,
+      "scheduler_lag_ms": 0.5702,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 175,
+      "scheduled_ms": 4375,
+      "started_ms": 4375.4389,
+      "scheduler_lag_ms": 0.4389,
+      "complete_latency_ms": 162.2039,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1197
+    },
+    {
+      "index": 176,
+      "scheduled_ms": 4400,
+      "scheduler_lag_ms": 0.3221,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 177,
+      "scheduled_ms": 4425,
+      "scheduler_lag_ms": 0.3265,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 178,
+      "scheduled_ms": 4450,
+      "scheduler_lag_ms": 0.2045,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 179,
+      "scheduled_ms": 4475,
+      "scheduler_lag_ms": 0.2796,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 180,
+      "scheduled_ms": 4500,
+      "scheduler_lag_ms": 0.2292,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 181,
+      "scheduled_ms": 4525,
+      "scheduler_lag_ms": 0.5662,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 182,
+      "scheduled_ms": 4550,
+      "started_ms": 4550.199,
+      "scheduler_lag_ms": 0.199,
+      "complete_latency_ms": 155.905,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1204
+    },
+    {
+      "index": 183,
+      "scheduled_ms": 4575,
+      "scheduler_lag_ms": 0.6384,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 184,
+      "scheduled_ms": 4600,
+      "scheduler_lag_ms": 0.3846,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 185,
+      "scheduled_ms": 4625,
+      "scheduler_lag_ms": 0.1292,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 186,
+      "scheduled_ms": 4650,
+      "scheduler_lag_ms": 0.6089,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 187,
+      "scheduled_ms": 4675,
+      "scheduler_lag_ms": 0.1967,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 188,
+      "scheduled_ms": 4700,
+      "scheduler_lag_ms": 0.1236,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 189,
+      "scheduled_ms": 4725,
+      "started_ms": 4725.2267,
+      "scheduler_lag_ms": 0.2267,
+      "complete_latency_ms": 159.8736,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1186
+    },
+    {
+      "index": 190,
+      "scheduled_ms": 4750,
+      "scheduler_lag_ms": 0.2121,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 191,
+      "scheduled_ms": 4775,
+      "scheduler_lag_ms": 0.3431,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 192,
+      "scheduled_ms": 4800,
+      "scheduler_lag_ms": 0.2418,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 193,
+      "scheduled_ms": 4825,
+      "scheduler_lag_ms": 0.2032,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 194,
+      "scheduled_ms": 4850,
+      "scheduler_lag_ms": 0.227,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 195,
+      "scheduled_ms": 4875,
+      "scheduler_lag_ms": 0.1333,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 196,
+      "scheduled_ms": 4900,
+      "started_ms": 4900.1791,
+      "scheduler_lag_ms": 0.1791,
+      "complete_latency_ms": 160.1075,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 1196
+    },
+    {
+      "index": 197,
+      "scheduled_ms": 4925,
+      "scheduler_lag_ms": 0.4135,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 198,
+      "scheduled_ms": 4950,
+      "scheduler_lag_ms": 0.5347,
+      "outcome": "skipped_inflight"
+    },
+    {
+      "index": 199,
+      "scheduled_ms": 4975,
+      "scheduler_lag_ms": 0.5056,
+      "outcome": "skipped_inflight"
+    }
+  ]
+}

@@ -23,7 +23,7 @@ jobs:
       - run: go test -count=1 ./...
       - name: Check query, benchmark, and server execution under the race detector
         if: runner.os == 'Linux'
-        run: go test -race -count=1 ./internal/query ./internal/benchmark ./cmd/bench ./internal/snapshot ./cmd/pack ./internal/api ./cmd/server
+        run: go test -race -count=1 ./internal/query ./internal/benchmark ./cmd/bench ./internal/load ./cmd/load ./internal/snapshot ./cmd/pack ./internal/api ./cmd/server
       - run: go build ./...
       - name: Check formatting
         shell: bash

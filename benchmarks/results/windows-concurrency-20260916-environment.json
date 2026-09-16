@@ -1,0 +1,231 @@
+{
+  "recorded_utc": "2026-09-16T03:55:07.317Z",
+  "dataset": {
+    "dataset": "events.clens",
+    "input_format": "snapshot",
+    "rows": 1000000,
+    "service_count": 16,
+    "services": [
+      "service-001",
+      "service-002",
+      "service-003",
+      "service-004",
+      "service-005",
+      "service-006",
+      "service-007",
+      "service-008",
+      "service-009",
+      "service-010",
+      "service-011",
+      "service-012",
+      "service-013",
+      "service-014",
+      "service-015",
+      "service-016"
+    ],
+    "services_truncated": false,
+    "statuses": [
+      200,
+      500
+    ],
+    "min_timestamp_us": "1767225600000000",
+    "max_timestamp_us": "1767226599999000",
+    "engines": [
+      "row",
+      "columnar",
+      "indexed"
+    ],
+    "default_buckets": 100,
+    "max_buckets": 240,
+    "load_ms": 91.8916
+  },
+  "generator": {
+    "events": 1000000,
+    "services": 16,
+    "seed": 42,
+    "profile": "uniform",
+    "interval": "1ms",
+    "start": "2026-01-01T00:00:00Z"
+  },
+  "jsonl_sha256": "b0c448c1734c27c841a5cf90343728b3017c5d2c613156c7e97d9c34eca785fa",
+  "snapshot_sha256": "816c1d5c3410977c081001b293115a81cc2720cfd078d3de2734d1d892a4e760",
+  "node": "v22.17.0",
+  "platform": "win32",
+  "arch": "x64",
+  "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+  "logical_cpus": 16,
+  "total_memory_bytes": 68665831424,
+  "free_memory_bytes_at_end": 19212197888,
+  "caveats": "Client, browser and server on same shared host; warm filesystem/cache; sequential phases, no isolation or cold-disk claims. Cancellation phase uses client deadlines, not proof of exact server admission; deterministic Go tests cover accepted cancellation and shared-slot recovery.",
+  "commands": [
+    {
+      "command": "go",
+      "args": [
+        "build",
+        "-o",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\server.exe",
+        "./cmd/server"
+      ]
+    },
+    {
+      "command": "go",
+      "args": [
+        "build",
+        "-o",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\load.exe",
+        "./cmd/load"
+      ]
+    },
+    {
+      "command": "go",
+      "args": [
+        "run",
+        "./cmd/generator",
+        "-events",
+        "1000000",
+        "-services",
+        "16",
+        "-seed",
+        "42",
+        "-output",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\events.jsonl"
+      ]
+    },
+    {
+      "command": "go",
+      "args": [
+        "run",
+        "./cmd/pack",
+        "-input",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\events.jsonl",
+        "-output",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\events.clens",
+        "-max-events",
+        "1000000"
+      ]
+    },
+    {
+      "command": "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\load.exe",
+      "args": [
+        "-target",
+        "http://127.0.0.1:57495/api/query",
+        "-payload",
+        "{\"engine\":\"indexed\",\"from_us\":\"1767225600000000\",\"to_us\":null,\"service\":\"\",\"status\":0,\"buckets\":100}",
+        "-duration",
+        "5s",
+        "-rate",
+        "2",
+        "-inflight",
+        "2",
+        "-timeout",
+        "1s",
+        "-output",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\benchmarks\\results\\windows-concurrency-20260916-query-baseline.json"
+      ]
+    },
+    {
+      "command": "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\load.exe",
+      "args": [
+        "-target",
+        "http://127.0.0.1:57495/api/compare",
+        "-payload",
+        "{\"engine\":\"indexed\",\"from_us\":\"1767225600000000\",\"to_us\":null,\"service\":\"\",\"status\":0,\"buckets\":100}",
+        "-duration",
+        "5s",
+        "-rate",
+        "2",
+        "-inflight",
+        "8",
+        "-timeout",
+        "1s",
+        "-output",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\benchmarks\\results\\windows-concurrency-20260916-compare-baseline.json"
+      ]
+    },
+    {
+      "command": "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\load.exe",
+      "args": [
+        "-target",
+        "http://127.0.0.1:57495/api/compare",
+        "-payload",
+        "{\"engine\":\"indexed\",\"from_us\":\"1767225600000000\",\"to_us\":null,\"service\":\"\",\"status\":0,\"buckets\":100}",
+        "-duration",
+        "5s",
+        "-rate",
+        "40",
+        "-inflight",
+        "8",
+        "-timeout",
+        "1s",
+        "-output",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\benchmarks\\results\\windows-concurrency-20260916-compare-overload.json"
+      ]
+    },
+    {
+      "command": "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\load.exe",
+      "args": [
+        "-target",
+        "http://127.0.0.1:57495/api/compare",
+        "-payload",
+        "{\"engine\":\"indexed\",\"from_us\":\"1767225600000000\",\"to_us\":null,\"service\":\"\",\"status\":0,\"buckets\":100}",
+        "-duration",
+        "5s",
+        "-rate",
+        "40",
+        "-inflight",
+        "1",
+        "-timeout",
+        "1s",
+        "-output",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\benchmarks\\results\\windows-concurrency-20260916-compare-local-cap.json"
+      ]
+    },
+    {
+      "command": "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\load.exe",
+      "args": [
+        "-target",
+        "http://127.0.0.1:57495/api/compare",
+        "-payload",
+        "{\"engine\":\"indexed\",\"from_us\":\"1767225600000000\",\"to_us\":null,\"service\":\"\",\"status\":0,\"buckets\":100}",
+        "-duration",
+        "5s",
+        "-rate",
+        "10",
+        "-inflight",
+        "2",
+        "-timeout",
+        "20ms",
+        "-output",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\benchmarks\\results\\windows-concurrency-20260916-compare-cancel.json"
+      ]
+    },
+    {
+      "command": "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\.cache\\chronolens-latency-mW3ZXp\\load.exe",
+      "args": [
+        "-target",
+        "http://127.0.0.1:57495/api/compare",
+        "-payload",
+        "{\"engine\":\"indexed\",\"from_us\":\"1767225600000000\",\"to_us\":null,\"service\":\"\",\"status\":0,\"buckets\":100}",
+        "-duration",
+        "5s",
+        "-rate",
+        "2",
+        "-inflight",
+        "2",
+        "-timeout",
+        "1s",
+        "-output",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\benchmarks\\results\\windows-concurrency-20260916-compare-recovery.json"
+      ]
+    },
+    {
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\node_modules\\@playwright\\test\\cli.js",
+        "test",
+        "--config",
+        "C:\\Users\\primaurya\\Downloads\\projects\\ChronoLens\\web\\playwright.latency.config.ts"
+      ]
+    }
+  ]
+}

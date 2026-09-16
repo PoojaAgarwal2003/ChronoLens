@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"strings"
+	"sync"
 	"testing"
 	"testing/fstest"
 	"time"
@@ -20,6 +21,92 @@ const testData = `{"timestamp_us":1,"service":"a","duration_us":10,"status":200}
 {"timestamp_us":3,"service":"a","duration_us":40,"status":404}
 `
 const validRequest = `{"engine":"indexed","from_us":"2","to_us":"3","service":"","status":0,"buckets":100}`
+
+// WithTimeout consults the parent deadline after admission. This context gates
+// that boundary without changing production code or relying on dataset speed.
+type admissionContext struct {
+	context.Context
+	entered chan struct{}
+	release chan struct{}
+	once    sync.Once
+}
+
+func (c *admissionContext) Deadline() (time.Time, bool) {
+	c.once.Do(func() { close(c.entered); <-c.release })
+	return c.Context.Deadline()
+}
+
+func TestAcceptedCancellationSharedCapacityAndRecovery(t *testing.T) {
+	server := testServer(t)
+	var gates []*admissionContext
+	var cancels []context.CancelFunc
+	var results []chan *httptest.ResponseRecorder
+	for _, route := range []string{"/api/query", "/api/compare"} {
+		ctx, cancel := context.WithCancel(context.Background())
+		gate := &admissionContext{Context: ctx, entered: make(chan struct{}), release: make(chan struct{})}
+		gates, cancels = append(gates, gate), append(cancels, cancel)
+		done := make(chan *httptest.ResponseRecorder, 1)
+		results = append(results, done)
+		go func() {
+			r := httptest.NewRequest(http.MethodPost, "http://127.0.0.1:8080"+route, strings.NewReader(validRequest)).WithContext(gate)
+			r.Header.Set("Content-Type", "application/json")
+			w := httptest.NewRecorder()
+			server.ServeHTTP(w, r)
+			done <- w
+		}()
+	}
+	defer func() {
+		for i, g := range gates {
+			cancels[i]()
+			select {
+			case <-g.release:
+			default:
+				close(g.release)
+			}
+		}
+	}()
+	for _, g := range gates {
+		select {
+		case <-g.entered:
+		case <-time.After(3 * time.Second):
+			t.Fatal("accepted request did not reach context boundary")
+		}
+	}
+	if len(server.slots) != 2 {
+		t.Fatal("requests did not share both slots")
+	}
+	for _, route := range []string{"/api/query", "/api/compare"} {
+		w := call(server, http.MethodPost, route, validRequest)
+		if w.Code != 429 || w.Header().Get("Retry-After") != "1" {
+			t.Fatalf("overload %s: %d", route, w.Code)
+		}
+	}
+	if w := call(server, http.MethodGet, "/api/health", ""); w.Code != 200 {
+		t.Fatal("health blocked by work")
+	}
+	for i, g := range gates {
+		cancels[i]()
+		close(g.release)
+	}
+	for _, done := range results {
+		select {
+		case w := <-done:
+			if w.Code != 408 {
+				t.Fatalf("cancelled accepted work returned %d: %s", w.Code, w.Body)
+			}
+		case <-time.After(3 * time.Second):
+			t.Fatal("cancelled work did not complete")
+		}
+	}
+	if len(server.slots) != 0 {
+		t.Fatal("permit leaked")
+	}
+	for _, route := range []string{"/api/query", "/api/compare"} {
+		if w := call(server, http.MethodPost, route, validRequest); w.Code != 200 {
+			t.Fatalf("recovery %s: %d", route, w.Code)
+		}
+	}
+}
 
 func testServer(t *testing.T) *Server {
 	t.Helper()

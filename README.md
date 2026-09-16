@@ -3,7 +3,7 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: measured snapshot startup.** A deterministic generator,
+**Current milestone: measured concurrency and browser latency.** A deterministic generator,
 validated JSONL reader, three query engines, diagnostic CLI, loopback-only Go API,
 and React explorer are implemented. The opt-in incident profile creates correlated
 traffic, service, failure, and latency spikes without changing the uniform baseline.
@@ -18,6 +18,15 @@ for the row scan with identical results. These are workload-specific observation
 not browser latency, request p95, or cold-disk guarantees.
 The [snapshot converter and loader](docs/snapshots.md) add versioned, checksummed
 binary input. Query/server/benchmark commands accept `-format snapshot`; JSONL remains the default.
+
+[The concurrent-load and browser experiment](benchmarks/concurrency-latency.md)
+adds a bounded, loopback-only open-loop load tool and individual Chromium samples
+on **one million events**. At 40 comparison arrivals/s, 58 requests completed and
+142 received explicit 429 backpressure; those rejections are excluded from
+successful latency percentiles. Full-range click-to-visible-commit median was
+**194.5 ms**, versus **5.06 ms aggregate-only server work** in the browser phase.
+These shared-host observations include the documented browser paint-opportunity
+boundary, not portable latency targets.
 
 ## Why this exists
 
@@ -215,6 +224,7 @@ cmd/generator/          CLI, output handling, and CLI tests
 cmd/pack/               Validated JSONL-to-snapshot conversion and safe publication
 cmd/query/              Query CLI and JSON reporting
 cmd/bench/              Bounded benchmark CLI and report output
+cmd/load/               Bounded open-loop loopback HTTP load CLI
 cmd/server/             Local server lifecycle and startup validation
 internal/generator/    Deterministic generation and validation tests
 internal/telemetry/    Shared schema, strict JSONL reader, and fuzz tests
@@ -223,6 +233,7 @@ internal/query/        Layouts, time index, shared catalog, exact chart profiles
 internal/api/          Local HTTP routes, limits, origin guards, comparison batches
 internal/measure/      Explicit handling of unresolved clock timings
 internal/benchmark/    Single-layout experiments, provenance, batch timing, heap snapshots
+internal/load/         Fixed arrivals, explicit skips/errors, complete-request percentiles
 benchmarks/            Raw results, independent oracle, chart renderer, reproduction guide
 web/                   React UI, build configuration, real-server browser tests
 docs/                  Architecture, API/setup guides, measurements, original images
@@ -249,6 +260,7 @@ go build -o bin/chronolens-generator ./cmd/generator
 go build -o bin/chronolens-pack ./cmd/pack
 go build -o bin/chronolens-query ./cmd/query
 go build -o bin/chronolens-bench ./cmd/bench
+go build -o bin/chronolens-load ./cmd/load
 go build -o bin/chronolens-server ./cmd/server
 ```
 
@@ -289,13 +301,15 @@ dependencies and local frontend iteration.
 
 ## Next milestones
 
-The [scoped remaining-work roadmap](docs/roadmap.md) separates the current
-storage/startup work from the intentionally deferred half: concurrent-load
-experiments, release packaging, and licensing/deployment decisions.
+The [scoped remaining-work roadmap](docs/roadmap.md) tracks independently reviewed
+milestones. Storage/startup and bounded concurrency/browser experiments are
+implemented; release packaging and licensing/deployment decisions remain separate.
 
 Ten-million-event warm selective queries are now measured, with
-[raw samples and reproduction commands](benchmarks/README.md). Cold-start,
-concurrent-load, and end-to-end UI latency targets remain separate, unverified goals.
+[raw samples and reproduction commands](benchmarks/README.md).
+[One-million-event concurrent-load and browser results](benchmarks/concurrency-latency.md)
+now have their own raw evidence. Cold-disk behavior, sustained multi-client
+capacity and portable end-to-end latency targets remain unverified.
 
 ## Contributing and licensing
 
