@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { createReadStream } from 'node:fs';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -27,6 +28,13 @@ let server;
 let active;
 let serverExited;
 const commands = [];
+const sourceFiles = ['internal/query/profile.go', 'internal/query/profile_benchmark_test.go', 'web/src/main.tsx', 'web/experiments/run.mjs', 'web/experiments/latency.spec.ts', 'web/package-lock.json'];
+const provenance = {
+  commit: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
+  status: execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8' }).trim(),
+  go: execFileSync(go, ['version'], { encoding: 'utf8' }).trim(),
+  sources: Object.fromEntries(await Promise.all(sourceFiles.map(async path => [path, await hash(join(root, path))]))),
+};
 
 async function run(command, args, env = {}) {
   commands.push({ command, args });
@@ -84,7 +92,7 @@ try {
     CHRONOLENS_LATENCY_REPORT: join(output, `${prefix}-browser.json`),
   });
   await writeFile(join(output, `${prefix}-environment.json`), JSON.stringify({
-    recorded_utc: new Date().toISOString(), dataset: metadata,
+    recorded_utc: new Date().toISOString(), dataset: metadata, provenance,
     generator: { events: 1_000_000, services: 16, seed: 42, profile: 'uniform', interval: '1ms', start: '2026-01-01T00:00:00Z' },
     jsonl_sha256: await hash(dataset), snapshot_sha256: format === 'snapshot' ? await hash(snapshot) : null,
     node: process.version, platform: process.platform, arch: process.arch, cpu: os.cpus()[0]?.model,

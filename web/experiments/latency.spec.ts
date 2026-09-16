@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import os from 'node:os';
 import type { Meta, QueryResponse } from '../src/api';
 
@@ -75,10 +76,12 @@ test('opt-in individual click-to-visible-commit samples', async ({ page, request
       const body = await response.json() as QueryResponse;
       const timing = await page.evaluate(() => (window as unknown as { latencySample: Promise<Record<string, number>> }).latencySample);
       expect(body.result.aggregate.count).toBe(narrow ? 100_000 : 1_000_000);
+      expect(body.profile.timeline.reduce((sum, bin) => sum + bin.count, 0)).toBe(body.result.aggregate.count);
+      const exactResultSHA256 = createHash('sha256').update(JSON.stringify({ result: body.result, profile: body.profile })).digest('hex');
       if (i >= 4) samples.push({
         index: i - 4, range_percent: narrow ? 10 : 100, engine: 'indexed',
         request: response.request().postDataJSON(), status: response.status(),
-        matches: body.result.aggregate.count, ...timing, server: body.timing,
+        matches: body.result.aggregate.count, exact_result_sha256: exactResultSHA256, ...timing, server: body.timing,
       });
     }
     expect(errors).toEqual([]);
