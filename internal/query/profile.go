@@ -55,7 +55,6 @@ func (d *Dataset) Profile(ctx context.Context, filter Filter, buckets int) (Prof
 	if err := ctx.Err(); err != nil {
 		return Profile{}, err
 	}
-	limits := []uint32{1000, 5000, 10000, 50000, 100000, 250000, 500000}
 	labels := []string{"<1 ms", "1-5 ms", "5-10 ms", "10-50 ms", "50-100 ms", "100-250 ms", "250-500 ms", ">=500 ms"}
 	result := Profile{Timeline: []TimeBucket{}, Histogram: make([]HistogramBucket, len(labels)), Services: []ServiceSummary{}}
 	for i, label := range labels {
@@ -87,7 +86,12 @@ func (d *Dataset) Profile(ctx context.Context, filter Filter, buckets int) (Prof
 		}
 	}
 	wantedID, known := d.dictionary[filter.Service]
-	services := make(map[uint16]*accumulator)
+	var single accumulator
+	var dense []accumulator
+	sparse := make(map[uint16]*accumulator)
+	// Only allocate a dense table after a match, and never more entries than
+	// candidate rows. Narrow windows on a large dictionary remain sparse.
+	useDense := filter.Service == "" && len(d.names) <= end-first
 	for i := first; i < end; i++ {
 		if i%1024 == 0 {
 			if err := ctx.Err(); err != nil {
@@ -104,24 +108,52 @@ func (d *Dataset) Profile(ctx context.Context, filter Filter, buckets int) (Prof
 		if d.statuses[i] >= 500 {
 			bucket.ErrorCount++
 		}
-		histogramIndex := sort.Search(len(limits), func(j int) bool { return d.durations[i] < limits[j] })
-		result.Histogram[histogramIndex].Count++
+		result.Histogram[durationBucket(d.durations[i])].Count++
 		id := d.serviceIDs[i]
-		if services[id] == nil {
-			services[id] = &accumulator{}
+		var summary *accumulator
+		switch {
+		case filter.Service != "":
+			summary = &single
+		case useDense:
+			if dense == nil {
+				dense = make([]accumulator, len(d.names))
+			}
+			summary = &dense[id]
+		default:
+			summary = sparse[id]
+			if summary == nil {
+				summary = &accumulator{}
+				sparse[id] = summary
+			}
 		}
-		if err := services[id].add(d.durations[i], d.statuses[i]); err != nil {
+		if err := summary.add(d.durations[i], d.statuses[i]); err != nil {
 			return Profile{}, err
 		}
 	}
 	if err := ctx.Err(); err != nil {
 		return Profile{}, err
 	}
-	for id, summary := range services {
+	appendService := func(id uint16, summary *accumulator) {
 		result.Services = append(result.Services, ServiceSummary{
 			Service: d.names[id], Count: summary.count, ErrorCount: summary.errors,
 			MeanDurationUS: float64(summary.sum) / float64(summary.count),
 		})
+	}
+	switch {
+	case single.count != 0:
+		appendService(wantedID, &single)
+	case dense != nil:
+		result.Services = make([]ServiceSummary, 0, len(dense))
+		for id := range dense {
+			if dense[id].count != 0 {
+				appendService(uint16(id), &dense[id])
+			}
+		}
+	default:
+		result.Services = make([]ServiceSummary, 0, len(sparse))
+		for id, summary := range sparse {
+			appendService(id, summary)
+		}
 	}
 	sort.Slice(result.Services, func(i, j int) bool {
 		if result.Services[i].Count != result.Services[j].Count {
@@ -137,4 +169,25 @@ func (d *Dataset) Profile(ctx context.Context, filter Filter, buckets int) (Prof
 		return Profile{}, err
 	}
 	return result, nil
+}
+
+func durationBucket(duration uint32) int {
+	switch {
+	case duration < 1000:
+		return 0
+	case duration < 5000:
+		return 1
+	case duration < 10000:
+		return 2
+	case duration < 50000:
+		return 3
+	case duration < 100000:
+		return 4
+	case duration < 250000:
+		return 5
+	case duration < 500000:
+		return 6
+	default:
+		return 7
+	}
 }

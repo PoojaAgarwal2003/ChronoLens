@@ -2,6 +2,7 @@ package query
 
 import (
 	"context"
+	"fmt"
 	"reflect"
 	"sort"
 	"strconv"
@@ -92,6 +93,28 @@ func TestProfileExactReference(t *testing.T) {
 			if err != nil || !reflect.DeepEqual(got, want) {
 				t.Fatalf("filter=%+v buckets=%d: profile differs from exact reference (%v)", filter, buckets, err)
 			}
+
+		}
+	}
+}
+
+func TestProfileConcurrentAccumulatorPaths(t *testing.T) {
+	data := cardinalityFixture(t, 65540, 65536)
+	for i, filter := range []Filter{
+		{}, {FromUS: 65535, ToUS: pointer(int64(65539))},
+		{Service: "service-65535"}, {Service: "missing"}, {Status: 201},
+	} {
+		want := referenceProfile(t, data, filter, 7)
+		for worker := range 4 {
+			t.Run(fmt.Sprintf("path_%d/worker_%d", i, worker), func(t *testing.T) {
+				t.Parallel()
+				for range 5 {
+					got, err := data.Profile(context.Background(), filter, 7)
+					if err != nil || !reflect.DeepEqual(got, want) {
+						t.Fatalf("concurrent profile differs from reference: %v", err)
+					}
+				}
+			})
 		}
 	}
 }
