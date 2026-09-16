@@ -54,6 +54,7 @@ function Workbench({ meta }: { meta: Meta }) {
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(1000);
   const [retry, setRetry] = useState(0);
+  const [debounce, setDebounce] = useState(false);
   const [data, setData] = useState<QueryResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -76,7 +77,7 @@ function Workbench({ meta }: { meta: Meta }) {
     setData(null);
     setError('');
     setLoading(true);
-    const timer = window.setTimeout(() => {
+    const dispatch = () => {
       request<QueryResponse>('/api/query', controller.signal, query).then(result => {
         if (!controller.signal.aborted) setData(result);
       }).catch(reason => {
@@ -84,9 +85,11 @@ function Workbench({ meta }: { meta: Meta }) {
       }).finally(() => {
         if (!controller.signal.aborted) setLoading(false);
       });
-    }, 100);
+    };
+    const timer = debounce ? window.setTimeout(dispatch, 100) : undefined;
+    if (!debounce) dispatch();
     return () => { window.clearTimeout(timer); controller.abort(); compareController.current?.abort(); };
-  }, [query, retry]);
+  }, [query, retry, debounce]);
 
   async function compare() {
     compareController.current?.abort();
@@ -114,21 +117,21 @@ function Workbench({ meta }: { meta: Meta }) {
     <section className="panel controls" aria-labelledby="query-title">
       <div className="section-heading"><h2 id="query-title"><span className="section-number">01</span>Shape your query</h2><span className="muted">Half-open time range [start, end)</span></div>
       <div className="filter-grid">
-        <div><label htmlFor="engine">Execution engine</label><select id="engine" value={engine} onChange={event => setEngine(event.target.value as Engine)}>{meta.engines.map(value => <option key={value} value={value}>{engineNames[value]}</option>)}</select></div>
-        <div><label htmlFor="service">Service</label><select id="service" value={service} onChange={event => setService(event.target.value)}><option value="">All services</option>{meta.services.map(value => <option key={value} value={value}>{value}</option>)}</select></div>
-        <div><label htmlFor="status">HTTP status</label><select id="status" value={status} onChange={event => setStatus(Number(event.target.value))}><option value="0">All statuses</option>{meta.statuses.map(value => <option key={value} value={value}>{value}{value >= 500 ? ' · server error' : ''}</option>)}</select></div>
+        <div><label htmlFor="engine">Execution engine</label><select id="engine" value={engine} onChange={event => { setDebounce(false); setEngine(event.target.value as Engine); }}>{meta.engines.map(value => <option key={value} value={value}>{engineNames[value]}</option>)}</select></div>
+        <div><label htmlFor="service">Service</label><select id="service" value={service} onChange={event => { setDebounce(false); setService(event.target.value); }}><option value="">All services</option>{meta.services.map(value => <option key={value} value={value}>{value}</option>)}</select></div>
+        <div><label htmlFor="status">HTTP status</label><select id="status" value={status} onChange={event => { setDebounce(false); setStatus(Number(event.target.value)); }}><option value="0">All statuses</option>{meta.statuses.map(value => <option key={value} value={value}>{value}{value >= 500 ? ' · server error' : ''}</option>)}</select></div>
       </div>
       <p className="engine-hint">{engineDescriptions[engine]}{meta.services_truncated ? ' Service options show the first 256 names; all-services queries still cover the full dataset.' : ''}</p>
-      <div className="range-heading"><h3>Time window <span>{percent((end - start) / 10)} of dataset span</span></h3><div className="presets" role="group" aria-label="Time window presets">{[1, 10, 100, 1000].map(value => <button key={value} aria-pressed={start === 0 && end === value} onClick={() => { setStart(0); setEnd(value); }}>{value / 10}%</button>)}</div></div>
+      <div className="range-heading"><h3>Time window <span>{percent((end - start) / 10)} of dataset span</span></h3><div className="presets" role="group" aria-label="Time window presets">{[1, 10, 100, 1000].map(value => <button key={value} aria-pressed={start === 0 && end === value} onClick={() => { setDebounce(false); setStart(0); setEnd(value); }}>{value / 10}%</button>)}</div></div>
       <div className="range-grid">
-        <label htmlFor="range-start">Range start <output aria-hidden="true">{percent(start / 10)}</output><input id="range-start" type="range" min="0" max="999" step="1" value={start} aria-valuetext={`${start / 10} percent of dataset time span`} onChange={event => setStart(Math.min(Number(event.target.value), end - 1))} /></label>
-        <label htmlFor="range-end">Range end <output aria-hidden="true">{percent(end / 10)}</output><input id="range-end" type="range" min="1" max="1000" step="1" value={end} aria-valuetext={`${end / 10} percent of dataset time span`} onChange={event => setEnd(Math.max(Number(event.target.value), start + 1))} /></label>
+        <label htmlFor="range-start">Range start <output aria-hidden="true">{percent(start / 10)}</output><input id="range-start" type="range" min="0" max="999" step="1" value={start} aria-valuetext={`${start / 10} percent of dataset time span`} onChange={event => { const value = Math.min(Number(event.target.value), end - 1); if (value !== start) { setDebounce(true); setStart(value); } }} /></label>
+        <label htmlFor="range-end">Range end <output aria-hidden="true">{percent(end / 10)}</output><input id="range-end" type="range" min="1" max="1000" step="1" value={end} aria-valuetext={`${end / 10} percent of dataset time span`} onChange={event => { const value = Math.max(Number(event.target.value), start + 1); if (value !== end) { setDebounce(true); setEnd(value); } }} /></label>
       </div>
       <div className="range-values"><span><b>FROM</b> {timestamp(bounds.from_us)}</span><span><b>TO</b> {bounds.to_us === null ? 'Dataset end · maximum timestamp included' : `${timestamp(bounds.to_us)} · exclusive`}</span></div>
     </section>
 
     <div className="results-heading"><h2><span className="section-number">02</span>Read the signal</h2><span role="status" className="query-state">{loading ? 'Running query…' : error ? 'Query failed' : `${engineNames[engine]} · ${number(aggregate?.count ?? 0)} matching events`}</span></div>
-    {error && <div className="notice error" role="alert"><h3>Query unavailable</h3><p>{error}</p><button onClick={() => setRetry(value => value + 1)}>Retry query</button></div>}
+    {error && <div className="notice error" role="alert"><h3>Query unavailable</h3><p>{error}</p><button onClick={() => { setDebounce(false); setRetry(value => value + 1); }}>Retry query</button></div>}
     <div className={`results ${loading ? 'is-loading' : ''}`} aria-busy={loading}>
       <div className="summary-grid">
         <Summary label="MATCHING EVENTS" value={aggregate ? number(aggregate.count) : '—'} detail="Exact count · no sampling" accent="teal" testId="match-count" />
@@ -136,7 +139,7 @@ function Workbench({ meta }: { meta: Meta }) {
         <Summary label="MEAN EVENT DURATION" value={aggregate ? duration(aggregate.mean_duration_us) : '—'} detail="Event latency · not query latency" accent="lime" testId="mean-duration" />
         <Summary label="QUERY WORK AVOIDED" value={stats ? percent(avoided) : '—'} detail={stats ? `${number(stats.rows_skipped)} / ${number(stats.total_rows)} rows skipped` : 'Rows skipped / dataset rows'} accent="teal" testId="work-avoided" />
       </div>
-      {data && aggregate?.count === 0 && <div className="notice empty" role="status"><strong>No matching events</strong><p>Try a wider time window or clear the service and status filters. Counts below are exact zeros, not missing data.</p><button onClick={() => { setStart(0); setEnd(1000); setService(''); setStatus(0); }}>Reset filters</button></div>}
+      {data && aggregate?.count === 0 && <div className="notice empty" role="status"><strong>No matching events</strong><p>Try a wider time window or clear the service and status filters. Counts below are exact zeros, not missing data.</p><button onClick={() => { setDebounce(false); setStart(0); setEnd(1000); setService(''); setStatus(0); }}>Reset filters</button></div>}
       <section className="panel chart-panel" aria-labelledby="timeline-title"><div className="section-heading"><div><h2 id="timeline-title">Event timeline</h2><p className="muted">Exact counts across the selected time window</p></div><div className="legend"><span><i className="teal-dot" />Events</span><span><i className="amber-dot" />Errors</span></div></div>{data ? <Timeline data={data.profile.timeline} /> : <ChartPlaceholder loading={loading} />}</section>
       <div className="detail-grid">
         <section className="panel" aria-labelledby="histogram-title"><div className="section-heading"><div><h2 id="histogram-title">Duration distribution</h2><p className="muted">Where event latency accumulates</p></div><span className="micro-label">HISTOGRAM</span></div>{data ? <Histogram data={data.profile.histogram} /> : <ChartPlaceholder loading={loading} />}</section>

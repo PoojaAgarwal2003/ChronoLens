@@ -90,7 +90,7 @@ test('opt-in individual click-to-visible-commit samples', async ({ page, request
     if (!output) throw new Error('Missing report path');
     await writeFile(output, JSON.stringify({
       schema: 1, recorded_utc: new Date().toISOString(),
-      boundary: 'Capture-phase preset click to matching result DOM (aria-busy=false, expected count visibly within the viewport, timeline SVG) followed by two requestAnimationFrame callbacks: a paint opportunity, not a physical display presentation timestamp. Dispatch is the fetch call; HTTP is ResourceTiming requestStart through responseEnd. App debounce is included only in click timings. Server query/profile/work exclude HTTP and rendering.',
+      boundary: 'Capture-phase preset click to matching result DOM (aria-busy=false, expected count visibly within the viewport, timeline SVG) followed by two requestAnimationFrame callbacks: a paint opportunity, not a physical display presentation timestamp. Dispatch is the fetch call; HTTP is ResourceTiming requestStart through responseEnd. Click timings include application scheduling; explicit presets now dispatch without the slider-only 100ms debounce. Server query/profile/work exclude HTTP and rendering.',
       policy: 'Sequential real Chromium clicks, indexed engine, alternating 10%/100%, four unrecorded warmup clicks then 40 individual samples, no retries or latency thresholds; no concurrent load during browser phase.',
       environment: { node: process.version, platform: process.platform, arch: process.arch, cpu: os.cpus()[0]?.model, logical_cpus: os.cpus().length, browser: browser.version(), headless: true, viewport: page.viewportSize(), client_server: 'same shared host' },
       dataset: meta, errors, samples,

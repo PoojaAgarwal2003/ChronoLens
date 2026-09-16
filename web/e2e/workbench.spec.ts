@@ -178,3 +178,70 @@ test('keyboard controls, reduced motion, responsive layout, and real screenshot'
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.screenshot({ path: 'test-results/chronolens-mobile.png', fullPage: true });
 });
+
+test('explicit presets dispatch with a frozen clock and repeated presets are no-ops', async ({ page }) => {
+  await ready(page);
+  await page.clock.install();
+  await page.clock.pauseAt(new Date());
+  let queries = 0;
+  page.on('request', request => { if (request.url().endsWith('/api/query')) queries++; });
+  const response = page.waitForResponse(response => response.url().endsWith('/api/query'));
+  await page.getByRole('button', { name: '10%', exact: true }).click();
+  expect((await (await response).json() as QueryResponse).result.aggregate.count).toBe(1000);
+  await expect(page.getByTestId('match-count')).toHaveText('1,000');
+  await page.getByRole('button', { name: '10%', exact: true }).click();
+  await page.clock.runFor(1000);
+  expect(queries).toBe(1);
+});
+
+test('slider changes coalesce for 100ms after the final keyboard or drag input', async ({ page, request }) => {
+  const meta = await (await request.get('/api/meta')).json() as Meta;
+  await ready(page);
+  await page.clock.install();
+  await page.clock.pauseAt(new Date());
+  const queries: unknown[] = [];
+  page.on('request', request => { if (request.url().endsWith('/api/query')) queries.push(request.postDataJSON()); });
+  const end = page.getByRole('slider', { name: 'Range end' });
+  await end.fill('900');
+  await expect(page.getByTestId('match-count')).toHaveText('—');
+  await page.clock.runFor(99);
+  expect(queries).toHaveLength(0);
+  await end.fill('800');
+  await page.clock.runFor(99);
+  expect(queries).toHaveLength(0);
+  await end.focus();
+  await page.keyboard.press('ArrowLeft');
+  await expect(end).toHaveValue('799');
+  await page.clock.runFor(99);
+  expect(queries).toHaveLength(0);
+  const dispatched = page.waitForRequest(request => request.url().endsWith('/api/query'));
+  await page.clock.runFor(1);
+  await dispatched;
+  expect(queries).toEqual([{ engine: 'indexed', ...timeBounds(meta, 0, 799), service: '', status: 0, buckets: 100 }]);
+  await expect(page.getByTestId('match-count')).toHaveText('7,990');
+});
+
+test('preset and discrete filters supersede a pending slider without a delayed stale query', async ({ page, request }) => {
+  const meta = await (await request.get('/api/meta')).json() as Meta;
+  await ready(page);
+  await page.clock.install();
+  await page.clock.pauseAt(new Date());
+  const queries: unknown[] = [];
+  page.on('request', request => { if (request.url().endsWith('/api/query')) queries.push(request.postDataJSON()); });
+  await page.getByRole('slider', { name: 'Range end' }).fill('100');
+  await expect(page.getByTestId('match-count')).toHaveText('—');
+  await page.clock.runFor(99);
+  // Same numeric bounds as the pending slider still flush immediately.
+  await selectWindow(page, '10%');
+  await page.getByRole('slider', { name: 'Range start' }).fill('1');
+  await expect(page.getByTestId('match-count')).toHaveText('—');
+  const response = page.waitForResponse(response => response.url().endsWith('/api/query'));
+  await page.getByLabel('Service', { exact: true }).selectOption(meta.services[0]);
+  const body = await (await response).json() as QueryResponse;
+  await expect(page.getByTestId('match-count')).toHaveText(body.result.aggregate.count.toLocaleString('en-US'));
+  await page.clock.runFor(1000);
+  expect(queries).toEqual([
+    { engine: 'indexed', ...timeBounds(meta, 0, 100), service: '', status: 0, buckets: 100 },
+    { engine: 'indexed', ...timeBounds(meta, 1, 100), service: meta.services[0], status: 0, buckets: 100 },
+  ]);
+});
