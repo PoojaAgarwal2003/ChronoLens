@@ -1,0 +1,66 @@
+goos: windows
+goarch: amd64
+pkg: github.com/PoojaAgarwal2003/ChronoLens/internal/query
+cpu: Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+BenchmarkProfile/services_16/full-16    	       6	  53562767 ns/op	   1000000 rows/op	    9480 B/op	     230 allocs/op
+BenchmarkProfile/services_16/full-16    	       6	  52384483 ns/op	   1000000 rows/op	    9480 B/op	     230 allocs/op
+BenchmarkProfile/services_16/full-16    	       6	  55643400 ns/op	   1000000 rows/op	    9480 B/op	     230 allocs/op
+BenchmarkProfile/services_16/full-16    	       6	  52051850 ns/op	   1000000 rows/op	    9485 B/op	     230 allocs/op
+BenchmarkProfile/services_16/full-16    	       6	  55299150 ns/op	   1000000 rows/op	    9480 B/op	     230 allocs/op
+BenchmarkProfile/services_16/time_1pct-16         	     628	    550766 ns/op	     10000 rows/op	    9536 B/op	     231 allocs/op
+BenchmarkProfile/services_16/time_1pct-16         	     673	    536605 ns/op	     10000 rows/op	    9536 B/op	     231 allocs/op
+BenchmarkProfile/services_16/time_1pct-16         	     673	    537674 ns/op	     10000 rows/op	    9536 B/op	     231 allocs/op
+BenchmarkProfile/services_16/time_1pct-16         	     588	    554515 ns/op	     10000 rows/op	    9536 B/op	     231 allocs/op
+BenchmarkProfile/services_16/time_1pct-16         	     678	    539696 ns/op	     10000 rows/op	    9536 B/op	     231 allocs/op
+BenchmarkProfile/services_16/sparse-16            	  269406	      1320 ns/op	         4.000 rows/op	     962 B/op	      20 allocs/op
+BenchmarkProfile/services_16/sparse-16            	  297115	      1333 ns/op	         4.000 rows/op	     962 B/op	      20 allocs/op
+BenchmarkProfile/services_16/sparse-16            	  285750	      1285 ns/op	         4.000 rows/op	     962 B/op	      20 allocs/op
+BenchmarkProfile/services_16/sparse-16            	  304143	      1356 ns/op	         4.000 rows/op	     962 B/op	      20 allocs/op
+BenchmarkProfile/services_16/sparse-16            	  290460	      1301 ns/op	         4.000 rows/op	     962 B/op	      20 allocs/op
+BenchmarkProfile/services_16/service-16           	      58	   6184686 ns/op	   1000000 rows/op	    6704 B/op	     204 allocs/op
+BenchmarkProfile/services_16/service-16           	      58	   6238174 ns/op	   1000000 rows/op	    6704 B/op	     204 allocs/op
+BenchmarkProfile/services_16/service-16           	      58	   6230678 ns/op	   1000000 rows/op	    6704 B/op	     204 allocs/op
+BenchmarkProfile/services_16/service-16           	      57	   6171095 ns/op	   1000000 rows/op	    6704 B/op	     204 allocs/op
+BenchmarkProfile/services_16/service-16           	      57	   6272600 ns/op	   1000000 rows/op	    6704 B/op	     204 allocs/op
+BenchmarkProfile/services_16/unknown-16           	     148	   2423555 ns/op	   1000000 rows/op	    6624 B/op	     202 allocs/op
+BenchmarkProfile/services_16/unknown-16           	     122	   2881430 ns/op	   1000000 rows/op	    6624 B/op	     202 allocs/op
+BenchmarkProfile/services_16/unknown-16           	     140	   2588981 ns/op	   1000000 rows/op	    6624 B/op	     202 allocs/op
+BenchmarkProfile/services_16/unknown-16           	     130	   2701868 ns/op	   1000000 rows/op	    6624 B/op	     202 allocs/op
+BenchmarkProfile/services_16/unknown-16           	     144	   2478802 ns/op	   1000000 rows/op	    6624 B/op	     202 allocs/op
+BenchmarkProfile/services_16/empty-16             	 2459235	       134.9 ns/op	         0 rows/op	     192 B/op	       1 allocs/op
+BenchmarkProfile/services_16/empty-16             	 2483074	       143.7 ns/op	         0 rows/op	     192 B/op	       1 allocs/op
+BenchmarkProfile/services_16/empty-16             	 2616244	       132.9 ns/op	         0 rows/op	     192 B/op	       1 allocs/op
+BenchmarkProfile/services_16/empty-16             	 2697357	       127.5 ns/op	         0 rows/op	     192 B/op	       1 allocs/op
+BenchmarkProfile/services_16/empty-16             	 2690704	       144.7 ns/op	         0 rows/op	     192 B/op	       1 allocs/op
+BenchmarkProfile/services_65536/full-16           	       3	 123036067 ns/op	   1000000 rows/op	20744610 B/op	   66299 allocs/op
+BenchmarkProfile/services_65536/full-16           	       3	 121243067 ns/op	   1000000 rows/op	20744573 B/op	   66299 allocs/op
+BenchmarkProfile/services_65536/full-16           	       3	 119905900 ns/op	   1000000 rows/op	20742874 B/op	   66297 allocs/op
+BenchmarkProfile/services_65536/full-16           	       3	 124181467 ns/op	   1000000 rows/op	20744573 B/op	   66299 allocs/op
+BenchmarkProfile/services_65536/full-16           	       3	 123598167 ns/op	   1000000 rows/op	20742874 B/op	   66297 allocs/op
+BenchmarkProfile/services_65536/time_1pct-16      	      81	   4633121 ns/op	     10000 rows/op	 2761106 B/op	   10303 allocs/op
+BenchmarkProfile/services_65536/time_1pct-16      	      87	   4550795 ns/op	     10000 rows/op	 2761165 B/op	   10303 allocs/op
+BenchmarkProfile/services_65536/time_1pct-16      	      84	   4738618 ns/op	     10000 rows/op	 2761109 B/op	   10303 allocs/op
+BenchmarkProfile/services_65536/time_1pct-16      	      81	   4578586 ns/op	     10000 rows/op	 2761168 B/op	   10303 allocs/op
+BenchmarkProfile/services_65536/time_1pct-16      	      82	   4610096 ns/op	     10000 rows/op	 2761106 B/op	   10303 allocs/op
+BenchmarkProfile/services_65536/sparse-16         	  287392	      1270 ns/op	         4.000 rows/op	     962 B/op	      20 allocs/op
+BenchmarkProfile/services_65536/sparse-16         	  304048	      1290 ns/op	         4.000 rows/op	     962 B/op	      20 allocs/op
+BenchmarkProfile/services_65536/sparse-16         	  311402	      1260 ns/op	         4.000 rows/op	     962 B/op	      20 allocs/op
+BenchmarkProfile/services_65536/sparse-16         	  270006	      1361 ns/op	         4.000 rows/op	     962 B/op	      20 allocs/op
+BenchmarkProfile/services_65536/sparse-16         	  311062	      1282 ns/op	         4.000 rows/op	     962 B/op	      20 allocs/op
+BenchmarkProfile/services_65536/service-16        	     139	   2557137 ns/op	   1000000 rows/op	    6704 B/op	     204 allocs/op
+BenchmarkProfile/services_65536/service-16        	     136	   2634096 ns/op	   1000000 rows/op	    6704 B/op	     204 allocs/op
+BenchmarkProfile/services_65536/service-16        	     142	   2695230 ns/op	   1000000 rows/op	    6704 B/op	     204 allocs/op
+BenchmarkProfile/services_65536/service-16        	     126	   2732283 ns/op	   1000000 rows/op	    6704 B/op	     204 allocs/op
+BenchmarkProfile/services_65536/service-16        	     134	   2622007 ns/op	   1000000 rows/op	    6704 B/op	     204 allocs/op
+BenchmarkProfile/services_65536/unknown-16        	     147	   2425229 ns/op	   1000000 rows/op	    6624 B/op	     202 allocs/op
+BenchmarkProfile/services_65536/unknown-16        	     145	   2519951 ns/op	   1000000 rows/op	    6624 B/op	     202 allocs/op
+BenchmarkProfile/services_65536/unknown-16        	     147	   2434857 ns/op	   1000000 rows/op	    6624 B/op	     202 allocs/op
+BenchmarkProfile/services_65536/unknown-16        	     145	   2470753 ns/op	   1000000 rows/op	    6624 B/op	     202 allocs/op
+BenchmarkProfile/services_65536/unknown-16        	     135	   2662342 ns/op	   1000000 rows/op	    6624 B/op	     202 allocs/op
+BenchmarkProfile/services_65536/empty-16          	 2572087	       137.5 ns/op	         0 rows/op	     192 B/op	       1 allocs/op
+BenchmarkProfile/services_65536/empty-16          	 2682406	       133.4 ns/op	         0 rows/op	     192 B/op	       1 allocs/op
+BenchmarkProfile/services_65536/empty-16          	 2456700	       144.2 ns/op	         0 rows/op	     192 B/op	       1 allocs/op
+BenchmarkProfile/services_65536/empty-16          	 2726262	       132.2 ns/op	         0 rows/op	     192 B/op	       1 allocs/op
+BenchmarkProfile/services_65536/empty-16          	 2669182	       134.1 ns/op	         0 rows/op	     192 B/op	       1 allocs/op
+PASS
+ok  	github.com/PoojaAgarwal2003/ChronoLens/internal/query	26.217s

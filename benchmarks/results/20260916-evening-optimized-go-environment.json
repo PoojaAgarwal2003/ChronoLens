@@ -1,0 +1,35 @@
+{
+  "started_utc": "2026-09-16T13:05:07.678Z",
+  "commit": "1543a3b22ee9ede5facec9738c5039697de54ca7",
+  "status": "M internal/query/profile.go\n?? benchmarks/results/20260916-evening-baseline-go-environment.json\n?? benchmarks/results/20260916-evening-baseline-go.txt",
+  "go": "go version go1.27.1 windows/amd64",
+  "node": "v22.17.0",
+  "platform": "win32",
+  "arch": "x64",
+  "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+  "logical_cpus": 16,
+  "command": [
+    "go",
+    "test",
+    "./internal/query",
+    "-run",
+    "^$",
+    "-bench",
+    "^BenchmarkProfile$",
+    "-benchmem",
+    "-benchtime=300ms",
+    "-count=5"
+  ],
+  "environment": {
+    "GOMAXPROCS": null,
+    "GOGC": null,
+    "GOFLAGS": null
+  },
+  "sources": {
+    "internal/query/profile.go": "bccd409321d511a116fc9a3bc8c9f6c84840f537342af6ace4eee617af2b3cab",
+    "internal/query/profile_benchmark_test.go": "498a8bcc252e9218d4dc1a3f4705a0f252bf14dac99fddb8474ab24563e4e90e",
+    "internal/query/query_test.go": "64dea2f6cccc6b1b0f29e69f07a4aff02cc6414dc9209dbeb87eab490fd0a030",
+    "benchmarks/profile-run.mjs": "6ef06b458c26a3381a8ef6278d3102b803cde468cc810b204841609d1582fe51"
+  },
+  "policy": "Five Go benchmark batch means per case, 300ms minimum each; not request percentiles. One million rows; fixtures and reference query outside b.Loop. 16 services: generatedInput seed 42, 1us interval, epoch start, 5% errors. 65536 services: round-robin IDs, timestamps i us, duration uint32(i*7919)%750000, every twentieth status 500. Same shared Windows host, no isolation."
+}

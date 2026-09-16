@@ -1,0 +1,1142 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-09-16T13:13:21.166Z",
+  "boundary": "Capture-phase preset click to matching result DOM (aria-busy=false, expected count visibly within the viewport, timeline SVG) followed by two requestAnimationFrame callbacks: a paint opportunity, not a physical display presentation timestamp. Dispatch is the fetch call; HTTP is ResourceTiming requestStart through responseEnd. Click timings include application scheduling; explicit presets now dispatch without the slider-only 100ms debounce. Server query/profile/work exclude HTTP and rendering.",
+  "policy": "Sequential real Chromium clicks, indexed engine, alternating 10%/100%, four unrecorded warmup clicks then 40 individual samples, no retries or latency thresholds; no concurrent load during browser phase.",
+  "environment": {
+    "node": "v22.17.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+    "logical_cpus": 16,
+    "browser": "153.0.8010.12",
+    "headless": true,
+    "viewport": {
+      "width": 1440,
+      "height": 1080
+    },
+    "client_server": "same shared host"
+  },
+  "dataset": {
+    "dataset": "events.clens",
+    "input_format": "snapshot",
+    "rows": 1000000,
+    "service_count": 16,
+    "services": [
+      "service-001",
+      "service-002",
+      "service-003",
+      "service-004",
+      "service-005",
+      "service-006",
+      "service-007",
+      "service-008",
+      "service-009",
+      "service-010",
+      "service-011",
+      "service-012",
+      "service-013",
+      "service-014",
+      "service-015",
+      "service-016"
+    ],
+    "services_truncated": false,
+    "statuses": [
+      200,
+      500
+    ],
+    "min_timestamp_us": "1767225600000000",
+    "max_timestamp_us": "1767226599999000",
+    "engines": [
+      "row",
+      "columnar",
+      "indexed"
+    ],
+    "default_buckets": 100,
+    "max_buckets": 240,
+    "load_ms": 84.9635
+  },
+  "errors": [],
+  "samples": [
+    {
+      "index": 0,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 30.30000001192093,
+      "click_to_visible_commit_ms": 43.700000047683716,
+      "dispatch_to_visible_commit_ms": 35.90000003576279,
+      "click_to_dispatch_ms": 7.800000011920929,
+      "http_ms": 3.699999988079071,
+      "fetch_resource_ms": 4.299999952316284,
+      "server": {
+        "query_ms": 0.5136,
+        "profile_ms": 2.0562,
+        "server_work_ms": 2.5698
+      }
+    },
+    {
+      "index": 1,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 46.30000001192093,
+      "click_to_visible_commit_ms": 61.5,
+      "dispatch_to_visible_commit_ms": 53.19999998807907,
+      "click_to_dispatch_ms": 8.300000011920929,
+      "http_ms": 23.600000023841858,
+      "fetch_resource_ms": 24.200000047683716,
+      "server": {
+        "query_ms": 5.3781,
+        "profile_ms": 16.893,
+        "server_work_ms": 22.2711
+      }
+    },
+    {
+      "index": 2,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 28.100000023841858,
+      "click_to_visible_commit_ms": 43.80000001192093,
+      "dispatch_to_visible_commit_ms": 36,
+      "click_to_dispatch_ms": 7.800000011920929,
+      "http_ms": 4.900000035762787,
+      "fetch_resource_ms": 5.400000035762787,
+      "server": {
+        "query_ms": 2.3868,
+        "profile_ms": 2.5297,
+        "server_work_ms": 4.9165
+      }
+    },
+    {
+      "index": 3,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 49.40000003576279,
+      "click_to_visible_commit_ms": 59.30000001192093,
+      "dispatch_to_visible_commit_ms": 50.5,
+      "click_to_dispatch_ms": 8.800000011920929,
+      "http_ms": 26.599999964237213,
+      "fetch_resource_ms": 27.19999998807907,
+      "server": {
+        "query_ms": 9.8582,
+        "profile_ms": 16.9178,
+        "server_work_ms": 26.776
+      }
+    },
+    {
+      "index": 4,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 30.599999964237213,
+      "click_to_visible_commit_ms": 42.799999952316284,
+      "dispatch_to_visible_commit_ms": 34.5,
+      "click_to_dispatch_ms": 8.299999952316284,
+      "http_ms": 4.400000035762787,
+      "fetch_resource_ms": 5,
+      "server": {
+        "query_ms": 1.1767,
+        "profile_ms": 1.9983,
+        "server_work_ms": 3.175
+      }
+    },
+    {
+      "index": 5,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 49.30000001192093,
+      "click_to_visible_commit_ms": 60.39999997615814,
+      "dispatch_to_visible_commit_ms": 52.39999997615814,
+      "click_to_dispatch_ms": 8,
+      "http_ms": 26.899999976158142,
+      "fetch_resource_ms": 27.5,
+      "server": {
+        "query_ms": 5.9691,
+        "profile_ms": 18.2589,
+        "server_work_ms": 24.228
+      }
+    },
+    {
+      "index": 6,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 36.60000002384186,
+      "click_to_visible_commit_ms": 45.5,
+      "dispatch_to_visible_commit_ms": 32.89999997615814,
+      "click_to_dispatch_ms": 12.600000023841858,
+      "http_ms": 4.299999952316284,
+      "fetch_resource_ms": 4.899999976158142,
+      "server": {
+        "query_ms": 0.6788,
+        "profile_ms": 2.0147,
+        "server_work_ms": 2.6935
+      }
+    },
+    {
+      "index": 7,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 48.30000001192093,
+      "click_to_visible_commit_ms": 60.90000003576279,
+      "dispatch_to_visible_commit_ms": 53.60000002384186,
+      "click_to_dispatch_ms": 7.300000011920929,
+      "http_ms": 25.900000035762787,
+      "fetch_resource_ms": 26.5,
+      "server": {
+        "query_ms": 5.4077,
+        "profile_ms": 19.3085,
+        "server_work_ms": 24.7162
+      }
+    },
+    {
+      "index": 8,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 29.80000001192093,
+      "click_to_visible_commit_ms": 44,
+      "dispatch_to_visible_commit_ms": 36.89999997615814,
+      "click_to_dispatch_ms": 7.100000023841858,
+      "http_ms": 3.199999988079071,
+      "fetch_resource_ms": 3.600000023841858,
+      "server": {
+        "query_ms": 0.6115,
+        "profile_ms": 1.6393,
+        "server_work_ms": 2.2508
+      }
+    },
+    {
+      "index": 9,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 49,
+      "click_to_visible_commit_ms": 60.59999996423721,
+      "dispatch_to_visible_commit_ms": 52.89999997615814,
+      "click_to_dispatch_ms": 7.699999988079071,
+      "http_ms": 25.099999964237213,
+      "fetch_resource_ms": 25.599999964237213,
+      "server": {
+        "query_ms": 5.3189,
+        "profile_ms": 17.8801,
+        "server_work_ms": 23.7611
+      }
+    },
+    {
+      "index": 10,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 28.600000023841858,
+      "click_to_visible_commit_ms": 43,
+      "dispatch_to_visible_commit_ms": 34.59999996423721,
+      "click_to_dispatch_ms": 8.400000035762787,
+      "http_ms": 3.599999964237213,
+      "fetch_resource_ms": 4,
+      "server": {
+        "query_ms": 0.7808,
+        "profile_ms": 1.6913,
+        "server_work_ms": 2.4721
+      }
+    },
+    {
+      "index": 11,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 48.39999997615814,
+      "click_to_visible_commit_ms": 59.39999997615814,
+      "dispatch_to_visible_commit_ms": 51.19999998807907,
+      "click_to_dispatch_ms": 8.199999988079071,
+      "http_ms": 25.19999998807907,
+      "fetch_resource_ms": 25.599999964237213,
+      "server": {
+        "query_ms": 6.1176,
+        "profile_ms": 17.843,
+        "server_work_ms": 23.9606
+      }
+    },
+    {
+      "index": 12,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 30.100000023841858,
+      "click_to_visible_commit_ms": 44.19999998807907,
+      "dispatch_to_visible_commit_ms": 36.80000001192093,
+      "click_to_dispatch_ms": 7.399999976158142,
+      "http_ms": 3.300000011920929,
+      "fetch_resource_ms": 4,
+      "server": {
+        "query_ms": 0.6169,
+        "profile_ms": 1.6257,
+        "server_work_ms": 2.2426
+      }
+    },
+    {
+      "index": 13,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 46.30000001192093,
+      "click_to_visible_commit_ms": 60.10000002384186,
+      "dispatch_to_visible_commit_ms": 52.60000002384186,
+      "click_to_dispatch_ms": 7.5,
+      "http_ms": 24.599999964237213,
+      "fetch_resource_ms": 25,
+      "server": {
+        "query_ms": 5.7939,
+        "profile_ms": 17.3617,
+        "server_work_ms": 23.1556
+      }
+    },
+    {
+      "index": 14,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 28.099999964237213,
+      "click_to_visible_commit_ms": 44.5,
+      "dispatch_to_visible_commit_ms": 36.90000003576279,
+      "click_to_dispatch_ms": 7.599999964237213,
+      "http_ms": 3.300000011920929,
+      "fetch_resource_ms": 3.800000011920929,
+      "server": {
+        "query_ms": 0.6148,
+        "profile_ms": 1.626,
+        "server_work_ms": 2.2408
+      }
+    },
+    {
+      "index": 15,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 49.5,
+      "click_to_visible_commit_ms": 60.5,
+      "dispatch_to_visible_commit_ms": 53.30000001192093,
+      "click_to_dispatch_ms": 7.199999988079071,
+      "http_ms": 27,
+      "fetch_resource_ms": 27.600000023841858,
+      "server": {
+        "query_ms": 6.4096,
+        "profile_ms": 18.8001,
+        "server_work_ms": 25.2097
+      }
+    },
+    {
+      "index": 16,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 29.099999964237213,
+      "click_to_visible_commit_ms": 42.5,
+      "dispatch_to_visible_commit_ms": 33.10000002384186,
+      "click_to_dispatch_ms": 9.399999976158142,
+      "http_ms": 4.199999988079071,
+      "fetch_resource_ms": 4.699999988079071,
+      "server": {
+        "query_ms": 0.5141,
+        "profile_ms": 2.285,
+        "server_work_ms": 2.7991
+      }
+    },
+    {
+      "index": 17,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 49.60000002384186,
+      "click_to_visible_commit_ms": 59.89999997615814,
+      "dispatch_to_visible_commit_ms": 49.69999998807907,
+      "click_to_dispatch_ms": 10.199999988079071,
+      "http_ms": 25.600000023841858,
+      "fetch_resource_ms": 26.19999998807907,
+      "server": {
+        "query_ms": 7.2673,
+        "profile_ms": 17.3272,
+        "server_work_ms": 24.5945
+      }
+    },
+    {
+      "index": 18,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 27.599999964237213,
+      "click_to_visible_commit_ms": 42.19999998807907,
+      "dispatch_to_visible_commit_ms": 35.10000002384186,
+      "click_to_dispatch_ms": 7.099999964237213,
+      "http_ms": 3.799999952316284,
+      "fetch_resource_ms": 4.399999976158142,
+      "server": {
+        "query_ms": 0.7325,
+        "profile_ms": 2.0523,
+        "server_work_ms": 2.7848
+      }
+    },
+    {
+      "index": 19,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 45.5,
+      "click_to_visible_commit_ms": 60.799999952316284,
+      "dispatch_to_visible_commit_ms": 53.69999998807907,
+      "click_to_dispatch_ms": 7.099999964237213,
+      "http_ms": 25,
+      "fetch_resource_ms": 25.5,
+      "server": {
+        "query_ms": 6.2152,
+        "profile_ms": 17.6782,
+        "server_work_ms": 23.8934
+      }
+    },
+    {
+      "index": 20,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 30.19999998807907,
+      "click_to_visible_commit_ms": 43.69999998807907,
+      "dispatch_to_visible_commit_ms": 35.5,
+      "click_to_dispatch_ms": 8.199999988079071,
+      "http_ms": 4.199999988079071,
+      "fetch_resource_ms": 4.699999988079071,
+      "server": {
+        "query_ms": 0.6382,
+        "profile_ms": 2.2094,
+        "server_work_ms": 2.8476
+      }
+    },
+    {
+      "index": 21,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 51.5,
+      "click_to_visible_commit_ms": 61.60000002384186,
+      "dispatch_to_visible_commit_ms": 54.40000003576279,
+      "click_to_dispatch_ms": 7.199999988079071,
+      "http_ms": 28.19999998807907,
+      "fetch_resource_ms": 28.69999998807907,
+      "server": {
+        "query_ms": 7.1249,
+        "profile_ms": 19.3313,
+        "server_work_ms": 26.4562
+      }
+    },
+    {
+      "index": 22,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 29.69999998807907,
+      "click_to_visible_commit_ms": 43.30000001192093,
+      "dispatch_to_visible_commit_ms": 36,
+      "click_to_dispatch_ms": 7.300000011920929,
+      "http_ms": 3.5,
+      "fetch_resource_ms": 3.899999976158142,
+      "server": {
+        "query_ms": 0.5157,
+        "profile_ms": 1.6105,
+        "server_work_ms": 2.1262
+      }
+    },
+    {
+      "index": 23,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 53.69999998807907,
+      "click_to_visible_commit_ms": 61.39999997615814,
+      "dispatch_to_visible_commit_ms": 53.799999952316284,
+      "click_to_dispatch_ms": 7.600000023841858,
+      "http_ms": 27,
+      "fetch_resource_ms": 27.69999998807907,
+      "server": {
+        "query_ms": 9.0342,
+        "profile_ms": 16.239,
+        "server_work_ms": 25.2732
+      }
+    },
+    {
+      "index": 24,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 27.200000047683716,
+      "click_to_visible_commit_ms": 44,
+      "dispatch_to_visible_commit_ms": 36.69999998807907,
+      "click_to_dispatch_ms": 7.300000011920929,
+      "http_ms": 3.399999976158142,
+      "fetch_resource_ms": 4,
+      "server": {
+        "query_ms": 0.5131,
+        "profile_ms": 1.6647,
+        "server_work_ms": 2.1778
+      }
+    },
+    {
+      "index": 25,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 54.5,
+      "click_to_visible_commit_ms": 74.39999997615814,
+      "dispatch_to_visible_commit_ms": 65.19999998807907,
+      "click_to_dispatch_ms": 9.199999988079071,
+      "http_ms": 29.600000023841858,
+      "fetch_resource_ms": 30.19999998807907,
+      "server": {
+        "query_ms": 5.4055,
+        "profile_ms": 22.6623,
+        "server_work_ms": 28.0678
+      }
+    },
+    {
+      "index": 26,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 26.5,
+      "click_to_visible_commit_ms": 42.69999998807907,
+      "dispatch_to_visible_commit_ms": 34.89999997615814,
+      "click_to_dispatch_ms": 7.800000011920929,
+      "http_ms": 4.699999988079071,
+      "fetch_resource_ms": 5.300000011920929,
+      "server": {
+        "query_ms": 0.7298,
+        "profile_ms": 2.4249,
+        "server_work_ms": 3.1547
+      }
+    },
+    {
+      "index": 27,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 45,
+      "click_to_visible_commit_ms": 60.299999952316284,
+      "dispatch_to_visible_commit_ms": 52,
+      "click_to_dispatch_ms": 8.299999952316284,
+      "http_ms": 23.69999998807907,
+      "fetch_resource_ms": 24.19999998807907,
+      "server": {
+        "query_ms": 4.6869,
+        "profile_ms": 17.8838,
+        "server_work_ms": 22.5707
+      }
+    },
+    {
+      "index": 28,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 27.599999964237213,
+      "click_to_visible_commit_ms": 44.39999997615814,
+      "dispatch_to_visible_commit_ms": 37.19999998807907,
+      "click_to_dispatch_ms": 7.199999988079071,
+      "http_ms": 3.099999964237213,
+      "fetch_resource_ms": 3.599999964237213,
+      "server": {
+        "query_ms": 0.5771,
+        "profile_ms": 1.6318,
+        "server_work_ms": 2.2089
+      }
+    },
+    {
+      "index": 29,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 44.200000047683716,
+      "click_to_visible_commit_ms": 60.200000047683716,
+      "dispatch_to_visible_commit_ms": 53.10000002384186,
+      "click_to_dispatch_ms": 7.100000023841858,
+      "http_ms": 23.30000001192093,
+      "fetch_resource_ms": 23.900000035762787,
+      "server": {
+        "query_ms": 5.1099,
+        "profile_ms": 16.8213,
+        "server_work_ms": 21.9312
+      }
+    },
+    {
+      "index": 30,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 26.30000001192093,
+      "click_to_visible_commit_ms": 45.10000002384186,
+      "dispatch_to_visible_commit_ms": 37.80000001192093,
+      "click_to_dispatch_ms": 7.300000011920929,
+      "http_ms": 3.300000011920929,
+      "fetch_resource_ms": 3.800000011920929,
+      "server": {
+        "query_ms": 0.6029,
+        "profile_ms": 1.6188,
+        "server_work_ms": 2.2217
+      }
+    },
+    {
+      "index": 31,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 51.60000002384186,
+      "click_to_visible_commit_ms": 61.10000002384186,
+      "dispatch_to_visible_commit_ms": 51.80000001192093,
+      "click_to_dispatch_ms": 9.300000011920929,
+      "http_ms": 25.69999998807907,
+      "fetch_resource_ms": 26.19999998807907,
+      "server": {
+        "query_ms": 5.373,
+        "profile_ms": 18.7931,
+        "server_work_ms": 24.1661
+      }
+    },
+    {
+      "index": 32,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 27.69999998807907,
+      "click_to_visible_commit_ms": 43.19999998807907,
+      "dispatch_to_visible_commit_ms": 35.09999996423721,
+      "click_to_dispatch_ms": 8.100000023841858,
+      "http_ms": 4,
+      "fetch_resource_ms": 4.600000023841858,
+      "server": {
+        "query_ms": 1.4788,
+        "profile_ms": 1.8828,
+        "server_work_ms": 3.3616
+      }
+    },
+    {
+      "index": 33,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 48,
+      "click_to_visible_commit_ms": 59.60000002384186,
+      "dispatch_to_visible_commit_ms": 52,
+      "click_to_dispatch_ms": 7.600000023841858,
+      "http_ms": 27.19999998807907,
+      "fetch_resource_ms": 27.799999952316284,
+      "server": {
+        "query_ms": 8.1562,
+        "profile_ms": 17.1975,
+        "server_work_ms": 25.3537
+      }
+    },
+    {
+      "index": 34,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 27.5,
+      "click_to_visible_commit_ms": 40.39999997615814,
+      "dispatch_to_visible_commit_ms": 30.399999976158142,
+      "click_to_dispatch_ms": 10,
+      "http_ms": 3.300000011920929,
+      "fetch_resource_ms": 3.800000011920929,
+      "server": {
+        "query_ms": 0.6294,
+        "profile_ms": 1.9024,
+        "server_work_ms": 2.5318
+      }
+    },
+    {
+      "index": 35,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 49.60000002384186,
+      "click_to_visible_commit_ms": 60.80000001192093,
+      "dispatch_to_visible_commit_ms": 51.10000002384186,
+      "click_to_dispatch_ms": 9.699999988079071,
+      "http_ms": 26.80000001192093,
+      "fetch_resource_ms": 27.5,
+      "server": {
+        "query_ms": 8.0924,
+        "profile_ms": 17.5297,
+        "server_work_ms": 25.6221
+      }
+    },
+    {
+      "index": 36,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 28.900000035762787,
+      "click_to_visible_commit_ms": 44.10000002384186,
+      "dispatch_to_visible_commit_ms": 36.89999997615814,
+      "click_to_dispatch_ms": 7.200000047683716,
+      "http_ms": 4.299999952316284,
+      "fetch_resource_ms": 5,
+      "server": {
+        "query_ms": 0.6326,
+        "profile_ms": 2.45,
+        "server_work_ms": 3.0826
+      }
+    },
+    {
+      "index": 37,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 52.19999998807907,
+      "click_to_visible_commit_ms": 61.30000001192093,
+      "dispatch_to_visible_commit_ms": 53.700000047683716,
+      "click_to_dispatch_ms": 7.599999964237213,
+      "http_ms": 30.30000001192093,
+      "fetch_resource_ms": 30.899999976158142,
+      "server": {
+        "query_ms": 6.4976,
+        "profile_ms": 22.4312,
+        "server_work_ms": 28.9288
+      }
+    },
+    {
+      "index": 38,
+      "range_percent": 10,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": "1767225699999900",
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 100000,
+      "exact_result_sha256": "99acb81a229d383caf4bc08cad050af3ebc276f131ae2b5cef47f9f84e5e49a7",
+      "click_to_dom_commit_ms": 29.899999976158142,
+      "click_to_visible_commit_ms": 43.39999997615814,
+      "dispatch_to_visible_commit_ms": 36,
+      "click_to_dispatch_ms": 7.399999976158142,
+      "http_ms": 3.5,
+      "fetch_resource_ms": 4.199999988079071,
+      "server": {
+        "query_ms": 0.6123,
+        "profile_ms": 1.5136,
+        "server_work_ms": 2.1259
+      }
+    },
+    {
+      "index": 39,
+      "range_percent": 100,
+      "engine": "indexed",
+      "request": {
+        "engine": "indexed",
+        "from_us": "1767225600000000",
+        "to_us": null,
+        "service": "",
+        "status": 0,
+        "buckets": 100
+      },
+      "status": 200,
+      "matches": 1000000,
+      "exact_result_sha256": "3bac97c50fab9e889ad4c4cd50ec64a3fc93924d1783b2c35d4e6264bb75bb8f",
+      "click_to_dom_commit_ms": 49.30000001192093,
+      "click_to_visible_commit_ms": 59.40000003576279,
+      "dispatch_to_visible_commit_ms": 51.5,
+      "click_to_dispatch_ms": 7.900000035762787,
+      "http_ms": 27.30000001192093,
+      "fetch_resource_ms": 27.899999976158142,
+      "server": {
+        "query_ms": 7.9802,
+        "profile_ms": 18.399,
+        "server_work_ms": 26.3792
+      }
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 A local telemetry-analysis project exploring how storage layout and indexing
 affect interactive queries over large event datasets.
 
-**Current milestone: unsigned, reproducible local-preview packages.**
+**Current milestone: measured interactive profile and preset performance.**
 [Release instructions](docs/releases.md) cover Windows/Linux amd64 bundles containing
 all six CLIs and built UI assets, without requiring Go, Node, or a source checkout
 on the consumer machine. The project license remains unselected; authentication
@@ -33,6 +33,15 @@ successful latency percentiles. Full-range click-to-visible-commit median was
 **194.5 ms**, versus **5.06 ms aggregate-only server work** in the browser phase.
 These shared-host observations include the documented browser paint-opportunity
 boundary, not portable latency targets.
+
+[The matched interactive follow-up](benchmarks/interactive-performance.md)
+reduces full-range exact profile batch means from **53.79 to 17.00 ms**
+(five Go batches per version), and actual Chromium click median from
+**194.9 to 60.5 ms** (20 individual full-range samples per version).
+Adaptive service accumulation preserves sparse-window behavior and exact
+results; explicit presets dispatch immediately while sliders retain 100 ms
+coalescing. Raw samples, source hashes, allocation trade-offs, and the measured
+chart distinguish Go batch means from browser percentiles.
 
 ## Why this exists
 

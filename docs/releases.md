@@ -165,11 +165,12 @@ dispatch additionally rebuilds twice, compares SHA256, runs packaged Chromium
 smoke, and uploads short-lived Actions artifacts. Workflow token permissions
 are `contents: read`; there is **no GitHub Release publication**.
 
-Local Windows evidence is separate from configured Linux/CI validation.
-Configuring a workflow is not evidence that it has run; Linux/Actions execution
-awaits an approved push and dispatch. Review diffs and local results before any
-commit or publication. Benchmark snapshot and concurrency histories are not
-modified by packaging.
+Local Windows evidence is separate from hosted CI validation. After the
+approved milestone-11 push, regular [CI run 35062923130](https://github.com/PoojaAgarwal2003/ChronoLens/actions/runs/35062923130)
+passed Windows, Linux, and explorer jobs at `3e4a347`. This does not establish
+that the separate manual preview workflow ran, nor validate later local
+milestone-13 commits. Publication still requires approval. Benchmark snapshot
+and concurrency histories are not modified by packaging.
 
 ## Local verification record — 2026-09-16
 
@@ -207,5 +208,6 @@ This intermediate review archive is not retained; the older repeatability
 record above describes its own fingerprinted inputs, not subsequent changes.
 
 This demonstrates isolated consumer execution on the existing Windows host,
-not a newly provisioned OS image. Linux and hosted Actions execution are
-**configured but not run locally**; they remain pending an approved push.
+not a newly provisioned OS image. Linux was not run locally; the subsequent
+successful regular hosted CI run is recorded separately above. No milestone-13
+package, tag, GitHub Release, or hosted CI success is claimed.

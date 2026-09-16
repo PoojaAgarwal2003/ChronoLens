@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "config": {
+    "target": "http://127.0.0.1:56686/api/query",
+    "payload": {
+      "engine": "indexed",
+      "from_us": "1767225600000000",
+      "to_us": null,
+      "service": "",
+      "status": 0,
+      "buckets": 100
+    },
+    "duration_ns": 5000000000,
+    "arrivals_per_second": 2,
+    "max_inflight": 2,
+    "max_requests": 1000,
+    "request_timeout_ns": 1000000000
+  },
+  "started_utc": "2026-09-16T13:11:29.3506736Z",
+  "elapsed_ms": 4559.3011,
+  "policy": "Open-loop fixed arrivals; no workload retries; skip arrivals \u003e= one period late or at inflight cap; drain on normal completion; cancel on parent cancellation. Metadata probe excluded from schedule and elapsed.",
+  "environment": {
+    "arch": "amd64",
+    "client_server": "same-host loopback",
+    "go": "go1.27.1",
+    "gomaxprocs": 16,
+    "logical_cpus": 16,
+    "os": "windows"
+  },
+  "dataset_metadata": {
+    "dataset": "events.clens",
+    "input_format": "snapshot",
+    "rows": 1000000,
+    "service_count": 16,
+    "services": [
+      "service-001",
+      "service-002",
+      "service-003",
+      "service-004",
+      "service-005",
+      "service-006",
+      "service-007",
+      "service-008",
+      "service-009",
+      "service-010",
+      "service-011",
+      "service-012",
+      "service-013",
+      "service-014",
+      "service-015",
+      "service-016"
+    ],
+    "services_truncated": false,
+    "statuses": [
+      200,
+      500
+    ],
+    "min_timestamp_us": "1767225600000000",
+    "max_timestamp_us": "1767226599999000",
+    "engines": [
+      "row",
+      "columnar",
+      "indexed"
+    ],
+    "default_buckets": 100,
+    "max_buckets": 240,
+    "load_ms": 91.8666
+  },
+  "scheduled": 10,
+  "sent": 10,
+  "skipped": 0,
+  "outcomes": {
+    "success": 10
+  },
+  "http_statuses": {
+    "200": 10
+  },
+  "successful_complete_requests": {
+    "count": 10,
+    "p50_ms": 61.0515,
+    "p95_ms": 66.1311,
+    "p99_ms": 66.1311
+  },
+  "observed_scheduler_lag": {
+    "count": 10,
+    "p50_ms": 0.358,
+    "p95_ms": 0.5401,
+    "p99_ms": 0.5401
+  },
+  "samples": [
+    {
+      "index": 0,
+      "scheduled_ms": 0,
+      "started_ms": 0,
+      "scheduler_lag_ms": 0,
+      "complete_latency_ms": 61.0515,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 11322
+    },
+    {
+      "index": 1,
+      "scheduled_ms": 500,
+      "started_ms": 500.1414,
+      "scheduler_lag_ms": 0.1414,
+      "complete_latency_ms": 66.1311,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 11322
+    },
+    {
+      "index": 2,
+      "scheduled_ms": 1000,
+      "started_ms": 1000.4302,
+      "scheduler_lag_ms": 0.4302,
+      "complete_latency_ms": 59.4642,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 11322
+    },
+    {
+      "index": 3,
+      "scheduled_ms": 1500,
+      "started_ms": 1500.358,
+      "scheduler_lag_ms": 0.358,
+      "complete_latency_ms": 57.203,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 11322
+    },
+    {
+      "index": 4,
+      "scheduled_ms": 2000,
+      "started_ms": 2000.431,
+      "scheduler_lag_ms": 0.431,
+      "complete_latency_ms": 65.6821,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 11322
+    },
+    {
+      "index": 5,
+      "scheduled_ms": 2500,
+      "started_ms": 2500.3829,
+      "scheduler_lag_ms": 0.3829,
+      "complete_latency_ms": 61.7054,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 11322
+    },
+    {
+      "index": 6,
+      "scheduled_ms": 3000,
+      "started_ms": 3000.1446,
+      "scheduler_lag_ms": 0.1446,
+      "complete_latency_ms": 61.4157,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 11322
+    },
+    {
+      "index": 7,
+      "scheduled_ms": 3500,
+      "started_ms": 3500.3789,
+      "scheduler_lag_ms": 0.3789,
+      "complete_latency_ms": 64.0814,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 11322
+    },
+    {
+      "index": 8,
+      "scheduled_ms": 4000,
+      "started_ms": 4000.5401,
+      "scheduler_lag_ms": 0.5401,
+      "complete_latency_ms": 59.1047,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 11322
+    },
+    {
+      "index": 9,
+      "scheduled_ms": 4500,
+      "started_ms": 4500.173,
+      "scheduler_lag_ms": 0.173,
+      "complete_latency_ms": 59.1281,
+      "outcome": "success",
+      "http_status": 200,
+      "response_bytes": 11321
+    }
+  ]
+}

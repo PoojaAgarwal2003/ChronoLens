@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="615" viewBox="0 0 980 615" role="img" aria-labelledby="title desc">
+<title id="title">ChronoLens: measured interactive profile and preset improvement</title>
+<desc id="desc">Same-host one-million-event snapshot. Twenty individual samples per range and version. Brown is baseline, teal is optimized. Click bars are nearest-rank medians; server chart bars are arithmetic means, not query-only timings.</desc>
+<style>text{font:15px system-ui,sans-serif;fill:#172d38}.label{font-weight:600}.note{font-size:13px}</style>
+<rect width="980" height="615" fill="#f8fafb"/>
+<text x="30" y="38" style="font-size:24px;font-weight:700">Exact charts. Less waiting.</text>
+<text x="30" y="66">1,000,000 events · 16 services · real Chromium · same shared Windows host</text>
+<rect x="30" y="85" width="15" height="15" fill="#a65b00"/><text x="52" y="98">Baseline</text>
+<rect x="155" y="85" width="15" height="15" fill="#007b74"/><text x="177" y="98">Optimized profile + immediate presets</text>
+<text x="30" y="133" class="label">10% window · click median</text>
+<rect x="355" y="123" width="353.78" height="23" fill="#a65b00"/>
+<text x="718.78" y="140">144.40 ms</text>
+<rect x="355" y="153" width="107.06" height="23" fill="#007b74"/>
+<text x="472.06" y="170">43.70 ms</text>
+<text x="30" y="233" class="label">10% window · server profile mean</text>
+<rect x="355" y="223" width="13.94" height="23" fill="#a65b00"/>
+<text x="378.94" y="240">5.69 ms</text>
+<rect x="355" y="253" width="4.71" height="23" fill="#007b74"/>
+<text x="369.71" y="270">1.92 ms</text>
+<text x="30" y="333" class="label">100% window · click median</text>
+<rect x="355" y="323" width="477.50" height="23" fill="#a65b00"/>
+<text x="842.50" y="340">194.90 ms</text>
+<rect x="355" y="353" width="148.22" height="23" fill="#007b74"/>
+<text x="513.23" y="370">60.50 ms</text>
+<text x="30" y="433" class="label">100% window · server profile mean</text>
+<rect x="355" y="423" width="131.59" height="23" fill="#a65b00"/>
+<text x="496.59" y="440">53.71 ms</text>
+<rect x="355" y="453" width="44.78" height="23" fill="#007b74"/>
+<text x="409.78" y="470">18.28 ms</text>
+<line x1="355" x2="845" y1="492" y2="492" stroke="#71808a"/>
+<text x="355" y="513">0 ms</text><text x="810" y="513">200 ms</text>
+<text x="30" y="547" class="note">Click → matching visible DOM + two animation frames (paint opportunity, not display presentation).</text>
+<text x="30" y="570" class="note">N = 20 per bar. Server profile excludes aggregate query, HTTP, and rendering. No portable SLO claim.</text>
+<text x="30" y="593" class="note">Reproduce: benchmarks/interactive-performance.md · raw samples retained without retries or trimming.</text>
+</svg>

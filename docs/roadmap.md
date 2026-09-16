@@ -12,9 +12,20 @@ Publication requires approval.
 | 7 | Versioned, bounded, checksummed immutable snapshot codec and safe JSONL conversion | Completed 2026-09-15; `a83d4e9` |
 | 8 | Snapshot input in query/catalog/server while keeping existing JSONL behavior | Completed 2026-09-15; `2135237` |
 | 9 | Benchmark input-format support and measured JSONL-versus-snapshot startup evidence | Completed 2026-09-15; [results](../benchmarks/snapshot-startup.md) |
-| 10 | Concurrent-load, backpressure/cancellation, and end-to-end UI latency experiments | Completed locally 2026-09-16; `5e9d541`; [one-million-event results](../benchmarks/concurrency-latency.md); push awaiting approval |
-| 11 | Reproducible release packages and fresh-machine installation/release automation | Completed locally 2026-09-16; [unsigned local-preview guide](releases.md); Windows native verification, Linux/Actions execution pending approved push |
+| 10 | Concurrent-load, backpressure/cancellation, and end-to-end UI latency experiments | Completed and published 2026-09-16; `5e9d541`; [one-million-event results](../benchmarks/concurrency-latency.md) |
+| 11 | Reproducible release packages and fresh-machine installation/release automation | Completed and published 2026-09-16 through `3e4a347`; [unsigned local-preview guide](releases.md); prior Windows, Linux, and explorer CI passed |
 | 12 | License owner decision, authentication design, and public-deployment readiness review | Deferred; no public exposure or automatic license selection |
+| 13 | Interactive exact-profile and explicit-preset performance | Completed locally as four tested tasks; [matched evidence](../benchmarks/interactive-performance.md); push/release approval outstanding |
+
+Milestone 13 tasks are: (1) exact-reference tests and profile/browser baselines,
+(2) measured adaptive service accumulation and direct histogram classification,
+(3) immediate explicit actions with tested slider coalescing/cancellation, and
+(4) matched raw reports, reproducible chart, and honest boundary documentation.
+No additional milestone or public deployment is included.
+
+Prior [CI run 35062923130](https://github.com/PoojaAgarwal2003/ChronoLens/actions/runs/35062923130)
+passed Windows, Linux, and explorer jobs at `3e4a347`. This is not a claim that
+milestone 13's new local commits have run hosted CI.
 
 The storage work targets the measured 42-47 second JSONL startup bottleneck.
 It is not live ingestion, a mutable database, a WAL, a distributed system, or

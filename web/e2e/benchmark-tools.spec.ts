@@ -82,3 +82,32 @@ test('warm-query chart labels snapshot validation rather than JSONL parsing', as
   expect(svg).toContain('snapshot integrity checks and source SHA-256');
   expect(svg).not.toContain('strict JSONL parsing');
 });
+
+test('interactive chart reproduces measured samples and rejects incomparable evidence', async ({}, info) => {
+  mkdirSync(info.outputDir, { recursive: true });
+  const before = resolve(root, 'benchmarks/results/20260916-evening-baseline-browser.json');
+  const after = resolve(root, 'benchmarks/results/20260916-evening-after-browser.json');
+  const output = info.outputPath('interactive.svg');
+  expect(invoke('render-interactive-chart.mjs', before, after, output).status).toBe(0);
+  const svg = readFileSync(output, 'utf8');
+  expect(svg).toBe(readFileSync(resolve(root, 'docs/images/interactive-performance.svg'), 'utf8'));
+  expect(invoke('render-interactive-chart.mjs', before, after, output).stderr).toContain('EEXIST');
+  expect(readFileSync(output, 'utf8')).toBe(svg);
+  const original = JSON.parse(readFileSync(after, 'utf8'));
+  const input = info.outputPath('invalid.json');
+  const invalidOutput = info.outputPath('invalid.svg');
+  for (const mutate of [
+    (r: typeof original) => { r.samples[0].exact_result_sha256 = '0'.repeat(64); },
+    (r: typeof original) => { r.samples[0].request.service = 'different'; },
+    (r: typeof original) => { r.samples[0].server.profile_ms = null; },
+    (r: typeof original) => { r.samples.pop(); },
+    (r: typeof original) => { r.environment.browser = 'different'; },
+    (r: typeof original) => { r.dataset.rows = 1000; },
+  ]) {
+    const invalid = structuredClone(original);
+    mutate(invalid);
+    writeFileSync(input, JSON.stringify(invalid));
+    expect(invoke('render-interactive-chart.mjs', before, input, invalidOutput).status).toBe(1);
+    expect(existsSync(invalidOutput)).toBe(false);
+  }
+});

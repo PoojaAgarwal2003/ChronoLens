@@ -1,0 +1,540 @@
+{
+  "schema": 1,
+  "config": {
+    "target": "http://127.0.0.1:56686/api/compare",
+    "payload": {
+      "engine": "indexed",
+      "from_us": "1767225600000000",
+      "to_us": null,
+      "service": "",
+      "status": 0,
+      "buckets": 100
+    },
+    "duration_ns": 5000000000,
+    "arrivals_per_second": 10,
+    "max_inflight": 2,
+    "max_requests": 1000,
+    "request_timeout_ns": 20000000
+  },
+  "started_utc": "2026-09-16T13:11:48.8992437Z",
+  "elapsed_ms": 4921.2134,
+  "policy": "Open-loop fixed arrivals; no workload retries; skip arrivals \u003e= one period late or at inflight cap; drain on normal completion; cancel on parent cancellation. Metadata probe excluded from schedule and elapsed.",
+  "environment": {
+    "arch": "amd64",
+    "client_server": "same-host loopback",
+    "go": "go1.27.1",
+    "gomaxprocs": 16,
+    "logical_cpus": 16,
+    "os": "windows"
+  },
+  "dataset_metadata": {
+    "dataset": "events.clens",
+    "input_format": "snapshot",
+    "rows": 1000000,
+    "service_count": 16,
+    "services": [
+      "service-001",
+      "service-002",
+      "service-003",
+      "service-004",
+      "service-005",
+      "service-006",
+      "service-007",
+      "service-008",
+      "service-009",
+      "service-010",
+      "service-011",
+      "service-012",
+      "service-013",
+      "service-014",
+      "service-015",
+      "service-016"
+    ],
+    "services_truncated": false,
+    "statuses": [
+      200,
+      500
+    ],
+    "min_timestamp_us": "1767225600000000",
+    "max_timestamp_us": "1767226599999000",
+    "engines": [
+      "row",
+      "columnar",
+      "indexed"
+    ],
+    "default_buckets": 100,
+    "max_buckets": 240,
+    "load_ms": 91.8666
+  },
+  "scheduled": 50,
+  "sent": 50,
+  "skipped": 0,
+  "outcomes": {
+    "client_timeout": 50
+  },
+  "http_statuses": {},
+  "successful_complete_requests": {
+    "count": 0,
+    "p50_ms": null,
+    "p95_ms": null,
+    "p99_ms": null
+  },
+  "observed_scheduler_lag": {
+    "count": 50,
+    "p50_ms": 0.4912,
+    "p95_ms": 0.6969,
+    "p99_ms": 0.7395
+  },
+  "samples": [
+    {
+      "index": 0,
+      "scheduled_ms": 0,
+      "started_ms": 0,
+      "scheduler_lag_ms": 0,
+      "complete_latency_ms": 21.286,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 1,
+      "scheduled_ms": 100,
+      "started_ms": 100.6734,
+      "scheduler_lag_ms": 0.6734,
+      "complete_latency_ms": 20.5621,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 2,
+      "scheduled_ms": 200,
+      "started_ms": 200.4374,
+      "scheduler_lag_ms": 0.4374,
+      "complete_latency_ms": 20.3337,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 3,
+      "scheduled_ms": 300,
+      "started_ms": 300.6941,
+      "scheduler_lag_ms": 0.6941,
+      "complete_latency_ms": 20.3727,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 4,
+      "scheduled_ms": 400,
+      "started_ms": 400.4912,
+      "scheduler_lag_ms": 0.4912,
+      "complete_latency_ms": 20.4069,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 5,
+      "scheduled_ms": 500,
+      "started_ms": 500.3327,
+      "scheduler_lag_ms": 0.3327,
+      "complete_latency_ms": 20.4865,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 6,
+      "scheduled_ms": 600,
+      "started_ms": 600.7395,
+      "scheduler_lag_ms": 0.7395,
+      "complete_latency_ms": 20.3158,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 7,
+      "scheduled_ms": 700,
+      "started_ms": 700.4098,
+      "scheduler_lag_ms": 0.4098,
+      "complete_latency_ms": 20.4479,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 8,
+      "scheduled_ms": 800,
+      "started_ms": 800.5209,
+      "scheduler_lag_ms": 0.5209,
+      "complete_latency_ms": 20.3531,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 9,
+      "scheduled_ms": 900,
+      "started_ms": 900.5287,
+      "scheduler_lag_ms": 0.5287,
+      "complete_latency_ms": 20.2774,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 10,
+      "scheduled_ms": 1000,
+      "started_ms": 1000.5328,
+      "scheduler_lag_ms": 0.5328,
+      "complete_latency_ms": 20.3929,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 11,
+      "scheduled_ms": 1100,
+      "started_ms": 1100.1417,
+      "scheduler_lag_ms": 0.1417,
+      "complete_latency_ms": 20.3,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 12,
+      "scheduled_ms": 1200,
+      "started_ms": 1200.4201,
+      "scheduler_lag_ms": 0.4201,
+      "complete_latency_ms": 20.1175,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 13,
+      "scheduled_ms": 1300,
+      "started_ms": 1300.4907,
+      "scheduler_lag_ms": 0.4907,
+      "complete_latency_ms": 20.6298,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 14,
+      "scheduled_ms": 1400,
+      "started_ms": 1400.5774,
+      "scheduler_lag_ms": 0.5774,
+      "complete_latency_ms": 20.3714,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 15,
+      "scheduled_ms": 1500,
+      "started_ms": 1500.4322,
+      "scheduler_lag_ms": 0.4322,
+      "complete_latency_ms": 20.5895,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 16,
+      "scheduled_ms": 1600,
+      "started_ms": 1600.4489,
+      "scheduler_lag_ms": 0.4489,
+      "complete_latency_ms": 20.6155,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 17,
+      "scheduled_ms": 1700,
+      "started_ms": 1700.5805,
+      "scheduler_lag_ms": 0.5805,
+      "complete_latency_ms": 20.5633,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 18,
+      "scheduled_ms": 1800,
+      "started_ms": 1800.5581,
+      "scheduler_lag_ms": 0.5581,
+      "complete_latency_ms": 20.6627,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 19,
+      "scheduled_ms": 1900,
+      "started_ms": 1900.4791,
+      "scheduler_lag_ms": 0.4791,
+      "complete_latency_ms": 20.7404,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 20,
+      "scheduled_ms": 2000,
+      "started_ms": 2000.6698,
+      "scheduler_lag_ms": 0.6698,
+      "complete_latency_ms": 20.4493,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 21,
+      "scheduled_ms": 2100,
+      "started_ms": 2100.5445,
+      "scheduler_lag_ms": 0.5445,
+      "complete_latency_ms": 20.5876,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 22,
+      "scheduled_ms": 2200,
+      "started_ms": 2200.3656,
+      "scheduler_lag_ms": 0.3656,
+      "complete_latency_ms": 20.4036,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 23,
+      "scheduled_ms": 2300,
+      "started_ms": 2300.49,
+      "scheduler_lag_ms": 0.49,
+      "complete_latency_ms": 20.498,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 24,
+      "scheduled_ms": 2400,
+      "started_ms": 2400.6969,
+      "scheduler_lag_ms": 0.6969,
+      "complete_latency_ms": 20.6672,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 25,
+      "scheduled_ms": 2500,
+      "started_ms": 2500.5682,
+      "scheduler_lag_ms": 0.5682,
+      "complete_latency_ms": 20.5779,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 26,
+      "scheduled_ms": 2600,
+      "started_ms": 2600.355,
+      "scheduler_lag_ms": 0.355,
+      "complete_latency_ms": 20.2638,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 27,
+      "scheduled_ms": 2700,
+      "started_ms": 2700.5616,
+      "scheduler_lag_ms": 0.5616,
+      "complete_latency_ms": 20.4002,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 28,
+      "scheduled_ms": 2800,
+      "started_ms": 2800.4386,
+      "scheduler_lag_ms": 0.4386,
+      "complete_latency_ms": 20.192,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 29,
+      "scheduled_ms": 2900,
+      "started_ms": 2900.6706,
+      "scheduler_lag_ms": 0.6706,
+      "complete_latency_ms": 20.5036,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 30,
+      "scheduled_ms": 3000,
+      "started_ms": 3000.6242,
+      "scheduler_lag_ms": 0.6242,
+      "complete_latency_ms": 20.4043,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 31,
+      "scheduled_ms": 3100,
+      "started_ms": 3100.4751,
+      "scheduler_lag_ms": 0.4751,
+      "complete_latency_ms": 20.3039,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 32,
+      "scheduled_ms": 3200,
+      "started_ms": 3200.4833,
+      "scheduler_lag_ms": 0.4833,
+      "complete_latency_ms": 20.4658,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 33,
+      "scheduled_ms": 3300,
+      "started_ms": 3300.6144,
+      "scheduler_lag_ms": 0.6144,
+      "complete_latency_ms": 20.553,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 34,
+      "scheduled_ms": 3400,
+      "started_ms": 3400.5834,
+      "scheduler_lag_ms": 0.5834,
+      "complete_latency_ms": 20.5721,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 35,
+      "scheduled_ms": 3500,
+      "started_ms": 3500.4604,
+      "scheduler_lag_ms": 0.4604,
+      "complete_latency_ms": 20.1171,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 36,
+      "scheduled_ms": 3600,
+      "started_ms": 3600.7349,
+      "scheduler_lag_ms": 0.7349,
+      "complete_latency_ms": 20.5009,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 37,
+      "scheduled_ms": 3700,
+      "started_ms": 3700.1537,
+      "scheduler_lag_ms": 0.1537,
+      "complete_latency_ms": 20.4416,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 38,
+      "scheduled_ms": 3800,
+      "started_ms": 3800.5696,
+      "scheduler_lag_ms": 0.5696,
+      "complete_latency_ms": 20.6789,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 39,
+      "scheduled_ms": 3900,
+      "started_ms": 3900.6446,
+      "scheduler_lag_ms": 0.6446,
+      "complete_latency_ms": 20.6226,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 40,
+      "scheduled_ms": 4000,
+      "started_ms": 4000.1928,
+      "scheduler_lag_ms": 0.1928,
+      "complete_latency_ms": 20.6917,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 41,
+      "scheduled_ms": 4100,
+      "started_ms": 4100.3559,
+      "scheduler_lag_ms": 0.3559,
+      "complete_latency_ms": 20.5669,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 42,
+      "scheduled_ms": 4200,
+      "started_ms": 4200.321,
+      "scheduler_lag_ms": 0.321,
+      "complete_latency_ms": 20.5369,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 43,
+      "scheduled_ms": 4300,
+      "started_ms": 4300.32,
+      "scheduler_lag_ms": 0.32,
+      "complete_latency_ms": 20.3076,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 44,
+      "scheduled_ms": 4400,
+      "started_ms": 4400.5719,
+      "scheduler_lag_ms": 0.5719,
+      "complete_latency_ms": 20.1535,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 45,
+      "scheduled_ms": 4500,
+      "started_ms": 4500.6314,
+      "scheduler_lag_ms": 0.6314,
+      "complete_latency_ms": 20.478,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 46,
+      "scheduled_ms": 4600,
+      "started_ms": 4600.5286,
+      "scheduler_lag_ms": 0.5286,
+      "complete_latency_ms": 20.3236,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 47,
+      "scheduled_ms": 4700,
+      "started_ms": 4700.2557,
+      "scheduler_lag_ms": 0.2557,
+      "complete_latency_ms": 20.2474,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 48,
+      "scheduled_ms": 4800,
+      "started_ms": 4800.1744,
+      "scheduler_lag_ms": 0.1744,
+      "complete_latency_ms": 20.2029,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    },
+    {
+      "index": 49,
+      "scheduled_ms": 4900,
+      "started_ms": 4900.5012,
+      "scheduler_lag_ms": 0.5012,
+      "complete_latency_ms": 20.7122,
+      "outcome": "client_timeout",
+      "error": "Post \"http://127.0.0.1:56686/api/compare\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+    }
+  ]
+}
