@@ -1,10 +1,14 @@
-# Unsigned local-preview packages (milestone 11)
+# Unsigned local-preview packages
 
 These are **local evaluation bundles, not production releases**. The project
 license remains **unselected**. Dependency notices do not grant permission to
 redistribute ChronoLens publicly. Authentication, public-deployment review,
 signing/installer decisions, and the project license remain milestone 12 owner
 decisions. Nothing here creates a GitHub Release, tag, commit, or push.
+
+Latest local acceptance: [0.14.0-preview.1 candidate evidence](release-candidate.md)
+and [scoped release notes](release-notes.md). The milestone-11 verification record
+below is historical; it does not substitute for the current candidate checks.
 
 ## Consumer: extract and run, without a development toolchain
 
@@ -194,7 +198,7 @@ that the separate manual preview workflow ran, nor validate later local
 milestone-13 commits. Publication still requires approval. Benchmark snapshot
 and concurrency histories are not modified by packaging.
 
-## Local verification record — 2026-09-16
+## Historical milestone-11 local verification record — 2026-09-16
 
 Before final review, Windows amd64 preview `0.11.0-preview.3` was built twice
 from the same unchanged working tree and toolchain. Both ZIP archives had SHA256:

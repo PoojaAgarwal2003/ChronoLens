@@ -45,6 +45,8 @@ same-host candidate archives, verified Windows/Linux payload integrity, and
 native Windows packaged CLI/browser execution with truthful platform coverage.
 Native Linux execution and hosted CI must be reported separately, never inferred
 from successful cross-compilation or older CI.
+The [candidate acceptance record](release-candidate.md) documents the completed
+local checks and the remaining platform/approval boundaries.
 
 The finished scope is a local, read-only analysis tool loading one immutable
 dataset at startup. It is **not** live ingestion, a mutable database/WAL,

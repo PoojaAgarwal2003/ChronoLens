@@ -1,0 +1,196 @@
+{
+  "schema": 1,
+  "candidate": "0.14.0-preview.1",
+  "recorded_utc": "2026-09-17T07:21:34.1349139Z",
+  "classification": "unsigned local-only evaluation preview; project license unselected",
+  "git_commit": "f8ae6577361a97ba5b1426a371788cfa9d3bf5db",
+  "git_dirty": false,
+  "build_host": "windows-amd64",
+  "tools": {
+    "go": "go version go1.27.1 windows/amd64",
+    "node": "v22.17.0",
+    "npm": "10.9.2",
+    "typescript": "Version 5.9.3",
+    "vite": "vite/6.4.3 win32-x64 node-v22.17.0",
+    "chromium": "153.0.8010.12"
+  },
+  "artifacts": [
+    {
+      "path": "releases/chronolens-0.14.0-preview.1-windows-amd64.zip",
+      "bytes": 22709813,
+      "sha256": "83b15a78ac33d46c8b005015d37d26ad7a97edd3c4e44b4ce02bf0e85c2b917b",
+      "target": "windows-amd64",
+      "manifest_sha256": "86db8b87db27414eeb82fe8778105db9419ff064d28a125230ec12663224aa7b",
+      "verified_without_execution": true,
+      "payload_files": 16,
+      "zip_entries": 17,
+      "source_fingerprints": 71,
+      "current_sources_match": true,
+      "project_license": "unselected",
+      "executable_headers": [
+        {
+          "path": "bin/generator.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        },
+        {
+          "path": "bin/pack.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        },
+        {
+          "path": "bin/query.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        },
+        {
+          "path": "bin/bench.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        },
+        {
+          "path": "bin/load.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        },
+        {
+          "path": "bin/server.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "releases/chronolens-0.14.0-preview.1-windows-amd64-repeat.zip",
+      "bytes": 22709813,
+      "sha256": "83b15a78ac33d46c8b005015d37d26ad7a97edd3c4e44b4ce02bf0e85c2b917b",
+      "target": "windows-amd64",
+      "manifest_sha256": "86db8b87db27414eeb82fe8778105db9419ff064d28a125230ec12663224aa7b",
+      "verified_without_execution": true,
+      "payload_files": 16,
+      "zip_entries": 17,
+      "source_fingerprints": 71,
+      "current_sources_match": true,
+      "project_license": "unselected",
+      "executable_headers": [
+        {
+          "path": "bin/generator.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        },
+        {
+          "path": "bin/pack.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        },
+        {
+          "path": "bin/query.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        },
+        {
+          "path": "bin/bench.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        },
+        {
+          "path": "bin/load.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        },
+        {
+          "path": "bin/server.exe",
+          "format": "PE32+ AMD64 (MZ, PE signature, Machine=0x8664, Magic=0x020b)",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "path": "releases/chronolens-0.14.0-preview.1-linux-amd64.zip",
+      "bytes": 22389309,
+      "sha256": "446b3e8f4f5dbac8219b1109aa28ca38134dba3bc4dd0c37ba87b61f7319a0e0",
+      "target": "linux-amd64",
+      "manifest_sha256": "d83f093d007459417f1314112a9aa8f53c2132495214d9bab6450ee74dc38799",
+      "verified_without_execution": true,
+      "payload_files": 16,
+      "zip_entries": 17,
+      "source_fingerprints": 71,
+      "current_sources_match": true,
+      "project_license": "unselected",
+      "executable_headers": [
+        {
+          "path": "bin/generator",
+          "format": "ELF64 little-endian x86-64 (ELF magic, class=2, data=1, e_machine=62)",
+          "passed": true
+        },
+        {
+          "path": "bin/pack",
+          "format": "ELF64 little-endian x86-64 (ELF magic, class=2, data=1, e_machine=62)",
+          "passed": true
+        },
+        {
+          "path": "bin/query",
+          "format": "ELF64 little-endian x86-64 (ELF magic, class=2, data=1, e_machine=62)",
+          "passed": true
+        },
+        {
+          "path": "bin/bench",
+          "format": "ELF64 little-endian x86-64 (ELF magic, class=2, data=1, e_machine=62)",
+          "passed": true
+        },
+        {
+          "path": "bin/load",
+          "format": "ELF64 little-endian x86-64 (ELF magic, class=2, data=1, e_machine=62)",
+          "passed": true
+        },
+        {
+          "path": "bin/server",
+          "format": "ELF64 little-endian x86-64 (ELF magic, class=2, data=1, e_machine=62)",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "acceptance": {
+    "go_test": "passed: go test -count=1 ./...",
+    "go_vet": "passed: go vet ./...",
+    "go_build": "passed: go build ./...",
+    "frontend": "TypeScript/Vite build passed during each packaging run; no frontend source changes in this milestone",
+    "windows_same_host_repeat": "identical archive SHA256; sidecars intentionally have different filenames",
+    "windows_native_smoke": "passed: all six packaged CLIs, empty application PATH, deterministic fixture, JSONL/snapshot aggregates across three engines, benchmark, HTTP/static bytes, two successful load requests",
+    "windows_chromium": "passed: snapshot 1,000 rows, 1% query 10 rows, three-engine comparison, no page errors",
+    "native_smoke_completed_utc": "2026-09-17T07:20:12.1186131Z",
+    "isolated_workspace": "outside repository; unique extraction removed; dedicated workspace parent removed",
+    "owned_server": "stopped by successful smoke cleanup",
+    "linux_native_execution": "not executed; cross-compiled and integrity/header-verified only",
+    "hosted_ci": "not run for this candidate; historical 3e4a347 CI is not current acceptance"
+  },
+  "commands": [
+    "go test -count=1 ./...",
+    "go vet ./...",
+    "go build ./...",
+    "go run ./cmd/release -version 0.14.0-preview.1 -target windows-amd64 -output releases/chronolens-0.14.0-preview.1-windows-amd64.zip",
+    "go run ./cmd/release -version 0.14.0-preview.1 -target windows-amd64 -output releases/chronolens-0.14.0-preview.1-windows-amd64-repeat.zip",
+    "go run ./cmd/release -version 0.14.0-preview.1 -target linux-amd64 -output releases/chronolens-0.14.0-preview.1-linux-amd64.zip",
+    "go run ./cmd/release-smoke -archive <each archive above> -verify-only",
+    "go run ./cmd/release-smoke -archive releases/chronolens-0.14.0-preview.1-windows-amd64.zip -work-root <dedicated existing parent outside repository> -browser-script <absolute checkout path>\\web\\release-browser-smoke.mjs",
+    "Get-FileHash releases\\chronolens-0.14.0-preview.1-*.zip -Algorithm SHA256"
+  ],
+  "header_check_method": "PowerShell .NET ZipFile entry streams and BitConverter checks; no payload extraction or execution; header fields listed per binary above",
+  "provenance_check_method": "Each manifest source SHA256/size compared against checkout; archive SHA256 compared to exact sidecar; complete payload validation through release.Verify",
+  "distribution": {
+    "license_selected": false,
+    "signed": false,
+    "pushed": false,
+    "tagged": false,
+    "github_release": false,
+    "workflow_dispatched": false
+  },
+  "limitations": [
+    "No new machine/OS image provisioned; Windows execution used the existing host.",
+    "Cross-host/toolchain byte reproducibility and native Linux runtime compatibility are not claimed.",
+    "Checksums and manifests are not publisher signatures or authentication.",
+    "Candidate built at clean f8ae657; later acceptance documentation is not a build input and is not represented by the artifact HEAD.",
+    "Local CGO race testing and current native hosted CI remain pending approved publication workflow."
+  ]
+}

@@ -21,7 +21,7 @@ distributed features to the local-first product.
 | 11 | Reproducible release packages and fresh-machine installation/release automation | Completed and published 2026-09-16 through `3e4a347`; [unsigned local-preview guide](releases.md); prior Windows, Linux, and explorer CI passed |
 | 12 | License owner decision, authentication design, and public-deployment readiness review | Deferred; no public exposure or automatic license selection |
 | 13 | Interactive exact-profile and explicit-preset performance | Completed locally as four tested tasks; [matched evidence](../benchmarks/interactive-performance.md); push/release approval outstanding |
-| 14 | Final local candidate scope, artifact verification, and retained acceptance evidence | In progress locally; unsigned `0.14.0-preview.1`; no public release or license selection |
+| 14 | Final local candidate scope, artifact verification, and retained acceptance evidence | Completed locally 2026-09-17; [unsigned `0.14.0-preview.1` evidence](release-candidate.md); Windows native/browser passed, Linux integrity/header verified only; no public release or license selection |
 | 15 | Final presentation/showcase of the verified local product | Separate subsequent milestone; not part of candidate acceptance |
 
 Milestone 13 tasks are: (1) exact-reference tests and profile/browser baselines,
