@@ -13,7 +13,7 @@ Dependency credits do not clear project redistribution.
 
 [**Watch the real 42-second demo**](docs/media/final-showcase/demo.webm) ·
 [Reproduce it](docs/demo.md) · [Mobile view](docs/media/final-showcase/mobile.png) ·
-[Local candidate evidence](docs/release-candidate.md)
+[Local candidate evidence](docs/release-candidate.md) · [Final handoff](docs/final-handoff.md)
 
 ![Real 100,000-event incident overview](docs/media/final-showcase/desktop.png)
 

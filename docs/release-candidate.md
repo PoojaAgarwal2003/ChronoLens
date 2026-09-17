@@ -97,3 +97,5 @@ No license was selected, no push/tag/release or CI dispatch was performed, and
 no public completion is claimed. [Final showcase](demo.md) is recorded separately;
 its capture tooling/package script changes do not retroactively change these
 archive manifests or their source commit.
+See the [final handoff](final-handoff.md) for subsequent source/browser checks
+and the still-uncompleted owner publication checklist.

@@ -1,0 +1,109 @@
+{
+  "recorded_utc": "2026-09-17T07:53:54.526Z",
+  "scope": "Final local showcase engineering, not publication or legal clearance",
+  "tested_source_commit": "5b6a1e4ba1e82f134d9476fb08589bb314cdb8f9",
+  "subsequent_changes": "Handoff/portfolio/validation documentation only; this record does not contain its own future commit hash.",
+  "host": {
+    "os": "Microsoft Windows NT 10.0.28000.0",
+    "arch": "amd64",
+    "go": "1.27.1",
+    "node": "22.17.0",
+    "npm": "10.9.2",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "isolation": "Existing shared host; not a newly provisioned OS or a benchmark run"
+  },
+  "checks": [
+    { "command": "go test -count=1 ./...", "result": "passed" },
+    { "command": "go vet ./...", "result": "passed" },
+    { "command": "go build ./...", "result": "passed" },
+    {
+      "cwd": "web",
+      "command": "npm run test:e2e",
+      "environment": "Go SDK prepended to process-local PATH; CHRONOLENS_GO set to installed executable",
+      "result": "passed",
+      "jsonl_tests": 23,
+      "snapshot_tests": 23,
+      "total_tests": 46,
+      "includes": "All 42 prior checks plus two capture-validation cases in each configuration; frontend typecheck and build"
+    },
+    {
+      "command": "npm run demo:capture -- final-showcase",
+      "cwd": "web",
+      "result": "passed",
+      "manifest": "media/final-showcase/capture.json",
+      "duration_seconds": 41.88,
+      "width": 1280,
+      "height": 900,
+      "bytes": 3050658,
+      "decoded_frames_during_validation": 17,
+      "video_sha256": "40343ddbfcd7f8e0da23d297cbf15b6e7ab3d1309748626074d58a5935b477b5",
+      "dataset_sha256": "4321094474fe4a5bd961ee4d7f43ab75da9b75444509b06ab0d8a3dafac72622",
+      "verified_artifact_hashes": 4,
+      "verified_source_hashes": 69,
+      "mobile_no_horizontal_overflow": true,
+      "all_three_screenshots_visually_reviewed": true,
+      "subsequent_full_playback": {
+        "ended": true,
+        "duration_seconds": 41.88,
+        "playback_rate": 4,
+        "total_video_frames": 1047,
+        "dropped_video_frames": 18,
+        "scope": "Independent Chromium playback to the end; accelerated playback scheduling is not a capture or application latency benchmark"
+      },
+      "architecture_svg_render_reviewed": true
+    },
+    {
+      "description": "Fresh local checkout in a new PowerShell path containing spaces",
+      "source_commit": "c3bcee2",
+      "commands": [
+        "git clone --quiet --no-hardlinks . <new-owned-path-containing-spaces>",
+        "npm ci (in the new checkout's web directory)",
+        "npm run build",
+        "go run ./cmd/generator -profile incident -events 100000 -seed 42 -output data\\events.jsonl",
+        "go build -o .\\server.exe ./cmd/server",
+        "server.exe -input data\\events.jsonl -web web\\dist -listen 127.0.0.1:0",
+        "Real Chromium: 100,000 matches, three comparison rows, no page errors"
+      ],
+      "result": "passed",
+      "new_operating_system": false,
+      "owned_server_stopped": true,
+      "owned_checkout_removed": true
+    },
+    {
+      "description": "git diff f8ae657 -- cmd internal web/src web/package-lock.json",
+      "result": "empty: application sources and dependency lock unchanged"
+    },
+    {
+      "description": "git diff 665d71b -- benchmarks",
+      "result": "empty: raw benchmark evidence untouched"
+    },
+    {
+      "description": "Local Node Markdown link/heading validation, excluding ignored dependencies",
+      "markdown_files": 21,
+      "relative_links": 169,
+      "markdown_anchors": 8,
+      "missing_targets_or_anchors": 0,
+      "result": "passed",
+      "scope": "Local targets only; remote URLs not fetched"
+    }
+  ],
+  "resolved_environment_failures": [
+    "Fresh checkout lacked tsc; attempted offline npm ci lacked cached Vite. Ordinary npm ci restored dependencies and fresh build/browser check passed.",
+    "Initial full browser invocation set CHRONOLENS_GO but not PATH; an existing storage test invokes go directly. Complete rerun with process-local SDK PATH passed all 46 checks."
+  ],
+  "candidate_rebuilt": false,
+  "candidate_source_commit": "f8ae6577361a97ba5b1426a371788cfa9d3bf5db",
+  "candidate_evidence": "release-candidate-validation.json",
+  "current_native_linux_executed": false,
+  "current_hosted_ci_dispatched": false,
+  "current_race_run_performed": false,
+  "project_license_selected": false,
+  "copied_source_provenance_resolved": false,
+  "public_distribution_approved": false,
+  "pushed": false,
+  "tagged": false,
+  "release_created": false,
+  "git_identity_changed": false,
+  "global_configuration_changed": false
+}

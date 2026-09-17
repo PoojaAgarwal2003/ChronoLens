@@ -71,3 +71,5 @@ No future feature expansion is required to call this local engineering scope
 complete. The [real incident demo](demo.md) and
 [architecture guide](architecture.md) complete the separate presentation work;
 they do not confer a license or turn the candidate into a public release.
+The [final handoff](final-handoff.md) records the later showcase validation and
+the unresolved provenance/publication actions.
