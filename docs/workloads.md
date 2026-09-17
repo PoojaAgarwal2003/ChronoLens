@@ -81,7 +81,7 @@ Both engines must report exactly 20,000 matching events. Add
 The indexed engine reduces candidate visits only through the time predicate;
 service-only filtering still requires a full candidate scan.
 
-![Original explorer view of the generated incident workload](images/incident.png)
+![Actual explorer view of the generated incident workload](images/incident.png)
 
 The image uses the real 100,000-event profile with seed 42. No browser response
 or chart series is mocked. Chart bucket alignment can straddle phase boundaries;

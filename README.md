@@ -1,59 +1,52 @@
 # ChronoLens
 
-A local telemetry-analysis project exploring how storage layout and indexing
-affect interactive queries over large event datasets.
+A local telemetry explorer for a practical question: **where is the signal,
+and how much work does finding it cost?** Inspect an incident, narrow a time
+window, and compare row, columnar, and indexed execution over the same data and
+query semantics—without hiding chart work inside query-only timings.
 
-**Current milestone: measured interactive profile and preset performance.**
-[Release instructions](docs/releases.md) cover Windows/Linux amd64 bundles containing
-all six CLIs and built UI assets, without requiring Go, Node, or a source checkout
-on the consumer machine. The project license remains unselected; authentication
-and public deployment are deferred to milestone 12. This is **not production-ready**.
+**Local engineering and showcase complete; publication blocked.** This is an
+unsigned, unauthenticated, loopback-only evaluation project, not production-ready.
+No project license is selected. The owner reports copied open-source code whose
+origins and terms are not yet mapped; see [third-party notices](THIRD_PARTY_NOTICES.md).
+Dependency credits do not clear project redistribution.
 
-A deterministic generator,
-validated JSONL reader, three query engines, diagnostic CLI, loopback-only Go API,
-and React explorer are implemented. The opt-in incident profile creates correlated
-traffic, service, failure, and latency spikes without changing the uniform baseline.
-[The snapshot startup experiment](benchmarks/snapshot-startup.md) loaded
-**10 million events into the indexed layout in 0.841 seconds**, versus
-**35.109 seconds from JSONL** in the same run. Snapshot files were **80.6% smaller**;
-one-time conversion took 34.4 seconds.
+[**Watch the real 42-second demo**](docs/media/final-showcase/demo.webm) ·
+[Reproduce it](docs/demo.md) · [Mobile view](docs/media/final-showcase/mobile.png) ·
+[Local candidate evidence](docs/release-candidate.md)
 
-[The earlier warm-query experiment](benchmarks/README.md) reports a
-**0.0644 ms median warm batch mean** for a 0.1% time range, versus **42.60 ms**
-for the row scan with identical results. These are workload-specific observations,
-not browser latency, request p95, or cold-disk guarantees.
-The [snapshot converter and loader](docs/snapshots.md) add versioned, checksummed
-binary input. Query/server/benchmark commands accept `-format snapshot`; JSONL remains the default.
+![Real 100,000-event incident overview](docs/media/final-showcase/desktop.png)
 
-[The concurrent-load and browser experiment](benchmarks/concurrency-latency.md)
-adds a bounded, loopback-only open-loop load tool and individual Chromium samples
-on **one million events**. At 40 comparison arrivals/s, 58 requests completed and
-142 received explicit 429 backpressure; those rejections are excluded from
-successful latency percentiles. Full-range click-to-visible-commit median was
-**194.5 ms**, versus **5.06 ms aggregate-only server work** in the browser phase.
-These shared-host observations include the documented browser paint-opportunity
-boundary, not portable latency targets.
+## What you can do
 
-[The matched interactive follow-up](benchmarks/interactive-performance.md)
-reduces full-range exact profile batch means from **53.79 to 17.00 ms**
-(five Go batches per version), and actual Chromium click median from
-**194.9 to 60.5 ms** (20 individual full-range samples per version).
-Adaptive service accumulation preserves sparse-window behavior and exact
-results; explicit presets dispatch immediately while sliders retain 100 ms
-coalescing. Raw samples, source hashes, allocation trade-offs, and the measured
-chart distinguish Go batch means from browser percentiles.
+- Generate deterministic uniform or correlated incident data; strictly validate
+  JSONL or convert it to versioned, checksummed immutable snapshots.
+- Explore half-open time ranges, service/status filters, exact timelines,
+  duration histograms, and service summaries in a responsive React UI.
+- Compare equivalent aggregates across three engines with explicit candidate
+  visits, index probes, and separate query/chart costs.
+- Reproduce CLI benchmarks, bounded HTTP load experiments, and real-browser
+  checks; inspect cancellation and explicit 429 backpressure.
+- Evaluate local Windows/Linux amd64 bundles containing six CLIs and built UI,
+  without a consumer Go/Node installation. Native validation coverage differs
+  by platform; [candidate limits](docs/release-candidate.md) are explicit.
 
-## Why this exists
+## Measured results, with boundaries
 
-ChronoLens compares a straightforward event scan with column-oriented and indexed execution
-over the **same data and query semantics**. Reproducible datasets, known-answer
-tests, and explicit rows-examined statistics distinguish a real improvement
-from a different answer or a misleading benchmark.
+| Experiment | Observed result | What was actually measured |
+|---|---|---|
+| [10M-event startup](benchmarks/snapshot-startup.md) | **35.109 s JSONL → 0.841 s snapshot** | Indexed-layout load on one host; not cold-disk or full server/catalog startup. Files 80.6% smaller; one-time conversion 34.4 s. |
+| [10M-event selective query](benchmarks/README.md) | **42.60 ms row → 0.0644 ms indexed** | Median warm **batch mean**, 0.1% time range, identical aggregates; not request p95 or browser latency. |
+| [1M-event exact profile](benchmarks/interactive-performance.md) | **53.79 → 17.00 ms** | Arithmetic mean of five Go batch means per version; exact chart work, not aggregate-only query speedup. |
+| [1M-event Chromium interaction](benchmarks/interactive-performance.md) | **194.9 → 60.5 ms** | Matched full-range click medians, 20 individual samples per version; visible DOM + two animation frames, not physical display presentation. |
 
-The explorer makes those differences visible: select a time window, filter by
-service or status, inspect exact charts, then compare the three engines against
-the same data. Candidate scans, index probes, and separate chart-construction
-work are reported explicitly.
+Each linked report includes workload, method, raw samples, and provenance.
+These are shared-host observations, not portable latency targets. The earlier
+[concurrency experiment](benchmarks/concurrency-latency.md) has a distinct
+**194.5 ms** browser baseline; it is not the matched 194.9 ms population.
+At 40 comparison arrivals/s, that experiment completed 58 requests and rejected
+142 with 429; rejected requests are excluded from successful latency percentiles.
+Demo/screenshot timings are incidental observations, not new benchmark evidence.
 
 ## Stack
 
@@ -93,11 +86,9 @@ The server is **local-only, unauthenticated, and read-only**. Do not expose it
 through a public proxy or tunnel. See the [developer and API guide](docs/local-explorer.md)
 for endpoint examples, request limits, timing semantics, tests, and troubleshooting.
 
-![ChronoLens explorer using real generated data](docs/images/explorer.png)
-
-Shown: one million seeded events with a 1% time window, 10,000 matches, and
-990,000 candidate rows skipped. [View the real comparison panel](docs/images/explorer-comparison.png).
-Interactive timings in screenshots are observations, not portable performance guarantees.
+The [recorded incident walkthrough](docs/demo.md) uses a separate 100,000-event
+incident dataset. Earlier [one-million-event views](docs/images/explorer.png)
+and the [comparison panel](docs/images/explorer-comparison.png) remain historical evidence.
 The [ten-million-event demonstration](benchmarks/README.md#explorer-demonstration)
 shows the larger dataset with exact charts and matching engine results.
 
@@ -233,6 +224,8 @@ and serves the static frontend from `web/dist`. Chart profiles are a separate,
 bounded indexed pass; they are not hidden in aggregate-only timings.
 The benchmark runner loads one layout at a time, verifies source hashes and
 full aggregate equivalence, and reports raw warm batches separately from loading.
+See the [architecture and trade-offs](docs/architecture.md) for implementation
+symbols, admission/cancellation behavior, and memory-versus-disk limits.
 
 ```text
 cmd/generator/          CLI, output handling, and CLI tests
@@ -254,7 +247,7 @@ internal/load/         Fixed arrivals, explicit skips/errors, complete-request p
 internal/release/      Archive safety, provenance, checksums, and publication
 benchmarks/            Raw results, independent oracle, chart renderer, reproduction guide
 web/                   React UI, build configuration, real-server browser tests
-docs/                  Architecture, API/setup guides, measurements, original images
+docs/                  Architecture, API/setup guides, measurements, actual UI captures
 .github/workflows/     Go checks on Windows and Linux
 go.mod                 Module and minimum Go version
 ```
@@ -317,13 +310,16 @@ dependencies and local frontend iteration.
 - **Dataset exceeds max-events:** explicitly increase the query limit or choose a smaller dataset.
 - **Reader error on line N:** check the exact field names, types, and timestamp order; the reader does not repair or silently skip records.
 
-## Next milestones
+## Completion boundary
 
 The [scoped remaining-work roadmap](docs/roadmap.md) tracks independently reviewed
-milestones. Storage/startup and bounded concurrency/browser experiments are
-implemented, as are local-preview bundles with isolated Windows execution and
-Windows/Linux CI automation. Linux execution awaits publication of these changes.
-Licensing, authentication, and public-deployment decisions remain deferred.
+milestones. Local storage, query/UI, measurement, packaging, candidate acceptance,
+and showcase engineering are complete. The current candidate has native Windows
+execution and Linux integrity/header verification, **not current native Linux
+execution or hosted CI**. Previous CI is historical.
+Source provenance/license review, push approval, and separate release approval
+remain owner actions; no additional feature milestone is required for local use.
+Authentication/public deployment would be a separate scope.
 
 Ten-million-event warm selective queries are now measured, with
 [raw samples and reproduction commands](benchmarks/README.md).
@@ -333,9 +329,11 @@ capacity and portable end-to-end latency targets remain unverified.
 
 ## Contributing and licensing
 
-Keep changes focused, include tests for behavior changes, and run the development
-checks above. Never commit generated datasets, credentials, or benchmark claims
-without the corresponding workload and measurement method.
-
-A license has not been selected yet. Public source availability alone does not
-grant an open-source license.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) for checks and evidence expectations.
+**ChronoLens is unlicensed: no project license has been selected or granted.**
+The owner reports using copied open-source code, but its source URLs, file
+mappings, authors/notices, and terms remain unresolved. Do not assume all code
+is original or that upstream dependency licenses license this project.
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) distinguishes verified dependencies
+from that incomplete copied-source review. Public availability alone does not
+grant an open-source license or permission to redistribute.

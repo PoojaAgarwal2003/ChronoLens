@@ -3,8 +3,12 @@
 **Local engineering acceptance completed 2026-09-17. Not a public release.**
 The project license remains unselected, binaries are unsigned, and the server
 remains unauthenticated and numeric-loopback only.
-[Scope and measured limitations](release-notes.md) define what is complete;
-the later presentation/showcase is separate.
+[Scope and measured limitations](release-notes.md) define what is complete.
+The subsequent [showcase](demo.md) is separate from this historical acceptance.
+**The owner reports copied open-source code whose origins/terms remain unmapped.**
+Read [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md); this candidate is not
+cleared for redistribution. Its archives predate that inventory and were not
+rewritten to include it.
 
 ## Candidate identity
 
@@ -82,11 +86,14 @@ even if the six application binaries are unchanged. There is no circular
 
 Remaining distribution decisions are deliberately short:
 
-- Owner-selected project license/redistribution terms.
+- Verified copied-source mappings/notices and owner-approved compatible project
+  license/redistribution terms; see [the unresolved inventory](../THIRD_PARTY_NOTICES.md).
 - Explicit approval to push, then review current native hosted CI/race results.
 - Owner signing/distribution decision and separate authorization for any tag or
   GitHub Release. A public service would additionally need a separately scoped
   authentication/exposure review; it is not part of this local product.
 
 No license was selected, no push/tag/release or CI dispatch was performed, and
-no public completion is claimed. Final showcase remains a separate milestone.
+no public completion is claimed. [Final showcase](demo.md) is recorded separately;
+its capture tooling/package script changes do not retroactively change these
+archive manifests or their source commit.

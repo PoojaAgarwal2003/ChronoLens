@@ -10,7 +10,7 @@
     <text x="32" y="62" font-size="13" fill="#486373">One source snapshot. Three query paths. Separate, exact chart work.</text>
     <rect x="30" y="150" width="145" height="88" rx="10" fill="#fff" stroke="#9cb4c2"/>
     <text x="102" y="185" text-anchor="middle" font-size="15" font-weight="600">JSONL / snapshot</text>
-    <text x="102" y="208" text-anchor="middle" font-size="12">validated once</text>
+    <text x="102" y="208" text-anchor="middle" font-size="12">validated / checksummed*</text>
     <rect x="222" y="100" width="285" height="230" rx="12" fill="#e4f5f1" stroke="#3b9a87"/>
     <text x="242" y="132" font-size="18" font-weight="600">Immutable engine catalog</text>
     <rect x="242" y="150" width="245" height="45" rx="6" fill="#fff"/>
@@ -24,12 +24,14 @@
     <text x="574" y="183" font-size="13">Aggregate query</text>
     <text x="574" y="210" font-size="13">Separate chart profile</text>
     <text x="574" y="237" font-size="13">Warm engine comparison</text>
-    <text x="574" y="279" font-size="12" fill="#486373">Loopback / bounded requests</text>
+    <text x="574" y="263" font-size="12" fill="#486373">Two shared execution slots</text>
+    <text x="574" y="284" font-size="12" fill="#486373">Loopback / cancel / 429 busy</text>
     <rect x="790" y="150" width="180" height="125" rx="12" fill="#fff" stroke="#9cb4c2"/>
     <text x="880" y="185" text-anchor="middle" font-size="18" font-weight="600">React explorer</text>
     <text x="880" y="212" text-anchor="middle" font-size="13">Ranges / filters / charts</text>
     <text x="880" y="237" text-anchor="middle" font-size="13">Real results and work counts</text>
-    <text x="32" y="386" font-size="13" fill="#486373">All components run on one machine. No broker, database, remote API, or public deployment required.</text>
+    <text x="32" y="366" font-size="12" fill="#486373">* Snapshot input has integrity checks. Both formats receive semantic validation before catalog publication.</text>
+    <text x="32" y="391" font-size="13" fill="#486373">One machine. No broker, database, remote API, or public deployment required.</text>
   </g>
   <g fill="none" stroke="#446578" stroke-width="2" marker-end="url(#arrow)">
     <path d="M175 194H218"/>
