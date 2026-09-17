@@ -10,6 +10,7 @@
     "build": "npm run typecheck && vite build",
     "test:e2e": "npm run build && playwright test && playwright test --config playwright.snapshot.config.ts",
     "test:e2e:ui": "playwright test --ui",
+    "demo:capture": "npm run build && node showcase/run.mjs",
     "experiment:latency": "npm run build && node experiments/run.mjs"
   },
   "dependencies": {

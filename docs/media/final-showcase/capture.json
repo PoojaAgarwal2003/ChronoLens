@@ -1,0 +1,202 @@
+{
+  "recorded_utc": "2026-09-17T07:41:31.286Z",
+  "completed_utc": "2026-09-17T07:42:14.411Z",
+  "source_commit": "665d71b675401d0746ebca2fb22b4f3a48fcaeba",
+  "source_status": "M web/package.json\n?? THIRD_PARTY_NOTICES.md\n?? docs/demo.md\n?? docs/media/\n?? web/e2e/showcase.spec.ts\n?? web/showcase/",
+  "source_sha256": {
+    "cmd/bench/format_test.go": "4aba2fc8755e8578c5025e187290b9acfb46c7c363d0719b89145e27dde78cd7",
+    "cmd/bench/main.go": "ad116902009d81b981c47840bea166fc649178935c39f971c3f47bb3663e998b",
+    "cmd/bench/main_test.go": "2b6d17213b7ead0ac061e7c28251b31388426b62061b563abbc449b39519a62c",
+    "cmd/generator/incident_test.go": "13981fea1fab2f32960591bfbdc75491c261a26f8c8901aad56891c9ae7b78dc",
+    "cmd/generator/main.go": "145a77d63f5d9e36ed579205affdcece547e5c8ab64108ffc0afaa4e804805d9",
+    "cmd/generator/main_test.go": "a42f37e8d618542dc69a7ba9c9e0cd83f9e4e3d24f45ea7443491b755eb62249",
+    "cmd/load/main.go": "bfae2e4e7688145f1f22f860d04dcd5f118b12ea1280e4bfd2426495ea7e5aa8",
+    "cmd/load/main_test.go": "ae13ef634a4291b324033f9f8c5dc19d4a8e87b54276aae1d82b0e876ddd8803",
+    "cmd/pack/main.go": "577f9cc82d4ebe0b39d721965a9db3b2c09b8c9d1152c93909b51f86a9feb66c",
+    "cmd/pack/main_test.go": "5facbef31e795be521add1b6cfd431914a4567d77986a281bf94006ee3d38666",
+    "cmd/pack/publish.go": "190dd0585ba8ee75e982074150a40aa61a9788c86aebcba0c46c4252caeaacfa",
+    "cmd/query/main.go": "a87347b6aa7ca4ac76c43945639c4e9aea64c77d626101eef16c9d4a3384a2f9",
+    "cmd/query/main_test.go": "9c0b677a170869e6e427c4abeacf339dddc3e182705dd1df522b39bba62d536f",
+    "cmd/release-smoke/main.go": "b27d1b02333044ca74c3c31849ef96c87589388901fb81f4ded77651b9e4b755",
+    "cmd/release-smoke/main_test.go": "ff8ff329c09b78f360f53a14bbce58fa312c0cf32f8fae35619dc7ad2026830a",
+    "cmd/release/main.go": "f138361165f6da4f7332ec5af4f4fa01e963f3ef43c8752092386f001ea14b4a",
+    "cmd/server/main.go": "fef344f30b67ca1b98eb63f434cd5f7f6340218eb56a6bf0f35aa2768e857680",
+    "cmd/server/main_test.go": "2e89c2a2d14878fce8cbe704b8c832e43fa7a3da84fabecaa3f7b9802b8248fd",
+    "internal/api/server.go": "259a83234f5b6d80cca0172bf31e269f31860257bf47245f51a64db0f532cf03",
+    "internal/api/server_test.go": "23ac9834404e48b239267b0e7bb484576de32c74e3f53728deda52cbc0ab6e29",
+    "internal/api/snapshot_test.go": "4c2171223127c36eca6a5028592aae31f2bbc8b5ca56da8098bfc2649eddf46e",
+    "internal/benchmark/benchmark_test.go": "3a0b15bedddfb3f4512cca7bd6b7479193823b166852ed2dc52879239ef81ca0",
+    "internal/benchmark/cases.go": "e6d6c46cdd24b77b67f8812fcb5ac631037c27b8795b962d9fb10b1421880508",
+    "internal/benchmark/config.go": "088b05f4757446bd53ba572e723795003bc8926191af2d8908f79adfa2c00ff9",
+    "internal/benchmark/format_test.go": "e30362aa5b1a8d45bed0394eaa7b851c6f801a884c1c5318d589c2dacc55fce3",
+    "internal/benchmark/load.go": "9deb5db63fd9eb1f5cfe0e1ba2c48d0afb4aa8f9dbbad72f05efc12ce36e39c9",
+    "internal/benchmark/report.go": "aa50de2465c34450b17128ddf97954d36ca04e70087c2a7732cd04880432721d",
+    "internal/benchmark/run.go": "ece6031940e48df38d8219ff7b02652f375c122d9e653898e8668beebd332d9d",
+    "internal/benchmark/timing.go": "b70da3e1c99c25e4481c87b9c822f347f9eb0007e255f725e5bde081066d7656",
+    "internal/benchmark/timing_test.go": "86a7c35710f678f9a6f3002dc43309a5f53da2c55d9e66637941274341bf19d1",
+    "internal/generator/generator.go": "b9743a84aee940c3b9f284cd5b6a8e14b96494298dc0841a5da83b276e67aa83",
+    "internal/generator/generator_test.go": "c9d7e51410842c4dc8a351e247f89077dc2ef5dd707ba9a15937a306db61a7f5",
+    "internal/generator/incident_test.go": "ea2275e6d521371d84eb28e070b704ad690bfdeaa2c39f5ff296b40ca9bbbb26",
+    "internal/load/load.go": "e324e78f88992a6b8b0e8688289a949dd27d9ece469a0a6e62c3349a60e4926c",
+    "internal/load/load_test.go": "c9add8319a0ac3846494c83eb2bbc0fa77a6d1da340e5a925f10d94c57fc3add",
+    "internal/measure/timing.go": "5815a09876132b7ec4bfb80aa319614f0e1d40b7fd6e3d43360ef64940ae135e",
+    "internal/measure/timing_test.go": "0d337310ee0251a37155404f871db7f197e48ec605e237aa5451a3f2b2cd9ad5",
+    "internal/query/benchmark_test.go": "126aed49535db73e8b5a11f64b8e7ccf0a96b64c6425fd2b0592fb7b3f435203",
+    "internal/query/catalog.go": "3afd34542e309f9455b5e90bd05ab847aefa1cc56dc3a865d17487e5442f1717",
+    "internal/query/dataset.go": "187bfa84e96274d45d4cd1ed0d653191f57a0ce2e01c4b3ab52767a73c9a2454",
+    "internal/query/format_test.go": "9d73515b32a88d78440e995282848d16777f34993a0932a8f611fa1636ce79e1",
+    "internal/query/incident_test.go": "ac3cd2c3c6c3bffa210cbb5b5ce151099d28ab93e502f67eb252466d0e0a5ea6",
+    "internal/query/indexed_test.go": "bbe6a01517ee3b57d54eb88e02fa26d6e99d129e511c350e7688a3a46993e78c",
+    "internal/query/profile.go": "bccd409321d511a116fc9a3bc8c9f6c84840f537342af6ace4eee617af2b3cab",
+    "internal/query/profile_benchmark_test.go": "498a8bcc252e9218d4dc1a3f4705a0f252bf14dac99fddb8474ab24563e4e90e",
+    "internal/query/profile_reference_test.go": "bbcd7e7565074cbad82658e9adaa69a791b25d94844f7c76af5d29554e67d2ab",
+    "internal/query/profile_test.go": "f8d41001681b44232d66aff0c38926697dc3cc8d535cc8503a73c998cb4a8b85",
+    "internal/query/query.go": "0b122adf952c0c53cb65fa86e06e1952a59cf7f852d8250716ed0413c5bd2a4c",
+    "internal/query/query_test.go": "64dea2f6cccc6b1b0f29e69f07a4aff02cc6414dc9209dbeb87eab490fd0a030",
+    "internal/query/selectivity_test.go": "08b74e951028c52e208b1cac3567d4c4f1ca521c07e4ca4f571221984fbd0417",
+    "internal/release/release.go": "edba9adf6b46c40aabeb38877767dc55896c4ab0b7f53d4eee70aa055e6609e2",
+    "internal/release/release_test.go": "e955a0106bc74943dbf2c2cb958626630d72b257b1543087414ba5de12e988f7",
+    "internal/release/release_windows_test.go": "c1eae8d8fd5ca71d22599db829e438d980cc9dac57f9a24e4c9d46580fd7d751",
+    "internal/release/verify.go": "660e532c24e215515749d4128f30ec49de3a09a1aca5fd848ba9cc5ff64d7089",
+    "internal/snapshot/reader.go": "0c44d688ed15d919e3343cdd604241e8053b220b99b2593b18c1e3eab642220d",
+    "internal/snapshot/snapshot.go": "0f0bcfeb8b0f450465a9c55e1b626060a7a7de189d8afdeb519539c3b0e04cee",
+    "internal/snapshot/snapshot_test.go": "0590f5cf87332423d3b36332bfa34a55ee243f6ea5221a34559efd291af29ce9",
+    "internal/snapshot/writer.go": "7b89ce9c6b3aa7ef96669f22b892d70edeaef862e859c4d6f3ca454495f4bc78",
+    "internal/telemetry/event.go": "b9d32b10b7a42aa8e69574ee07277a8351b5cd0e462ba72b3cfbddc4900f5f37",
+    "internal/telemetry/reader.go": "7dbfb9a419e4ca7ecb4193a4ce9483ae683d7f6f054f615a3d7e81711bbe5b90",
+    "internal/telemetry/reader_test.go": "a49b8f028a0b694e06f886b8a2decacd48137f057ac666554c5b6ee714af7766",
+    "web/package-lock.json": "fa1d7ccb79fed17d48523615280581d3e3201025d5a686d98d602d7373655ca4",
+    "web/package.json": "931a8063a101d4a1222134fb150e2b88846ab50b9c3761c3cc5ba185bebeea81",
+    "web/src/Charts.tsx": "3b24d11e44eba4bb80c778c759f231c5ab6fb17b4a1df3b302ff513a6dbd1d29",
+    "web/src/api.ts": "2d73d5951bbc5370150eb34d6d94a551327366ce68b1dff17a885adc10758db4",
+    "web/src/main.tsx": "5303ad26a9ae997f9581efbc922173f387dd377d2b74ff601d2334cca6c86846",
+    "web/src/style.css": "f85221cd194d3e133b45fe31dd1fb818ccbbeca840686552d11f2867ac8d50a0",
+    "web/showcase/run.mjs": "70fb1cbcdb0952efc917640a23f9dccf50a01e183d3c777089ef760baf8b916f",
+    "web/showcase/validation.mjs": "1502cd58deae80cb18ede549f4c0fce428f56e49a7f1cf19c240b28d79e1e545"
+  },
+  "generator": {
+    "profile": "incident",
+    "events": 100000,
+    "services": 16,
+    "seed": 42,
+    "interval": "1ms",
+    "start": "2026-01-01T00:00:00Z",
+    "error_percent": 5
+  },
+  "dataset_sha256": "4321094474fe4a5bd961ee4d7f43ab75da9b75444509b06ab0d8a3dafac72622",
+  "metadata": {
+    "dataset": "incident.jsonl",
+    "input_format": "jsonl",
+    "rows": 100000,
+    "service_count": 16,
+    "services": [
+      "service-001",
+      "service-002",
+      "service-003",
+      "service-004",
+      "service-005",
+      "service-006",
+      "service-007",
+      "service-008",
+      "service-009",
+      "service-010",
+      "service-011",
+      "service-012",
+      "service-013",
+      "service-014",
+      "service-015",
+      "service-016"
+    ],
+    "services_truncated": false,
+    "statuses": [
+      200,
+      500
+    ],
+    "min_timestamp_us": "1767225600000000",
+    "max_timestamp_us": "1767225684999000",
+    "engines": [
+      "row",
+      "columnar",
+      "indexed"
+    ],
+    "default_buckets": 100,
+    "max_buckets": 240,
+    "load_ms": 419.7399
+  },
+  "selected_time_percent": [
+    47,
+    53
+  ],
+  "filtered_aggregate": {
+    "count": 12848,
+    "error_count": 12848,
+    "duration_sum_us": "25676478475",
+    "mean_duration_us": 1998480.5786892902,
+    "min_duration_us": 6537,
+    "max_duration_us": 2999993
+  },
+  "scenes": [
+    {
+      "label": "Full dataset: generated incident and recovery",
+      "elapsed_seconds": 0.392
+    },
+    {
+      "label": "Timeline spike, error concentration, duration distribution",
+      "elapsed_seconds": 6.66
+    },
+    {
+      "label": "47–53% time window surrounds the five-second incident",
+      "elapsed_seconds": 13.041
+    },
+    {
+      "label": "Service-001 failures: inspect the synthetic business signal",
+      "elapsed_seconds": 19.156
+    },
+    {
+      "label": "Separate query and exact-chart costs; index work is not free",
+      "elapsed_seconds": 25.209
+    },
+    {
+      "label": "Equivalent aggregates; warm batch means are not browser latency",
+      "elapsed_seconds": 31.543
+    }
+  ],
+  "recording": {
+    "duration": 41.88,
+    "width": 1280,
+    "height": 900,
+    "decodedFrames": 17,
+    "bytes": 3050658
+  },
+  "artifacts": {
+    "demo.webm": {
+      "bytes": 3050658,
+      "sha256": "40343ddbfcd7f8e0da23d297cbf15b6e7ab3d1309748626074d58a5935b477b5"
+    },
+    "desktop.png": {
+      "bytes": 170892,
+      "sha256": "46ed064c76822efc2ef12516266a2c971390bfc4b69e297d4e3ad31f462b7c05"
+    },
+    "mobile.png": {
+      "bytes": 163467,
+      "sha256": "93376fa8586dd0cf8d126e1727718b0bfbe2c254efaa10e9f073f123b22a05bb"
+    },
+    "comparison.png": {
+      "bytes": 170269,
+      "sha256": "69e3f30a9182357149c7093fb8537633b65a5c2062589949529e9f61486b5dfc"
+    }
+  },
+  "tools": {
+    "node": "v22.17.0",
+    "go": "go version go1.27.1 windows/amd64",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12"
+  },
+  "checks": {
+    "page_errors": [],
+    "mobile_no_horizontal_overflow": true,
+    "equivalent_engine_aggregates": true,
+    "video_decoded": true
+  },
+  "caveats": "Paced real UI, synthetic incident; no API mocks, narration, or timing overlays. Displayed timings are incidental observations, not benchmarks. Project license unselected; copied-code provenance unresolved: see THIRD_PARTY_NOTICES.md."
+}
