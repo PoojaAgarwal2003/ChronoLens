@@ -127,6 +127,28 @@ from the commit named in the manifest, explicitly and visibly.
 
 ## Isolated package smoke
 
+### Verify without running the download
+
+Developers/reviewers can verify **either target on either host** without
+extracting or executing any payload (including a Linux candidate on Windows):
+
+```powershell
+go run ./cmd/release-smoke -archive releases\preview.zip -verify-only
+```
+
+This reuses the same bounded checksum, safe-entry, required-file, and complete
+manifest verification as native smoke. Success writes a single JSON object with
+`verified: true`, `extracted: false`, `executed: false`, and the complete
+`manifest`; it creates no workspace. `-work-root` and `-browser-script` cannot
+be combined with this mode. The built developer command exits 0 on success,
+1 on verification/output failure, and 2 on invalid arguments (`go run` itself
+may wrap a nonzero child exit). Errors go to stderr, not a success JSON record.
+This is integrity inspection, **not executable-format validation, native smoke,
+publisher authentication, or approval of manifest claims**. Consumers still use
+their OS checksum tools above; no seventh executable is added to the bundle.
+
+### Execute the native package in isolation
+
 From the checkout, select an existing workspace parent **outside the repository**
 (`$env:RUNNER_TEMP` in CI, or a dedicated local verification directory):
 

@@ -24,21 +24,51 @@ import (
 )
 
 func main() {
-	archive := flag.String("archive", "", "preview ZIP with adjacent .sha256")
-	workRoot := flag.String("work-root", "", "existing clean-workspace parent OUTSIDE source repository")
-	browser := flag.String("browser-script", "", "optional absolute path to web/release-browser-smoke.mjs (developer Node/Playwright required)")
-	flag.Parse()
-	if flag.NArg() != 0 || *archive == "" || *workRoot == "" {
-		fmt.Fprintln(os.Stderr, "release-smoke: require -archive and -work-root (outside repository)")
-		os.Exit(2)
+	os.Exit(run(os.Args[1:], os.Stdout, os.Stderr))
+}
+
+func run(args []string, stdout, stderr io.Writer) int {
+	flags := flag.NewFlagSet("release-smoke", flag.ContinueOnError)
+	flags.SetOutput(stderr)
+	archive := flags.String("archive", "", "preview ZIP with adjacent .sha256")
+	workRoot := flags.String("work-root", "", "existing clean-workspace parent OUTSIDE source repository")
+	browser := flags.String("browser-script", "", "optional absolute path to web/release-browser-smoke.mjs (developer Node/Playwright required)")
+	verifyOnly := flags.Bool("verify-only", false, "verify either target and emit JSON manifest; never extract or execute")
+	if err := flags.Parse(args); err != nil {
+		if errors.Is(err, flag.ErrHelp) {
+			return 0
+		}
+		return 2
+	}
+	if flags.NArg() != 0 || *archive == "" ||
+		!*verifyOnly && *workRoot == "" || *verifyOnly && (*workRoot != "" || *browser != "") {
+		fmt.Fprintln(stderr, "release-smoke: require -archive and either -verify-only (no work-root/browser-script) or -work-root (outside repository)")
+		return 2
+	}
+	if *verifyOnly {
+		manifest, _, err := release.Verify(*archive)
+		if err == nil {
+			err = json.NewEncoder(stdout).Encode(struct {
+				Verified  bool              `json:"verified"`
+				Extracted bool              `json:"extracted"`
+				Executed  bool              `json:"executed"`
+				Manifest  *release.Manifest `json:"manifest"`
+			}{Verified: true, Manifest: manifest})
+		}
+		if err != nil {
+			fmt.Fprintln(stderr, "release-smoke:", err)
+			return 1
+		}
+		return 0
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Minute)
 	defer cancel()
 	if err := smoke(ctx, *archive, *workRoot, *browser); err != nil {
-		fmt.Fprintln(os.Stderr, "release-smoke:", err)
-		os.Exit(1)
+		fmt.Fprintln(stderr, "release-smoke:", err)
+		return 1
 	}
-	fmt.Println("PASS: archive checksum + complete manifest; isolated extraction; all six CLIs; aggregate equality; HTTP/static assets; owned server stopped; workspace removed")
+	fmt.Fprintln(stdout, "PASS: archive checksum + complete manifest; isolated extraction; all six CLIs; aggregate equality; HTTP/static assets; owned server stopped; workspace removed")
+	return 0
 }
 
 func smoke(ctx context.Context, archive, workRoot, browser string) (resultErr error) {
