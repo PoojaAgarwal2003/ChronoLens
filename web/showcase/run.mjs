@@ -166,7 +166,7 @@ try {
       playwright: JSON.parse(await readFile(join(web, 'node_modules', '@playwright', 'test', 'package.json'))).version,
       chromium: browser.version() },
     checks: { page_errors: errors, mobile_no_horizontal_overflow: true, equivalent_engine_aggregates: true, video_decoded: true },
-    caveats: 'Paced real UI, synthetic incident; no API mocks, narration, or timing overlays. Displayed timings are incidental observations, not benchmarks. Project license unselected; copied-code provenance unresolved: see THIRD_PARTY_NOTICES.md.'
+    caveats: 'Paced real UI, synthetic incident; no API mocks, narration, or timing overlays. Displayed timings are incidental observations, not benchmarks. Project license unselected; verified dependency licenses and notices are documented in THIRD_PARTY_NOTICES.md and do not automatically license ChronoLens.'
   }, null, 2) + '\n', { flag: 'wx' });
   console.log(`Validated ${recording.duration.toFixed(2)}s / ${recording.bytes} bytes: ${output}`);
 } finally {

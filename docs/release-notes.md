@@ -3,10 +3,11 @@
 This candidate closes the **local-first product-engineering scope**, not a public
 v1.0 release. It is an unsigned evaluation preview; the project license remains
 **unselected**. No publication, authentication, or public deployment is implied.
-The owner reports using copied open-source code; its actual origins, file
-mappings, and terms remain unresolved. [Third-party notices](../THIRD_PARTY_NOTICES.md)
-credit verified dependencies without claiming complete source clearance.
-**Distribution remains blocked**, independently of local engineering acceptance.
+[Third-party notices](../THIRD_PARTY_NOTICES.md) credit verified dependencies
+and explain that their licenses do not automatically license the project.
+The owner requested proper upstream attribution, not a specific project license.
+**Distribution awaits project licensing and approval**, independently of local
+engineering acceptance.
 
 ## Included
 
@@ -58,8 +59,8 @@ distributed storage, an authenticated service, or public deployment.
 
 Before any distribution beyond local evaluation, the owner must:
 
-1. Resolve copied-source provenance and preserve required upstream notices,
-   then select/approve compatible project terms for material the owner can
+1. Preserve required upstream notices and select/approve compatible project terms
+   for material the owner can
    license; dependency notices alone are not a ChronoLens redistribution grant.
 2. Approve pushing the local commits and evaluate current native hosted CI
    (including Linux/race results); historical CI does not validate this candidate.
@@ -72,4 +73,4 @@ complete. The [real incident demo](demo.md) and
 [architecture guide](architecture.md) complete the separate presentation work;
 they do not confer a license or turn the candidate into a public release.
 The [final handoff](final-handoff.md) records the later showcase validation and
-the unresolved provenance/publication actions.
+the outstanding project-licensing/publication actions.

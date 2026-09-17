@@ -1,9 +1,7 @@
 # Portfolio material — draft, not approved for posting
 
-**Pending source-provenance review and owner verification of personal
-contributions.** The owner reports using copied open-source code whose origins
-and terms remain unmapped. Before using these drafts, complete
-[THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md), retain upstream credits, and
+**Drafts for ordinary accuracy and personal-contribution review.** Before using
+these drafts, read [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md), retain upstream credits, and
 replace/remove any wording that does not describe work you personally performed.
 Project measurements do not establish authorship of the underlying code.
 
@@ -26,7 +24,7 @@ the repository's results, not a claim that one person wrote every component.
   workload/allocation caveats ([evidence](../benchmarks/interactive-performance.md)).
 - Validated a local Go/React explorer with deterministic incident data,
   real-server browser tests, and a reproducible **41.88-second recorded demo**;
-  documented unsigned candidate limits and unresolved upstream provenance
+  documented unsigned candidate limits and verified upstream dependency credits
   ([demo](demo.md), [handoff](final-handoff.md)).
 
 ## LinkedIn draft
@@ -44,13 +42,14 @@ the repository's results, not a claim that one person wrote every component.
 > 17.00 ms, while Chromium click medians changed from 194.9 to 60.5 ms. Those are
 > different measurements, not portable performance guarantees.
 >
-> The project uses open-source components. Upstream credits and the provenance
-> of copied code are still under review; no project license or public release
-> is approved. I'm treating attribution and reproducible evidence as part of
+> The project uses open-source components, with verified dependency licenses
+> and notices documented separately. No project license or public release is
+> approved. I'm treating attribution and reproducible evidence as part of
 > the engineering work—not an afterthought.
 
-Attach/link the demo only after the publication review, not as a claim of
-production adoption, original invention, or upstream endorsement.
+Review the wording for personal accuracy before posting. Sharing the source,
+demo, or bundles still requires the applicable publication approval; a post is
+not a claim of production adoption, original invention, or upstream endorsement.
 
 ## Technical talking points
 

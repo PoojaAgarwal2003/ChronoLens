@@ -99,7 +99,21 @@
   "current_hosted_ci_dispatched": false,
   "current_race_run_performed": false,
   "project_license_selected": false,
-  "copied_source_provenance_resolved": false,
+  "attribution_clarification": {
+    "date": "2026-09-17",
+    "request": "Proper upstream dependency attribution, not a report of personally copied unknown files or selection of a project license.",
+    "externally_copied_project_code_source_identified_in_available_implementation_record": false,
+    "scope": "Not a categorical originality claim or legal-clearance opinion.",
+    "changes": "Corrected descriptive documentation and capture-manifest notice text; preserved media bytes, dataset and original capture source hashes. The capture script has a corresponding notice-only string change after the historical checks above.",
+    "validation": {
+      "node_check_showcase_script": "passed",
+      "targeted_playwright_capture_tests": 2,
+      "relative_links": 169,
+      "markdown_anchors": 8,
+      "media_hashes_verified": 4,
+      "historical_capture_measurements_and_source_hashes_unchanged": true
+    }
+  },
   "public_distribution_approved": false,
   "pushed": false,
   "tagged": false,

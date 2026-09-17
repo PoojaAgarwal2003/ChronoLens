@@ -5,9 +5,9 @@ The project license remains unselected, binaries are unsigned, and the server
 remains unauthenticated and numeric-loopback only.
 [Scope and measured limitations](release-notes.md) define what is complete.
 The subsequent [showcase](demo.md) is separate from this historical acceptance.
-**The owner reports copied open-source code whose origins/terms remain unmapped.**
-Read [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md); this candidate is not
-cleared for redistribution. Its archives predate that inventory and were not
+Read [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) for verified dependency
+credits; dependency licenses do not license the project automatically. Project
+licensing and distribution approval remain outstanding. The archives predate that inventory and were not
 rewritten to include it.
 
 ## Candidate identity
@@ -86,8 +86,8 @@ even if the six application binaries are unchanged. There is no circular
 
 Remaining distribution decisions are deliberately short:
 
-- Verified copied-source mappings/notices and owner-approved compatible project
-  license/redistribution terms; see [the unresolved inventory](../THIRD_PARTY_NOTICES.md).
+- Owner-approved project license/redistribution terms, preserving required
+  upstream notices; see [dependency attribution](../THIRD_PARTY_NOTICES.md).
 - Explicit approval to push, then review current native hosted CI/race results.
 - Owner signing/distribution decision and separate authorization for any tag or
   GitHub Release. A public service would additionally need a separately scoped
@@ -98,4 +98,4 @@ no public completion is claimed. [Final showcase](demo.md) is recorded separatel
 its capture tooling/package script changes do not retroactively change these
 archive manifests or their source commit.
 See the [final handoff](final-handoff.md) for subsequent source/browser checks
-and the still-uncompleted owner publication checklist.
+and the outstanding owner licensing/publication checklist.

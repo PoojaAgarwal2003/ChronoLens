@@ -5,10 +5,9 @@ license remains **unselected**. Dependency notices do not grant permission to
 redistribute ChronoLens publicly. Authentication, public-deployment review,
 signing/installer decisions, and the project license remain milestone 12 owner
 decisions. Nothing here creates a GitHub Release, tag, commit, or push.
-The owner also reports copied open-source code with unresolved origins and
-terms. Read [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) before any sharing:
-the retained candidate predates that inventory, and existing dependency notices
-are not complete project-source clearance.
+Read [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) for verified dependency
+credits and license scope. The retained candidate predates that inventory;
+its existing dependency notices are not a project license or publication approval.
 
 Latest local acceptance: [0.14.0-preview.1 candidate evidence](release-candidate.md)
 and [scoped release notes](release-notes.md). The milestone-11 verification record

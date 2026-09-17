@@ -22,7 +22,7 @@ distributed features to the local-first product.
 | 12 | License owner decision, authentication design, and public-deployment readiness review | Deferred; no public exposure or automatic license selection |
 | 13 | Interactive exact-profile and explicit-preset performance | Completed locally as four tested tasks; [matched evidence](../benchmarks/interactive-performance.md); push/release approval outstanding |
 | 14 | Final local candidate scope, artifact verification, and retained acceptance evidence | Completed locally 2026-09-17; [unsigned `0.14.0-preview.1` evidence](release-candidate.md); Windows native/browser passed, Linux integrity/header verified only; no public release or license selection |
-| 15 | Final presentation/showcase of the verified local product | Engineering complete locally 2026-09-17 in three tasks: [verified real recording](demo.md), [architecture/docs](architecture.md), [validated handoff](final-handoff.md); publication blocked by unresolved source provenance/license and owner approval |
+| 15 | Final presentation/showcase of the verified local product | Engineering complete locally 2026-09-17 in three tasks: [verified real recording](demo.md), [architecture/docs](architecture.md), [validated handoff](final-handoff.md); publication awaits project license selection and owner approval |
 
 Milestone 13 tasks are: (1) exact-reference tests and profile/browser baselines,
 (2) measured adaptive service accumulation and direct histogram classification,
@@ -49,6 +49,7 @@ The actual ten-minute gap before milestone 15 completed at
 2026-09-17 07:33:30.352 UTC. Its three tasks are demo, documentation, and handoff;
 there is no artificial waiting interval between those task commits.
 
-The owner reports copied open-source code, but source URLs/file mappings/terms
-remain unresolved. [Third-party notices](../THIRD_PARTY_NOTICES.md) record that
-blocker and verified dependency credits. Local completion is not legal clearance.
+The owner requests proper attribution for third-party components used in the
+implementation. [Third-party notices](../THIRD_PARTY_NOTICES.md) record verified
+dependency credits without selecting a project license. Local completion is not
+legal clearance or publication approval.

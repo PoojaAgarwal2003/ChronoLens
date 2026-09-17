@@ -83,5 +83,5 @@ workloads and provenance. Memory-versus-disk, cold-versus-warm, and isolated-
 versus-contended observations must not be mixed into a single headline.
 
 This describes the checked-in implementation, not authorship of every component.
-[Upstream attribution and copied-source review](../THIRD_PARTY_NOTICES.md) remain
+[Upstream dependency attribution and project licensing](../THIRD_PARTY_NOTICES.md) remain
 separate from engineering acceptance.

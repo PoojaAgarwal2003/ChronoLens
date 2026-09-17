@@ -49,8 +49,14 @@ Capture timings vary; hashes identify this recording, not bit-reproducible video
 
 ## Attribution and distribution boundary
 
-The project has no selected license. The owner reports use of open-source code,
-but copied-source origins and terms remain unresolved. See
-[third-party notices](../THIRD_PARTY_NOTICES.md) before sharing source, captures,
-or bundles. These local showcase artifacts are not a public release or clearance
-to redistribute; existing candidate archives predate the showcase.
+The project has no selected license. See
+[third-party notices](../THIRD_PARTY_NOTICES.md) for verified dependency credits:
+their licenses do not automatically license ChronoLens. These local showcase
+artifacts are not a public release or a grant of redistribution rights;
+project licensing/publication approval remain owner decisions. Existing candidate
+archives predate the showcase.
+
+The capture manifest's descriptive attribution note was corrected after capture
+following the owner's clarification. Media bytes, measurements, dataset hash,
+and original source fingerprints were preserved. The capture script's later
+notice-text edit does not change the recorded application's behavior.

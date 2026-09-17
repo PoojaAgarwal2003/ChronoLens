@@ -1,34 +1,34 @@
-# Third-party notices and unresolved source provenance
+# Third-party notices and dependency attribution
 
 **ChronoLens has no selected project license. No `LICENSE` file is supplied.**
 Public visibility is not a grant of redistribution rights. Dependency licenses
 below apply to their respective upstream components, **not automatically to
 ChronoLens**. This document is an attribution inventory, not legal clearance.
 
-## Owner-reported copied code — unresolved
+## Scope of the owner's request
 
-The owner reports that the project uses code taken from open-source sources.
-The originating repositories/URLs, revisions, copied file or snippet mappings,
-modifications, authors/copyright notices, and applicable license terms have **not
-yet been provided or verified**. We therefore cannot claim that project code is
-all original, identify its upstream authors, or establish redistribution rights.
-Do not infer origins from a similar project or from the repository's owner name.
+The owner requests proper attribution and license notices for the third-party
+components used in implementing ChronoLens. They did **not** report personally
+copying unidentified upstream files. The earlier interpretation to that effect
+was mistaken and is superseded by this clarification.
 
-Before publication, the owner must map each copied/adapted portion to its actual
-source and revision, preserve required notices, review obligations (including
-NOTICE/source-offer requirements where applicable), resolve incompatible or
-unknown terms, and select project terms only for material they can license.
-Record those verified mappings here. This dependency list is **not a complete
-copied-source inventory or a completed clearance review**. Publication of source,
-bundles, and portfolio material remains blocked pending that review and approval.
+No externally copied project-code source has been identified in the available
+implementation record. This is not a categorical claim that every part is
+original, nor a legal-clearance opinion. The verified dependencies below retain
+their own licenses and notices. If separately incorporated upstream material is
+identified in future work, record its actual source and applicable notices then;
+there is no owner-reported unknown-source inventory awaiting completion.
+
+The request for upstream attribution does not select MIT or any other project
+license. Choosing project terms and approving publication remain owner decisions.
 
 ## Verified dependency inventory
 
 Verified 2026-09-17 against installed `web/node_modules/<package>/package.json`
 and its upstream notice filenames, with pinned versions in
 [`web/package-lock.json`](web/package-lock.json). Repository links below come
-from package metadata; they are **dependency** sources, not claimed origins for
-unmapped project code.
+from package metadata; they identify **dependency** sources, not the provenance
+of the project's entire implementation.
 
 | Component / installed version | Role | Declared license | Upstream repository | Installed notices |
 |---|---|---|---|---|
@@ -58,9 +58,9 @@ upstream notices have been removed or replaced by this inventory.
 The retained [local candidate](docs/release-candidate.md) was built at `f8ae657`
 **before this document**. Its existing hashes remain historical evidence;
 archives have not been silently rewritten, and they do not contain this new
-inventory or the copied-source warning. They are unsigned, local-only evaluation
+inventory. They are unsigned, local-only evaluation
 artifacts, **not cleared for redistribution**. Any later approved distribution
-must include the then-complete inventory and all required upstream notices.
+must include the applicable dependency inventory and all required upstream notices.
 
 [Showcase captures](docs/demo.md) record the actual running project and generated
 data. They do not assert ownership of all visible implementation/design.

@@ -198,5 +198,10 @@
     "equivalent_engine_aggregates": true,
     "video_decoded": true
   },
-  "caveats": "Paced real UI, synthetic incident; no API mocks, narration, or timing overlays. Displayed timings are incidental observations, not benchmarks. Project license unselected; copied-code provenance unresolved: see THIRD_PARTY_NOTICES.md."
+  "caveats": "Paced real UI, synthetic incident; no API mocks, narration, or timing overlays. Displayed timings are incidental observations, not benchmarks. Project license unselected; verified dependency licenses and notices are documented in THIRD_PARTY_NOTICES.md and do not automatically license ChronoLens.",
+  "post_capture_annotation": {
+    "date": "2026-09-17",
+    "reason": "Owner clarified that the request concerns proper third-party dependency attribution, not personally copied unknown files.",
+    "scope": "Only descriptive attribution text was corrected. Media, measurements, dataset hash, and original source fingerprints are unchanged. The capture script's later notice-only edit is not substituted into these historical source hashes."
+  }
 }

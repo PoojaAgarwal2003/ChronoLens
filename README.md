@@ -7,9 +7,10 @@ query semantics—without hiding chart work inside query-only timings.
 
 **Local engineering and showcase complete; publication blocked.** This is an
 unsigned, unauthenticated, loopback-only evaluation project, not production-ready.
-No project license is selected. The owner reports copied open-source code whose
-origins and terms are not yet mapped; see [third-party notices](THIRD_PARTY_NOTICES.md).
-Dependency credits do not clear project redistribution.
+No project license is selected. Verified third-party components and their
+licenses are credited in [third-party notices](THIRD_PARTY_NOTICES.md).
+Those licenses apply to their respective dependencies, not automatically to
+ChronoLens; project licensing and publication approval remain owner decisions.
 
 [**Watch the real 42-second demo**](docs/media/final-showcase/demo.webm) ·
 [Reproduce it](docs/demo.md) · [Mobile view](docs/media/final-showcase/mobile.png) ·
@@ -317,7 +318,7 @@ milestones. Local storage, query/UI, measurement, packaging, candidate acceptanc
 and showcase engineering are complete. The current candidate has native Windows
 execution and Linux integrity/header verification, **not current native Linux
 execution or hosted CI**. Previous CI is historical.
-Source provenance/license review, push approval, and separate release approval
+Project license selection, push approval, and separate release approval
 remain owner actions; no additional feature milestone is required for local use.
 Authentication/public deployment would be a separate scope.
 
@@ -331,9 +332,10 @@ capacity and portable end-to-end latency targets remain unverified.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) for checks and evidence expectations.
 **ChronoLens is unlicensed: no project license has been selected or granted.**
-The owner reports using copied open-source code, but its source URLs, file
-mappings, authors/notices, and terms remain unresolved. Do not assume all code
-is original or that upstream dependency licenses license this project.
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) distinguishes verified dependencies
-from that incomplete copied-source review. Public availability alone does not
-grant an open-source license or permission to redistribute.
+The owner requested proper upstream attribution for components used in the
+implementation, not a particular project license.
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) credits verified dependencies and
+their notices. No externally copied project-code source has been identified in
+the available implementation record; this is not an all-original or legal-
+clearance claim. Dependency licenses do not automatically license this project,
+and public availability alone does not grant permission to redistribute it.

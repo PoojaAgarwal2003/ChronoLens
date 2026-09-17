@@ -1,10 +1,13 @@
 # Final local handoff — 2026-09-17
 
 **Local product engineering and showcase are complete. Publication is blocked.**
-The project is unlicensed, its candidate is unsigned, and the owner-reported
-copied code has unresolved source URLs, file mappings, and terms.
-[THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) is an incomplete attribution
-inventory, not a grant of rights. No push, tag, release, or workflow dispatch was
+The project has no selected license and its candidate is unsigned.
+[THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) credits verified dependencies
+without granting project rights. The owner's request concerns proper upstream
+attribution, not a claim of personally copying unknown files. No externally
+copied project-code source has been identified in the available implementation
+record; this is not categorical originality or legal clearance.
+No push, tag, release, or workflow dispatch was
 performed in this final milestone.
 
 ## What is ready locally
@@ -33,15 +36,19 @@ slots. Rejections/cancellation are explicit; neither proves a capacity SLO.
 - `c3bcee2`: actual recorded incident walkthrough, capture validation tests,
   desktop/mobile/comparison images, and third-party/provenance notices.
 - `5b6a1e4`: measured README, architecture, fresh-checkout instructions, and
-  candidate/roadmap attribution warnings.
-- This handoff is the third local showcase task commit, written after the checks
-  below. The validation record identifies the tested commit rather than trying
-  to contain its own future commit hash.
+  candidate/roadmap licensing notes.
+- `f2ba16c`: the third local showcase task commit, containing the handoff,
+  portfolio drafts, and validation record after the checks below.
+
+A subsequent corrective commit applies the owner's attribution clarification
+without amending those three commits: the request was for proper dependency
+credits, not an assertion of unknown copied files. Project license selection
+and publication approvals remain outstanding.
 
 The retained `0.14.0-preview.1` archives still identify clean source
 `f8ae6577361a97ba5b1426a371788cfa9d3bf5db`; their exact sizes/hashes remain in
 [candidate acceptance](release-candidate.md). They were **not rebuilt** here and
-do **not** contain the later copied-source warning/inventory. Application source
+do **not** contain the later dependency inventory. Application source
 (`cmd`, `internal`, `web/src`) and the dependency lockfile are unchanged from
 that candidate; the new package script is capture tooling. A future rebuild at
 a new HEAD changes manifest identity even if application source is unchanged.
@@ -49,6 +56,10 @@ a new HEAD changes manifest identity even if application source is unchanged.
 The video was captured on a working tree based on `665d71b`, before committing
 the capture tooling; its manifest truthfully records dirty status and **69
 source fingerprints**. It is not represented as a clean-candidate recording.
+Those fingerprints describe the original capture inputs. A later descriptive
+notice correction in `web/showcase/run.mjs` is intentionally not substituted
+into the historical source hashes. The manifest's attribution annotation was
+corrected without changing the media, dataset hash, or measured results.
 All four retained media artifacts were hash/size-verified after capture.
 The WebM is **3,050,658 bytes**, 1280×900, **41.88 seconds**, with actual Chromium
 metadata/decoded-frame validation. The synthetic dataset SHA256 and exact
@@ -60,7 +71,7 @@ speed (1,047 total video frames; 18 dropped during accelerated playback); this
 checks media usability, not application latency. The architecture SVG was also
 rendered and visually reviewed.
 
-## Final verification and coverage
+## Original final verification and coverage
 
 On Windows amd64, Go 1.27.1, Node 22.17.0, npm 10.9.2, Playwright 1.63.0,
 Chromium 153.0.8010.12:
@@ -92,13 +103,10 @@ commits. No new benchmark or production deployment was performed.
 
 ## Short publication checklist — owner actions, not done
 
-- [ ] Identify actual copied/adapted source URLs, revisions, file mappings,
-  modifications, authors/notices, and obligations; resolve unknown/incompatible
-  terms and complete the upstream inventory.
 - [ ] Select compatible project terms only for material the owner can license;
-  preserve all required notices and include the completed inventory in any
-  later distribution. Do not treat current archives as cleared.
-- [ ] Verify personal contributions/attribution before using portfolio drafts.
+  preserve required dependency notices and include the applicable inventory in
+  any later distribution. Dependency licenses do not supply project terms.
+- [ ] Review portfolio drafts for factual accuracy and personal contributions.
 - [ ] Explicitly approve pushing the local commits, then review current hosted
   native Windows/Linux and race results.
 - [ ] Separately approve distribution/signing policy and any tag or release.

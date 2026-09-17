@@ -2,8 +2,8 @@
 
 This is a local-first evaluation project, not a cleared public contribution
 program. No project license is selected. Read
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md): the owner-reported copied-source
-inventory is unresolved. Do not submit material you cannot identify and license,
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for verified dependency credits
+and their license scope. Do not submit material you cannot identify and license,
 remove upstream notices, or infer project rights from dependency licenses.
 
 ## Setup and focused changes
@@ -49,9 +49,9 @@ ordinary `npm ci` succeeded. This is a fresh checkout, not a newly provisioned O
   it takes about a minute plus build time and is not a latency benchmark.
 - Update the relevant command/API/architecture docs. Check relative links and
   visually inspect screenshots; a saved file alone does not validate a capture.
-- Map copied/adapted code to actual upstream URLs/revisions/files and required
-  notices before any publication review. Unknown origins stay explicitly unknown.
+- When introducing third-party code, document actual upstream URLs/revisions/files
+  and required notices; preserve existing dependency attribution.
 
 Commits and local checks do not authorize pushing, tagging, workflow dispatch,
-or releasing. The owner separately approves source provenance/licensing,
+or releasing. The owner separately approves project licensing,
 publication, current CI review, and any signed/distributed release.
