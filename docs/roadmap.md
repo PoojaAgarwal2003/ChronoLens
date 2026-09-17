@@ -7,6 +7,11 @@ implemented and measured on 2026-09-16. Milestone 11 adds local-preview packagin
 and isolated consumer smoke automation; milestone 12 still requires owner decisions.
 Publication requires approval.
 
+The final local engineering boundary is defined in the
+[candidate release notes](release-notes.md). License/distribution approval is an
+owner handoff, not an invitation to add authentication, live ingestion, or
+distributed features to the local-first product.
+
 | Milestone | Scope | Boundary |
 |---|---|---|
 | 7 | Versioned, bounded, checksummed immutable snapshot codec and safe JSONL conversion | Completed 2026-09-15; `a83d4e9` |
@@ -16,12 +21,14 @@ Publication requires approval.
 | 11 | Reproducible release packages and fresh-machine installation/release automation | Completed and published 2026-09-16 through `3e4a347`; [unsigned local-preview guide](releases.md); prior Windows, Linux, and explorer CI passed |
 | 12 | License owner decision, authentication design, and public-deployment readiness review | Deferred; no public exposure or automatic license selection |
 | 13 | Interactive exact-profile and explicit-preset performance | Completed locally as four tested tasks; [matched evidence](../benchmarks/interactive-performance.md); push/release approval outstanding |
+| 14 | Final local candidate scope, artifact verification, and retained acceptance evidence | In progress locally; unsigned `0.14.0-preview.1`; no public release or license selection |
+| 15 | Final presentation/showcase of the verified local product | Separate subsequent milestone; not part of candidate acceptance |
 
 Milestone 13 tasks are: (1) exact-reference tests and profile/browser baselines,
 (2) measured adaptive service accumulation and direct histogram classification,
 (3) immediate explicit actions with tested slider coalescing/cancellation, and
 (4) matched raw reports, reproducible chart, and honest boundary documentation.
-No additional milestone or public deployment is included.
+Those four tasks did not include final candidate acceptance or public deployment.
 
 Prior [CI run 35062923130](https://github.com/PoojaAgarwal2003/ChronoLens/actions/runs/35062923130)
 passed Windows, Linux, and explorer jobs at `3e4a347`. This is not a claim that
