@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" role="img" aria-labelledby="title description">
+  <title id="title">ChronoLens: Same Data. Same Answer. Less Work.</title>
+  <desc id="description">Five-stage telemetry workflow. Execute branches into three alternative engines: row scan, columnar scan, and indexed search. All produce equivalent aggregate results. A separate indexed chart-profile pass uses the same filters to feed a timeline, duration histogram, and service table. Charts and record values are conceptual illustrations.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#507077" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="teal-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9" fill="none" stroke="#087F82" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      text { font-family: "Segoe UI", Arial, sans-serif; fill: #142D40; }
+      .muted { fill: #546C78; }
+      .teal { fill: #087F82; }
+      .eyebrow { font-size: 17px; font-weight: 700; letter-spacing: 2px; }
+      .step { font-size: 24px; font-weight: 650; }
+      .sub { font-size: 19px; fill: #546C78; }
+      .card-title { font-size: 28px; font-weight: 650; }
+      .label { font-size: 23px; font-weight: 600; }
+      .small { font-size: 18px; }
+      .mono { font-family: Consolas, "Courier New", monospace; font-size: 18px; }
+      .wire { fill: none; stroke: #507077; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+      .teal-wire { fill: none; stroke: #087F82; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+      .card { fill: #FFFFFF; stroke: #D7E1DF; stroke-width: 1.5; }
+      .grid { stroke: #CCDAD8; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="1800" height="1200" fill="#F6F7F4"/>
+  <rect x="64" y="48" width="7" height="65" rx="3.5" fill="#087F82"/>
+  <text x="92" y="64" class="eyebrow teal">A LOCAL TELEMETRY EXPLORER</text>
+  <text x="90" y="116" font-size="49" font-weight="700" letter-spacing="-1.2">ChronoLens: Same Data. Same Answer. Less Work.</text>
+
+  <!-- High-level user workflow. -->
+  <g>
+    <rect class="card" x="64" y="155" width="300" height="105" rx="16"/>
+    <text x="86" y="189" class="eyebrow teal">01</text>
+    <text x="126" y="190" class="step">Generate telemetry</text>
+    <text x="86" y="231" class="sub">Deterministic event data</text>
+
+    <rect class="card" x="408" y="155" width="300" height="105" rx="16"/>
+    <text x="430" y="189" class="eyebrow teal">02</text>
+    <text x="470" y="190" class="step">Validate &amp; load</text>
+    <text x="430" y="231" class="sub">JSONL or binary snapshot</text>
+
+    <rect class="card" x="752" y="155" width="300" height="105" rx="16"/>
+    <text x="774" y="189" class="eyebrow teal">03</text>
+    <text x="814" y="190" class="step">Select filters</text>
+    <text x="774" y="231" class="sub">Time · service · status</text>
+
+    <rect x="1096" y="155" width="300" height="105" rx="16" fill="#E4F2EE" stroke="#087F82" stroke-width="2"/>
+    <text x="1118" y="189" class="eyebrow teal">04</text>
+    <text x="1158" y="190" class="step">Execute</text>
+    <text x="1118" y="231" class="sub">Choose an engine below</text>
+
+    <rect class="card" x="1440" y="155" width="300" height="105" rx="16"/>
+    <text x="1462" y="189" class="eyebrow teal">05</text>
+    <text x="1502" y="190" class="step">Explore exact charts</text>
+    <text x="1462" y="231" class="sub">Find and inspect the signal</text>
+    <path class="wire" d="M 370 207 H 397 M 714 207 H 741 M 1058 207 H 1085 M 1402 207 H 1429" marker-end="url(#arrow)"/>
+    <path class="wire" d="M 370 207 H 397" marker-end="url(#arrow)"/>
+    <path class="wire" d="M 714 207 H 741" marker-end="url(#arrow)"/>
+    <path class="wire" d="M 1058 207 H 1085" marker-end="url(#arrow)"/>
+  </g>
+
+  <text x="64" y="311" class="eyebrow muted">THREE ALTERNATIVES · SAME DATASET AND FILTERS · NOT SEQUENTIAL STAGES</text>
+  <path class="teal-wire" d="M 1246 261 V 337 M 330 337 H 1474"/>
+  <circle cx="1246" cy="337" r="5" fill="#087F82"/>
+  <path class="teal-wire" d="M 330 337 V 367" marker-end="url(#teal-arrow)"/>
+  <path class="teal-wire" d="M 902 337 V 367" marker-end="url(#teal-arrow)"/>
+  <path class="teal-wire" d="M 1474 337 V 367" marker-end="url(#teal-arrow)"/>
+
+  <!-- Row-oriented layout: complete records. -->
+  <g>
+    <rect class="card" x="64" y="377" width="532" height="295" rx="18"/>
+    <rect x="88" y="401" width="9" height="28" rx="3" fill="#7196A4"/>
+    <text x="111" y="426" class="card-title">Row scan</text>
+    <text x="91" y="464" class="small muted">time</text>
+    <text x="232" y="464" class="small muted">service</text>
+    <text x="361" y="464" class="small muted">duration</text>
+    <text x="488" y="464" class="small muted">status</text>
+    <rect x="90" y="478" width="480" height="120" rx="8" fill="#EFF4F5" stroke="#CCDAD8"/>
+    <path class="grid" d="M 90 508 H 570 M 90 538 H 570 M 90 568 H 570 M 218 478 V 598 M 346 478 V 598 M 478 478 V 598"/>
+    <g class="mono">
+      <text x="102" y="500">12:00:01</text><text x="232" y="500">svc-01</text><text x="360" y="500">12 ms</text><text x="498" y="500">200</text>
+      <text x="102" y="530">12:00:02</text><text x="232" y="530">svc-02</text><text x="360" y="530">80 ms</text><text x="498" y="530">500</text>
+      <text x="102" y="560">12:00:03</text><text x="232" y="560">svc-01</text><text x="360" y="560">18 ms</text><text x="498" y="560">200</text>
+      <text x="102" y="590">12:00:04</text><text x="232" y="590">svc-03</text><text x="360" y="590">25 ms</text><text x="498" y="590">200</text>
+    </g>
+    <text x="91" y="640" class="label">Inspect every event.</text>
+  </g>
+
+  <!-- Column-oriented layout: the same records split into arrays. -->
+  <g>
+    <rect class="card" x="636" y="377" width="532" height="295" rx="18"/>
+    <rect x="660" y="401" width="9" height="28" rx="3" fill="#4F9496"/>
+    <text x="683" y="426" class="card-title">Columnar scan</text>
+    <text x="662" y="464" class="small muted">timestamp</text>
+    <text x="798" y="464" class="small muted">service ID</text>
+    <text x="932" y="464" class="small muted">duration</text>
+    <text x="1064" y="464" class="small muted">status</text>
+    <rect x="660" y="478" width="126" height="120" rx="8" fill="#E2F1EE" stroke="#B9DAD3"/>
+    <rect x="798" y="478" width="120" height="120" rx="8" fill="#EFF4F5" stroke="#CCDAD8"/>
+    <rect x="930" y="478" width="120" height="120" rx="8" fill="#EFF4F5" stroke="#CCDAD8"/>
+    <rect x="1062" y="478" width="80" height="120" rx="8" fill="#E2F1EE" stroke="#B9DAD3"/>
+    <path class="grid" d="M 660 508 H 786 M 660 538 H 786 M 660 568 H 786 M 798 508 H 918 M 798 538 H 918 M 798 568 H 918 M 930 508 H 1050 M 930 538 H 1050 M 930 568 H 1050 M 1062 508 H 1142 M 1062 538 H 1142 M 1062 568 H 1142"/>
+    <g class="mono">
+      <text x="673" y="500">12:00:01</text><text x="841" y="500">01</text><text x="947" y="500">12 ms</text><text x="1083" y="500">200</text>
+      <text x="673" y="530">12:00:02</text><text x="841" y="530">02</text><text x="947" y="530">80 ms</text><text x="1083" y="530">500</text>
+      <text x="673" y="560">12:00:03</text><text x="841" y="560">01</text><text x="947" y="560">18 ms</text><text x="1083" y="560">200</text>
+      <text x="673" y="590">12:00:04</text><text x="841" y="590">03</text><text x="947" y="590">25 ms</text><text x="1083" y="590">200</text>
+    </g>
+    <text x="663" y="640" class="label">Scan relevant columns.</text>
+  </g>
+
+  <!-- Timestamp bounds select a candidate interval, not a separate copied index. -->
+  <g>
+    <rect x="1208" y="377" width="532" height="295" rx="18" fill="#FFFFFF" stroke="#80BDB4" stroke-width="2"/>
+    <rect x="1232" y="401" width="9" height="28" rx="3" fill="#087F82"/>
+    <text x="1255" y="426" class="card-title">Indexed search</text>
+    <text x="1235" y="464" class="small muted">Sorted timestamps</text>
+    <rect x="1234" y="496" width="480" height="48" rx="7" fill="#EFF4F5" stroke="#CCDAD8"/>
+    <rect x="1420" y="496" width="80" height="48" fill="#087F82"/>
+    <path stroke="#CCDAD8" stroke-width="1" d="M 1260 496 V 544 M 1287 496 V 544 M 1314 496 V 544 M 1340 496 V 544 M 1367 496 V 544 M 1394 496 V 544 M 1500 496 V 544 M 1527 496 V 544 M 1554 496 V 544 M 1580 496 V 544 M 1607 496 V 544 M 1634 496 V 544 M 1660 496 V 544 M 1687 496 V 544"/>
+    <path stroke="#B9DED5" stroke-width="1" d="M 1447 496 V 544 M 1474 496 V 544"/>
+    <path class="teal-wire" d="M 1420 483 V 555 M 1500 483 V 555"/>
+    <circle cx="1420" cy="483" r="4" fill="#087F82"/>
+    <circle cx="1500" cy="483" r="4" fill="#087F82"/>
+    <text x="1235" y="578" class="small muted">Skip</text>
+    <text x="1460" y="578" text-anchor="middle" class="small teal" font-weight="700">[from, to)</text>
+    <text x="1676" y="578" class="small muted">Skip</text>
+    <text x="1235" y="617" class="label">Binary-search bounds,</text>
+    <text x="1235" y="647" class="label">then scan candidates.</text>
+  </g>
+
+  <path class="wire" d="M 330 673 V 715 H 1474 V 673 M 902 673 V 746" marker-end="url(#arrow)"/>
+  <circle cx="902" cy="715" r="5" fill="#507077"/>
+  <rect x="450" y="756" width="904" height="84" rx="16" fill="#E4F2EE" stroke="#A9CEC5" stroke-width="1.5"/>
+  <text x="902" y="790" text-anchor="middle" font-size="28" font-weight="700">Equivalent aggregate results</text>
+  <text x="902" y="820" text-anchor="middle" class="sub">Count · errors · sum · mean · minimum · maximum</text>
+
+  <text x="64" y="886" class="eyebrow muted">SEPARATE CHART COMPUTATION · SAME FILTERS · NOT INCLUDED IN AGGREGATE-ONLY TIMING</text>
+  <g>
+    <rect x="64" y="909" width="440" height="218" rx="18" fill="#E4F2EE" stroke="#A9CEC5" stroke-width="1.5"/>
+    <text x="89" y="947" class="small teal" font-weight="700">FROM THE SAME FILTER SELECTION</text>
+    <text x="89" y="989" font-size="28" font-weight="700">Indexed chart-profile pass</text>
+    <text x="89" y="1028" class="sub">Visit matching candidates.</text>
+    <text x="89" y="1058" class="sub">Compute exact bins and groups.</text>
+    <text x="89" y="1097" class="small teal" font-weight="600">No sampling. No cached chart shortcuts.</text>
+    <path class="teal-wire" d="M 508 1018 H 546" marker-end="url(#teal-arrow)"/>
+
+    <rect class="card" x="556" y="909" width="1184" height="218" rx="18"/>
+    <text x="581" y="943" class="eyebrow teal">SIMPLIFIED DASHBOARD</text>
+    <path d="M 970 964 V 1108 M 1350 964 V 1108" stroke="#D7E1DF" stroke-width="1.5"/>
+    <text x="583" y="978" font-size="21" font-weight="650">Timeline + error spike</text>
+    <path d="M 590 1089 H 944" stroke="#CCDAD8" stroke-width="1.5"/>
+    <g fill="#87BFB7">
+      <rect x="600" y="1067" width="20" height="22" rx="2"/><rect x="625" y="1065" width="20" height="24" rx="2"/>
+      <rect x="650" y="1063" width="20" height="26" rx="2"/><rect x="675" y="1067" width="20" height="22" rx="2"/>
+      <rect x="700" y="1065" width="20" height="24" rx="2"/><rect x="725" y="1018" width="20" height="71" rx="2"/>
+      <rect x="750" y="1002" width="20" height="87" rx="2"/><rect x="775" y="1010" width="20" height="79" rx="2"/>
+      <rect x="800" y="1025" width="20" height="64" rx="2"/><rect x="825" y="1063" width="20" height="26" rx="2"/>
+      <rect x="850" y="1067" width="20" height="22" rx="2"/><rect x="875" y="1065" width="20" height="24" rx="2"/>
+      <rect x="900" y="1066" width="20" height="23" rx="2"/>
+    </g>
+    <path d="M 609 1085 L 635 1083 L 661 1084 L 687 1085 L 713 1081 L 735 1045 L 760 1025 L 785 1032 L 811 1051 L 837 1084 L 865 1085 L 891 1084 L 913 1085" fill="none" stroke="#B87726" stroke-width="3" stroke-linejoin="round"/>
+
+    <text x="994" y="978" font-size="21" font-weight="650">Duration histogram</text>
+    <g fill="#6DA9A2">
+      <rect x="1005" y="1068" width="39" height="21" rx="3"/><rect x="1057" y="1048" width="39" height="41" rx="3"/>
+      <rect x="1109" y="1015" width="39" height="74" rx="3"/><rect x="1161" y="1033" width="39" height="56" rx="3"/>
+      <rect x="1213" y="1053" width="39" height="36" rx="3"/><rect x="1265" y="1072" width="39" height="17" rx="3"/>
+    </g>
+    <path d="M 994 1089 H 1325" stroke="#CCDAD8" stroke-width="1.5"/>
+    <text x="999" y="1112" font-size="15" class="muted">Lower duration</text>
+    <text x="1219" y="1112" font-size="15" class="muted">Higher duration</text>
+
+    <text x="1375" y="978" font-size="21" font-weight="650">Service breakdown</text>
+    <text x="1375" y="1010" font-size="16" class="muted">Service</text>
+    <text x="1510" y="1010" font-size="16" class="muted">Matching events</text>
+    <path d="M 1375 1020 H 1713 M 1375 1051 H 1713 M 1375 1082 H 1713" stroke="#E0E7E4"/>
+    <text x="1375" y="1043" class="mono">svc-01</text><rect x="1512" y="1031" width="164" height="13" rx="3" fill="#087F82"/>
+    <text x="1375" y="1074" class="mono">svc-02</text><rect x="1512" y="1062" width="100" height="13" rx="3" fill="#87BFB7"/>
+    <text x="1375" y="1105" class="mono">svc-03</text><rect x="1512" y="1093" width="66" height="13" rx="3" fill="#87BFB7"/>
+  </g>
+  <text x="64" y="1170" font-size="20" font-weight="600">Selective queries avoid work. Broad queries still scan more.</text>
+  <text x="1740" y="1170" text-anchor="end" font-size="17" class="muted">Conceptual flow · illustrative records and charts · not a benchmark</text>
+</svg>

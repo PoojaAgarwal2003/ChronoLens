@@ -15,6 +15,11 @@
 /releases/
 .chronolens-release-*
 
+# Personal publishing drafts and LinkedIn carousel assets (kept locally).
+/docs/portfolio.md
+/docs/linkedin-post.md
+/docs/media/linkedin/
+
 # Local environment and credentials must never be committed.
 .env
 .env.*

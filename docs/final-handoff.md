@@ -1,5 +1,10 @@
 # Final local handoff — 2026-09-17
 
+This is a historical acceptance record, including the approvals outstanding on
+2026-09-17, not a live publication-status page. See the [README](../README.md)
+for the current project overview and scope. Personal publishing drafts are
+kept locally and excluded from the repository.
+
 **Local product engineering and showcase are complete. Publication is blocked.**
 The project has no selected license and its candidate is unsigned.
 [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) credits verified dependencies
@@ -21,7 +26,6 @@ performed in this final milestone.
 | Reproducible incident story | [41.88-second video](media/final-showcase/demo.webm), [capture guide](demo.md), [manifest](media/final-showcase/capture.json) |
 | Measurements, not guarantees | [10M warm queries](../benchmarks/README.md), [snapshot startup](../benchmarks/snapshot-startup.md), [matched profile/UI experiment](../benchmarks/interactive-performance.md) |
 | Unsigned evaluation archives | [Candidate acceptance](release-candidate.md), [machine-readable historical checks](release-candidate-validation.json), [packaging guide](releases.md) |
-| Presentation material pending review | [Resume bullets, LinkedIn draft, and talking points](portfolio.md) |
 | Final source/browser/setup checks | [Final validation record](final-validation.json) |
 
 The system remains one process loading an immutable dataset, not live ingestion,

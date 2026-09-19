@@ -5,22 +5,13 @@ Public visibility is not a grant of redistribution rights. Dependency licenses
 below apply to their respective upstream components, **not automatically to
 ChronoLens**. This document is an attribution inventory, not legal clearance.
 
-## Scope of the owner's request
+## Attribution scope
 
-The owner requests proper attribution and license notices for the third-party
-components used in implementing ChronoLens. They did **not** report personally
-copying unidentified upstream files. The earlier interpretation to that effect
-was mistaken and is superseded by this clarification.
-
-No externally copied project-code source has been identified in the available
-implementation record. This is not a categorical claim that every part is
-original, nor a legal-clearance opinion. The verified dependencies below retain
-their own licenses and notices. If separately incorporated upstream material is
-identified in future work, record its actual source and applicable notices then;
-there is no owner-reported unknown-source inventory awaiting completion.
-
-The request for upstream attribution does not select MIT or any other project
-license. Choosing project terms and approving publication remain owner decisions.
+This inventory records the third-party components used to build, run, and test
+ChronoLens. Each component retains its own license and required notices.
+Additional upstream material introduced in future changes must be documented
+with its source and applicable notices. Dependency attribution does not select
+or grant a project license.
 
 ## Verified dependency inventory
 

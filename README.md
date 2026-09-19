@@ -5,16 +5,14 @@ and how much work does finding it cost?** Inspect an incident, narrow a time
 window, and compare row, columnar, and indexed execution over the same data and
 query semantics—without hiding chart work inside query-only timings.
 
-**Local engineering and showcase complete; publication blocked.** This is an
-unsigned, unauthenticated, loopback-only evaluation project, not production-ready.
-No project license is selected. Verified third-party components and their
-licenses are credited in [third-party notices](THIRD_PARTY_NOTICES.md).
-Those licenses apply to their respective dependencies, not automatically to
-ChronoLens; project licensing and publication approval remain owner decisions.
+**Built for local exploration, exact results, and reproducible performance
+experiments.** ChronoLens brings a Go query engine and an interactive React
+dashboard together in one local process. No database, cloud account, or API key
+is required.
 
 [**Watch the real 42-second demo**](docs/media/final-showcase/demo.webm) ·
 [Reproduce it](docs/demo.md) · [Mobile view](docs/media/final-showcase/mobile.png) ·
-[Local candidate evidence](docs/release-candidate.md) · [Final handoff](docs/final-handoff.md)
+[Architecture](docs/architecture.md) · [Benchmark reports](benchmarks/README.md)
 
 ![Real 100,000-event incident overview](docs/media/final-showcase/desktop.png)
 
@@ -32,7 +30,28 @@ ChronoLens; project licensing and publication approval remain owner decisions.
   without a consumer Go/Node installation. Native validation coverage differs
   by platform; [candidate limits](docs/release-candidate.md) are explicit.
 
-## Measured results, with boundaries
+## How it works
+
+Generate telemetry, validate and load it, select a time range and service/status
+filters, then inspect exact results. Three alternative query engines make the
+cost of the same question visible:
+
+- **Row scan** visits complete event records.
+- **Columnar scan** reads the relevant arrays while still visiting every event.
+- **Indexed search** binary-searches the timestamp bounds and scans only the
+  candidate interval before applying the remaining filters.
+
+All three return equivalent aggregates. A **separate indexed chart-profile
+pass** computes the timeline, duration histogram, and service breakdown.
+Narrow time windows can avoid most rows; broad windows still require more work.
+
+![ChronoLens working flow: three alternative query engines and a separate exact chart-profile pass](docs/images/chronolens-concept.png)
+
+The diagram is conceptual, not a benchmark or an application screenshot.
+See the [architecture guide](docs/architecture.md) for implementation details
+and the [editable diagram](docs/images/chronolens-concept.svg) for a vector version.
+
+## Measured results
 
 | Experiment | Observed result | What was actually measured |
 |---|---|---|
@@ -311,31 +330,31 @@ dependencies and local frontend iteration.
 - **Dataset exceeds max-events:** explicitly increase the query limit or choose a smaller dataset.
 - **Reader error on line N:** check the exact field names, types, and timestamp order; the reader does not repair or silently skip records.
 
-## Completion boundary
+## Project scope and packages
 
-The [scoped remaining-work roadmap](docs/roadmap.md) tracks independently reviewed
-milestones. Local storage, query/UI, measurement, packaging, candidate acceptance,
-and showcase engineering are complete. The current candidate has native Windows
-execution and Linux integrity/header verification, **not current native Linux
-execution or hosted CI**. Previous CI is historical.
-Project license selection, push approval, and separate release approval
-remain owner actions; no additional feature milestone is required for local use.
-Authentication/public deployment would be a separate scope.
+The local explorer is complete: ingestion, immutable snapshots, three query
+engines, exact charts, reproducible experiments, and standalone preview packaging.
+The [development history](docs/roadmap.md) records the completed work.
 
-Ten-million-event warm selective queries are now measured, with
-[raw samples and reproduction commands](benchmarks/README.md).
-[One-million-event concurrent-load and browser results](benchmarks/concurrency-latency.md)
-now have their own raw evidence. Cold-disk behavior, sustained multi-client
-capacity and portable end-to-end latency targets remain unverified.
+The [packaging guide](docs/releases.md) covers Windows/Linux amd64 bundles with
+all six CLIs and built UI assets; consumers do not need Go, Node, or a source
+checkout. These are unsigned evaluation packages, not a production release.
+The retained [candidate record](docs/release-candidate.md) distinguishes native
+Windows execution from Linux archive/header verification; cross-compilation is
+not evidence of native Linux execution.
+
+ChronoLens intentionally loads one immutable dataset and serves a read-only,
+unauthenticated loopback interface. Live ingestion, distributed storage,
+authentication, and public hosting are outside this project's current scope,
+not unfinished steps required to run it locally. Do not expose the server publicly.
+Cold-disk performance, sustained multi-client capacity, and portable latency
+targets are not claimed.
 
 ## Contributing and licensing
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) for checks and evidence expectations.
-**ChronoLens is unlicensed: no project license has been selected or granted.**
-The owner requested proper upstream attribution for components used in the
-implementation, not a particular project license.
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) credits verified dependencies and
-their notices. No externally copied project-code source has been identified in
-the available implementation record; this is not an all-original or legal-
-clearance claim. Dependency licenses do not automatically license this project,
-and public availability alone does not grant permission to redistribute it.
+No project license has been granted; this repository currently has no `LICENSE`
+file. Public visibility does not itself grant reuse or redistribution rights.
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) credits dependencies and their
+applicable notices; those licenses apply to the upstream components, not
+automatically to ChronoLens.

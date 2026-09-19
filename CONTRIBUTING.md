@@ -1,10 +1,11 @@
 # Working on ChronoLens
 
-This is a local-first evaluation project, not a cleared public contribution
-program. No project license is selected. Read
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for verified dependency credits
-and their license scope. Do not submit material you cannot identify and license,
-remove upstream notices, or infer project rights from dependency licenses.
+ChronoLens is a local-first telemetry explorer. Changes should preserve exact
+results, reproducible measurements, and the loopback-only serving boundary.
+See [project licensing](README.md#contributing-and-licensing) and
+[third-party notices](THIRD_PARTY_NOTICES.md) before contributing code.
+Preserve upstream attribution and include only material you have permission
+to contribute.
 
 ## Setup and focused changes
 

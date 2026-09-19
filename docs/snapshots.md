@@ -152,7 +152,8 @@ query results must agree.
 go run ./cmd/bench -input data/incident.clens -format snapshot -max-events 100000
 ```
 
-The [roadmap](roadmap.md) leaves the remaining half of the work deferred.
+The [development history](roadmap.md) records snapshot integration, measured
+startup improvements, and the completed local explorer scope.
 
 The [ten-million-event startup comparison](../benchmarks/snapshot-startup.md)
 publishes actual conversion cost, file sizes, validated loading times, source

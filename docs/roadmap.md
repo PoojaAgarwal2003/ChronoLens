@@ -1,16 +1,14 @@
-# Remaining-work boundary
+# Development history and project scope
 
-This is a scoped completion roadmap, not an estimate of equal engineering effort.
-On 2026-09-15, the requested first half is **three of six remaining milestones**.
-Only milestones 7-9 belonged to that work session. Milestone 10 was subsequently
-implemented and measured on 2026-09-16. Milestone 11 adds local-preview packaging
-and isolated consumer smoke automation; milestone 12 still requires owner decisions.
-Publication requires approval.
+**The local explorer is complete.** ChronoLens includes deterministic telemetry,
+strict ingestion, row/columnar/indexed execution, exact charts, immutable
+snapshots, performance experiments, and reproducible preview packaging.
+No further feature milestone is required for the documented local workflow.
 
-The final local engineering boundary is defined in the
-[candidate release notes](release-notes.md). License/distribution approval is an
-owner handoff, not an invitation to add authentication, live ingestion, or
-distributed features to the local-first product.
+This table preserves the later development milestones and their evidence.
+Licensing and binary distribution are separate decisions. Authentication and
+public hosting were considered during planning but are outside the completed
+local-first scope; they are not promised follow-up milestones.
 
 | Milestone | Scope | Boundary |
 |---|---|---|
@@ -19,10 +17,10 @@ distributed features to the local-first product.
 | 9 | Benchmark input-format support and measured JSONL-versus-snapshot startup evidence | Completed 2026-09-15; [results](../benchmarks/snapshot-startup.md) |
 | 10 | Concurrent-load, backpressure/cancellation, and end-to-end UI latency experiments | Completed and published 2026-09-16; `5e9d541`; [one-million-event results](../benchmarks/concurrency-latency.md) |
 | 11 | Reproducible release packages and fresh-machine installation/release automation | Completed and published 2026-09-16 through `3e4a347`; [unsigned local-preview guide](releases.md); prior Windows, Linux, and explorer CI passed |
-| 12 | License owner decision, authentication design, and public-deployment readiness review | Deferred; no public exposure or automatic license selection |
-| 13 | Interactive exact-profile and explicit-preset performance | Completed locally as four tested tasks; [matched evidence](../benchmarks/interactive-performance.md); push/release approval outstanding |
+| 12 | License/distribution decisions and possible public-deployment review | Project license not granted; authentication/public hosting outside the local scope |
+| 13 | Interactive exact-profile and explicit-preset performance | Completed as four tested tasks; [matched evidence](../benchmarks/interactive-performance.md) |
 | 14 | Final local candidate scope, artifact verification, and retained acceptance evidence | Completed locally 2026-09-17; [unsigned `0.14.0-preview.1` evidence](release-candidate.md); Windows native/browser passed, Linux integrity/header verified only; no public release or license selection |
-| 15 | Final presentation/showcase of the verified local product | Engineering complete locally 2026-09-17 in three tasks: [verified real recording](demo.md), [architecture/docs](architecture.md), [validated handoff](final-handoff.md); publication awaits project license selection and owner approval |
+| 15 | Final presentation/showcase of the verified local product | Completed locally 2026-09-17: [real recording](demo.md), [architecture/docs](architecture.md), and [historical acceptance record](final-handoff.md) |
 
 Milestone 13 tasks are: (1) exact-reference tests and profile/browser baselines,
 (2) measured adaptive service accumulation and direct histogram classification,
@@ -39,17 +37,8 @@ It is not live ingestion, a mutable database, a WAL, a distributed system, or
 memory-mapped query execution. Query semantics and the loopback-only safety
 boundary remain unchanged.
 
-Each milestone is reviewed, tested, and committed independently, then published
-after approval.
-The working schedule retains a ten-minute gap between milestones. Historical
-benchmark reports remain intact; new results have their own provenance.
-The actual ten-minute gap before milestone 11 completed at
-2026-09-16 04:08:40 UTC.
-The actual ten-minute gap before milestone 15 completed at
-2026-09-17 07:33:30.352 UTC. Its three tasks are demo, documentation, and handoff;
-there is no artificial waiting interval between those task commits.
-
-The owner requests proper attribution for third-party components used in the
-implementation. [Third-party notices](../THIRD_PARTY_NOTICES.md) record verified
-dependency credits without selecting a project license. Local completion is not
-legal clearance or publication approval.
+Historical benchmark reports remain intact; new results carry their own
+workload and source provenance. [Third-party notices](../THIRD_PARTY_NOTICES.md)
+record dependency credits. See [project licensing](../README.md#contributing-and-licensing)
+for the separate project terms and [package documentation](releases.md) for
+unsigned preview limitations.
